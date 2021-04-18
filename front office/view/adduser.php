@@ -41,5 +41,4 @@ if(isset($_POST["nom"])&&
     }
 }
 ?>
- <html>   
     

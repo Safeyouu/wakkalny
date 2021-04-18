@@ -1,6 +1,6 @@
 <?php
     include "../config.php";
-    include "../model/user.php";
+    include_once "../model/user.php";
  
     class userC {
         function adduser($user){
@@ -22,10 +22,8 @@
 			}
 			catch (Exception $e){
 				echo 'Erreur: '.$e->getMessage();
+            }
         }
     }
-
-
-
 
 ?>
