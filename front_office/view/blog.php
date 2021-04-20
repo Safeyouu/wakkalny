@@ -1,3 +1,12 @@
+
+<?php
+include "../controller/blogC.php";
+
+$blogc = new blogC();
+$listeblogs=$blogc->afficherblog();
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -42,9 +51,11 @@
 					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
-					<li class="current-menu-item"><a href="blog.html" title="Blog"><span>Blog</span></a>
+					<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
 							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
+							<li><a href="Add_blog.html" title="Add Blog">add blog</a></li>
+
 						</ul>
 					</li>
 					<li><a href="#" title="Pages"><span>Pages</span></a>
@@ -91,22 +102,26 @@
 				
 				<!--content-->
 				<section class="content three-fourth">
-					<!--blog entry-->
-					<article class="post">
-						<div class="entry-meta">
-							<div class="date">
-								<span class="day">30</span> 
-								<span class="my">July, 2014</span>
-							</div>
+					  
+				<!--blog entry-->
+				
+				<article class="post">
+						<?php
+            				foreach($listeblogs as $blog){
+            			?>
+				<div class="entry-meta">
+						
 							<div class="avatar">
-								<a href="my_profile.html"><img src="images/avatar1.jpg" alt="" /><span>Kimberly C.</span></a>
+								<a href="my_profile.html"><img src="images/avatar1.jpg" alt="" <?php// echo $blog['nom'];?>/></a>
 							</div>
 						</div>
 						<div class="container">
-							<div class="entry-featured"><a href="blog_single.html"><img src="images/img.jpg" alt="" /></a></div>
+							<div class="entry-featured">
+								<a href="blog_single.html"><img src="images/<?php// echo $blog['image'];?>"/></a>
+							</div>
 							<div class="entry-content">
-								<h2><a href="blog_single.html">This is a blog post title</a></h2>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. </p>
+								<h2><a href="blog_single.html"><?php// echo $blog['titre'];?></a></h2>
+								<p><?php //echo $blog['sujet'];?> </p>
 							</div>
 							<div class="actions">
 								<div>
@@ -115,129 +130,17 @@
 									<div class="more"><a href="blog_single.html">Read more</a></div>
 								</div>
 							</div>
+							
 						</div>
+						<?php
+						}
+						?>
 					</article>
+					
 					<!--//blog entry-->
 					
-					<!--blog entry-->
-					<article class="post">
-						<div class="entry-meta">
-							<div class="date">
-								<span class="day">25</span> 
-								<span class="my">July, 2014</span>
-							</div>
-							<div class="avatar">
-								<a href="my_profile.html"><img src="images/avatar2.jpg" alt="" /><span>Alex J.</span></a>
-							</div>
-						</div>
-						<div class="container">
-							<div class="entry-featured"><a href="blog_single.html"><img src="images/img2.jpg" alt="" /></a></div>
-							<div class="entry-content">
-								<h2><a href="blog_single.html">This is a blog post title</a></h2>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. </p>
-							</div>
-							<div class="actions">
-								<div>
-									
-									<div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.html">Read more</a></div>
-								</div>
-							</div>
-						</div>
-					</article>
-					<!--//blog entry-->
+				 
 					
-					<!--blog entry-->
-					<article class="post">
-						<div class="entry-meta">
-							<div class="date">
-								<span class="day">22</span> 
-								<span class="my">July, 2014</span>
-							</div>
-							<div class="avatar">
-								<a href="my_profile.html"><img src="images/avatar3.jpg" alt="" /><span>Denise M.</span></a>
-							</div>
-						</div>
-						<div class="container">
-							<div class="entry-featured"><a href="blog_single.html"><img src="images/img7.jpg" alt="" /></a></div>
-							<div class="entry-content">
-								<h2><a href="blog_single.html">This is a blog post title</a></h2>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. </p>
-							</div>
-							<div class="actions">
-								<div>
-									
-									<div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.html">Read more</a></div>
-								</div>
-							</div>
-						</div>
-					</article>
-					<!--//blog entry-->
-					
-					<!--blog entry-->
-					<article class="post">
-						<div class="entry-meta">
-							<div class="date">
-								<span class="day">29</span> 
-								<span class="my">June, 2014</span>
-							</div>
-							<div class="avatar">
-								<a href="my_profile.html"><img src="images/avatar4.jpg" alt="" /><span>Anabelle Q.</span></a>
-							</div>
-						</div>
-						<div class="container">
-							<div class="entry-featured"><a href="blog_single.html"><img src="images/img19.jpg" alt="" /></a></div>
-							<div class="entry-content">
-								<h2><a href="blog_single.html">This is a blog post title</a></h2>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. </p>
-							</div>
-							<div class="actions">
-								<div>
-									
-									<div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.html">Read more</a></div>
-								</div>
-							</div>
-						</div>
-					</article>
-					<!--//blog entry-->
-					
-					<!--blog entry-->
-					<article class="post">
-						<div class="entry-meta">
-							<div class="date">
-								<span class="day">17</span> 
-								<span class="my">June, 2014</span>
-							</div>
-							<div class="avatar">
-								<a href="my_profile.html"><img src="images/avatar5.jpg" alt="" /><span>Michelle S.</span></a>
-							</div>
-						</div>
-						<div class="container">
-							<div class="entry-featured"><a href="blog_single.html"><img src="images/img.jpg" alt="" /></a></div>
-							<div class="entry-content">
-								<h2><a href="blog_single.html">This is a blog post title</a></h2>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. </p>
-							</div>
-							<div class="actions">
-								<div>
-									
-									<div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.html">Read more</a></div>
-								</div>
-							</div>
-						</div>
-					</article>
-					<!--//blog entry-->
-					
-					<div class="pager">
-						<a href="#">1</a>
-						<a href="#" class="current">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-					</div>
 				</section>
 				<!--//content-->
 				
