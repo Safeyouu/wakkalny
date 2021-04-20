@@ -1,12 +1,12 @@
 <?PHP
 	include "../config.php";
-	require_once '../Model/shopC.php';
+	require_once '../Model/shop.php';
 
 	class shopC {
 		
 		function ajoutershop($shop){
-			$sql="INSERT INTO shop (nom,description,nb_stock,nbr_like,nbr_commentaire) 
-			VALUES (:nom,:description,:image,:nb_stock,:nbr_like,:nbr_commentaire)";
+			$sql="INSERT INTO shop (nom,description,nb_stock,image) 
+			VALUES (:nom,:description,:image,:nb_stock)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql); //pour preparer la requete
@@ -15,8 +15,8 @@
 					'nom' => $shop->getnom(),
 					'description' => $shop->getdescription(),
 					'nb_stock' => $shop->getnb_stock(),
-                    'nbr_like' => $shop->getnbr_like(),
-                    'nbr_commentaire' => $shop->getnbr_commentaire(),
+					'image' => $shop->getimage(),
+                   
 
 			
 				]);			
@@ -60,17 +60,14 @@
                         id = : id,  
 						description = :description, 
                         nb_stock = :nb_stock, 
-                        nbr_like= :nbr_like, 
-						nbr_commentaire = :nbr_commentaire,
-						
+                        image= : image, 	
 					WHERE idshop = :id'
 				);
 				$query->execute([
 					'nom' => $shop->getnom(),
 					'description' => $shop->getdescription(),
 					'nb_stock' => $shop->getnb_stock(),
-                    'nbr_like' => $shop->getnbr_like(),
-                    'nbr_commentaire' => $shop->getnbr_commentaire(),
+                    'image' => $shop->getimage(),
                     'id' => $id
 
 				]);
