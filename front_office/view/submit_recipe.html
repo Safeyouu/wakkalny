@@ -89,36 +89,42 @@
 				<header class="s-title">
 					<h1>Add a new recipe</h1>
 				</header>
-					
+				<form method="POST" action="addrecette.php">
 				<!--content-->
 				<section class="content full-width">
+					
 					<div class="submit_recipe container">
-						<form>
+						
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
-									<div class="full"><input type="text" placeholder="Recipe title" /></div>
+									<div class="full"><input type="text" name="titre" placeholder="Recipe title" /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time" /></div>
-									<div class="third"><input type="text" placeholder="Cooking time" /></div>
-									<div class="third"><input type="text" placeholder="Difficulty" /></div>
+									<div class="third"><input type="text" name="prept" placeholder="Preparation time" /></div>
+									<div class="third"><input type="text" name="cookingt" placeholder="Cooking time" /></div>
+									<div class="third"><input type="text" name="difficulty" placeholder="Difficulty" /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Serves how many people?" /></div>
-									<div class="third"><select><option selected="selected">Select a category</option></select></div>
+									<div class="third"><input type="text" name="nb_ppl" placeholder="Serves how many people?" /></div>
+									<div class="third"><select><optgroup selected="selected" name="category" label="Select a category ">
+									<option>dessert</option>
+									<option>salty</option>
+								
+								</optgroup>
+									</select></div>
 								</div>
 							</section>
 							
 							<section>
 								<h2>Description</h2>
 								<div class="f-row">
-									<div class="full"><textarea placeholder="Recipe title"></textarea></div>
+									<div class="full"><textarea name="description" placeholder="Recipe title"></textarea></div>
 								</div>
 							</section>	
 							
-							<section>
+							<!-- <section>
 								<h2>Ingredients</h2>
 								<div class="f-row ingredient">
 									<div class="large"><input type="text" placeholder="Ingredient" /></div>
@@ -130,44 +136,25 @@
 									<button class="add">Add an ingredient</button>
 								</div>
 							</section>	
-							
-							<section>
-								<h2>Instructions <span>(enter instructions, each step at a time)</span></h2>
-								<div class="f-row instruction">
-									<div class="full"><input type="text" placeholder="Instructions" /></div>
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row full">
-									<button class="add">Add a step</button>
-								</div>
-							</section>
-							
+						-->
 							<section>
 								<h2>Photo</h2>
 								<div class="f-row full">
-									<input type="file" />
+									<input type="file" name="photo" />
 								</div>
 							</section>	
 							
-							<section>
-								<h2>Status <span>(would you like to further edit this recipe or are you ready to publish it?)</span></h2>
-								<div class="f-row full">
-									<input type="radio" id="r1" name="radio"/>
-									<label for="r1">I am still working on it</label>
-								</div>
-								<div class="f-row full">
-									<input type="radio" id="r2" name="radio"/>
-									<label for="r2">I am ready to publish this recipe</label>
-								</div>
-							</section>
+							
 							
 							<div class="f-row full">
 								<input type="submit" class="button" id="submitRecipe" value="Publish this recipe" />
 							</div>
-						</form>
+						
 					</div>
+				
 				</section>
 				<!--//content-->
+			</form>
 			</div>
 			<!--//row-->
 		</div>
