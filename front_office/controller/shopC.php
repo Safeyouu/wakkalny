@@ -5,8 +5,8 @@
 	class shopC {
 		
 		function ajoutershop($shop){
-			$sql="INSERT INTO shop (nom,description,nb_stock,image) 
-			VALUES (:nom,:description,:image,:nb_stock)";
+			$sql="INSERT INTO shop (nom,description,nb_stock,prix,image) 
+			VALUES (:nom,:description,:nb_stock,:prix,:image)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql); //pour preparer la requete
@@ -15,9 +15,8 @@
 					'nom' => $shop->getnom(),
 					'description' => $shop->getdescription(),
 					'nb_stock' => $shop->getnb_stock(),
+					'prix' => $shop->getprix(),
 					'image' => $shop->getimage(),
-                   
-
 			
 				]);			
 			}

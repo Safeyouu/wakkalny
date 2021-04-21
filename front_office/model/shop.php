@@ -1,57 +1,66 @@
 <?php
 class Shop {
-private ?int $id=null;
-private ?string $nom=null;
-private ?string $description=null;
-private ?string $nb_stock=null;
-private ?string $image=null;
-public function __construct( int $id, string $nom, string $description,string $image) 
+private  $id=null;
+private  $nom=null;
+private  $description=null;
+private  $nb_stock=null;
+private  $prix=null;
+private  $image=null;
+
+public function __construct(  string $nom, string $description,int $nb_stock ,string $prix,string $image) 
 //construct:pour exagerer tous les attributs de saisir (intialisation)
 {
 
 $this->nom=$nom;
 $this->description=$description;
 $this->nb_stock=$nb_stock;
+$this->prix=$prix;
 $this->image=$image;
 }
 
-public function getid() {
+ function getid():int {
   return $this->id;
 }
-public function getnom (){
+ function getnom ():string{
   return $this->nom ;
 }
-public function getdescription(){
+ function getdescription():string{
   return $this->description ;
 }
-public function getnb_stock(){
+ function getnb_stock():int{
   return $this->nb_stock ;
 }
-public function getimage() {
-    return $this->nbr_like;
+function getprix():string {
+  return $this->prix;
+}
+ function getimage():string {
+    return $this->image;
   }
    
 
 
 
-  public function setnom (string $nom){
+
+
+
+   function setnom ( $nom):void{
     $this->nom=$nom;
   }
-  public function setdescription (string $description){
+   function setdescription ( $description):void{
     $this->description=$description;
   }
-  public function setnb_stock(string $nb_stock){
+  function setnb_stock( $nb_stock):void{
     $this->nb_stock=$nb_stock;
   }
-  public function setimage (string $image){
+  function setprix ( $prix):void{
+    $this->prix=$prix;
+  }
+
+   function setimage ( $image):void{
     $this->image=$image;
   }
   
 }
-
-
-
-
 
 
 ?>

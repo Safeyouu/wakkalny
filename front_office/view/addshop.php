@@ -10,23 +10,26 @@ $shopc = new shopC();
 if(isset($_POST["nom"])&&
     isset($_POST["description"])&&
     isset($_POST["nb_stock"])&&
+    isset($_POST["prix"])&&
     isset($_POST["image"])
     )
     {
         if(!empty($_POST["nom"])&&
             !empty($_POST["description"])&&
             !empty($_POST["nb_stock"])&&
+            !empty($_POST["prix"])&&
             !empty($_POST["image"])
             ){
         $shop1 = new shop(
             $_POST["nom"],
             $_POST["description"],
             $_POST["nb_stock"],
+            $_POST["prix"],
             $_POST["image"]
 
         );
    $shopc->ajoutershop($shop1);
-   header('location:shop.html');
+   header('location:shop.php');
     }
     else {
 
@@ -132,7 +135,7 @@ $error=  "Missing information";
 					
 				<!--content-->
 				<section class="content full-width">
-					<div class="submit_recipe container">
+					<div class="submit_shop container">
                     <form  name="myForm" method="POST" action="" >
 							<section>
 								<h2>Basics</h2>
@@ -148,14 +151,20 @@ $error=  "Missing information";
                                     <div class="f-row">
                                         <div class="full"><textarea placeholder="description"id="description" name="description" ></textarea></div>
                                     </div>
-                                </section>	
+                                </section>
 
+                                <div class="f-row">
+                                <div class="third"><input type="text" placeholder="prix" id="prix" name="prix" /></div>
+									
+									
+								</div>
 
 
 
 
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="nb de stock" id="nbre de stock" name="nbre de stock" /></div>
+                                
+									<div class="third"><input type="text" placeholder="nb_stock" id="nb_stock" name="nb_stock" /></div>
 									
 								</div>
 							
@@ -164,7 +173,7 @@ $error=  "Missing information";
 							<section>
 								<h2>image</h2>
 								<div class="f-row full">
-									<input type="file" />
+									<input type="file" id="image" name="image" />
 								</div>
 							</section>	
 							
