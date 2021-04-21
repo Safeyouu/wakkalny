@@ -31,21 +31,38 @@
 
                           /* *********************** */
 
-                          function afficherblog()
+                          public function afficherblog()
                           {
 			
-                            $sql="SELECT * FROM blog";
-                            $db = config::getConnexion();
+                           
                             try
-                              {
-                                $liste = $db->query($sql);
-                                return $liste;
+                              { $pdo=config::getConnexion();
+                                $query= $pdo ->prepare(
+                                  'SELECT * FROM blog'
+                              );
+                              $query->execute();
+                              $result = $query->fetchAll();
+
+                                return $result;
                               }
-                              catch (Exception $e)
+                              catch (PDOException $e)
                               {
                                 die('Erreur: '.$e->getMessage());
                               }
-                           } 	
+                           } 
+                           
+                           
+
+                           
+
+
+
+
+
+
+
+
+
                       /* ****************************** */
                       
                       function supprimeralbum($idblog)

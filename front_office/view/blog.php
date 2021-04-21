@@ -1,11 +1,13 @@
-
 <?php
 include "../controller/blogC.php";
 
 $blogc = new blogC();
 $listeblogs=$blogc->afficherblog();
 
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -54,7 +56,7 @@ $listeblogs=$blogc->afficherblog();
 					<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
 							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
-							<li><a href="Add_blog.html" title="Add Blog">add blog</a></li>
+							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
 
 						</ul>
 					</li>
@@ -65,7 +67,14 @@ $listeblogs=$blogc->afficherblog();
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
-					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<li><a href="shop.html" title="Shop"><span>Shop</span></a>
+					<ul>
+					<li><a href="Add_blog.php" title="Add add shop">add shop</a></li>
+
+					</ul>
+					
+					
+					</li>
 				</ul>
 			</nav>
 			
@@ -105,43 +114,44 @@ $listeblogs=$blogc->afficherblog();
 					  
 				<!--blog entry-->
 				
+				<?php
+            foreach($listeblogs as $blog){
+        ?>
 				<article class="post">
-						<?php
-            				foreach($listeblogs as $blog){
-            			?>
-				<div class="entry-meta">
-						
+						<div class="entry-meta">
+							
 							<div class="avatar">
-								<a href="my_profile.html"><img src="images/avatar1.jpg" alt="" <?php// echo $blog['nom'];?>/></a>
+								<a href="my_profile.html"> <img src="images/abatar0.jpg"> <span> <?php echo $blog ["nom"] ?> </span>  </a>
 							</div>
 						</div>
 						<div class="container">
-							<div class="entry-featured">
-								<a href="blog_single.html"><img src="images/<?php// echo $blog['image'];?>"/></a>
-							</div>
+							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" /></a></div>
 							<div class="entry-content">
-								<h2><a href="blog_single.html"><?php// echo $blog['titre'];?></a></h2>
-								<p><?php //echo $blog['sujet'];?> </p>
+								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
+								<p><?php echo $blog['sujet'];?> </p>
 							</div>
+						
+						
+						
+						
+						
 							<div class="actions">
 								<div>
 									
-									<div class="leave_comment"><a href="blog_single.html#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.html">Read more</a></div>
+									<div class="leave_comment"><a href="blog_single.php#respond">Leave a comment</a></div>
+									<div class="more"><a href="blog_single.php">Read more</a></div>
 								</div>
 							</div>
-							
 						</div>
-						<?php
-						}
-						?>
+			
 					</article>
-					
+					<?php
+            }    
+            ?>
 					<!--//blog entry-->
-					
-				 
-					
 				</section>
+
+			
 				<!--//content-->
 				
 				<!--right sidebar-->
