@@ -8,7 +8,8 @@ class user {
     private $adresse;
     private $tel;
     private $role;
-    public function __construct(string $nom,string $prenom,string $email,string $mdp,string $adresse,int $tel,string $role)
+	private $image;
+    public function __construct(string $nom,string $prenom,string $email,string $mdp,string $adresse,int $tel,string $image)
     {
         $this->nom=$nom;
         $this->prenom=$prenom;
@@ -16,16 +17,19 @@ class user {
         $this->mdp=$mdp;
         $this->adresse=$adresse;
         $this->tel=$tel;
-        $this->rol=$role;
+		$this->image=$image;
+
     }
+
+
     function getid(){
 		return $this->id;
 	}
 	function getnom(){
-		return $this->prenom;
+		return $this->nom;
 	}
 	function getprenom(){
-		return $this->prix;
+		return $this->prenom;
 	}
 	function getemail(){
 		return $this->email;
@@ -41,6 +45,9 @@ class user {
 	}
     function getrole(){
 		return $this->role;
+	}
+	function getimage(){
+		return $this->image;
 	}
 
 	function setnom($nom){
@@ -63,6 +70,9 @@ class user {
 	}
 	function setrole($role){
 		$this->role=$role;
+	}
+	function setimage($image){
+		$this->image=$image;
 	}
 	
 

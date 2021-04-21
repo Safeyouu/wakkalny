@@ -61,7 +61,7 @@
 			<nav class="user-nav" role="navigation">
 				<ul>
 					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="medium"><a href="my_profile.html" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
+					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
@@ -70,9 +70,9 @@
 	</header>
 	<!--//header-->
 		
-	<!--main-->
+	
 	<form method="POST" action="adduser.php">
-	<main class="main" role="main">
+		<!--main-->
 		<!--wrap-->
 		<div class="wrap clearfix">
 			<!--row-->
@@ -82,26 +82,33 @@
 					<div class="modal container">
 						<h3>Register</h3>
 						<div class="f-row">
-							<input type="text" placeholder="Your name" />
+							<input type="text" name="nom" placeholder="Your name" />
 						</div>
 						<div class="f-row">
-							<input type="text" placeholder="Your surname" />
+							<input type="text" name="prenom" placeholder="Your surname" />
 						</div>
 						<div class="f-row">
-							<input type="email" placeholder="Your email" />
+							<input type="email" name="email" placeholder="Your email" />
 						</div>
 						<div class="f-row">
-							<input type="password" placeholder="Your password" />
+							<input type="password" name="mdp" placeholder="Your password" />
 						</div>
 						<div class="f-row">
-							<input type="password" placeholder="Retype password" />
+							<input type="password"  placeholder="Retype password" />
 						</div>
 						<div class="f-row">
-							<input type="text" placeholder="Your adress" />
+							<input type="text" name="adresse" placeholder="Your adress" />
 						</div>
 						<div class="f-row">
-							<input type="number" placeholder="Your phone number" />
+							<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8"  />
 						</div>
+					
+						<section>
+							<h42>Photo</h4>
+							<div class="f-row full">
+								<input type="file" name="image" />
+							</div>
+						</section>
 						
 						
 						<div class="f-row bwrap">
@@ -114,9 +121,7 @@
 			</div>
 			<!--//row-->
 		</div>
-		<!--//wrap-->
-	</main>
-	<!--//main-->
+	
 	</form>
 	
 	
@@ -171,7 +176,6 @@
 	<script src="js/scripts.js"></script>
 </body>
 
-<!-- Mirrored from www.themeenergy.com/themes/html/social-chef/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Apr 2021 21:55:36 GMT -->
 </html>
 
 

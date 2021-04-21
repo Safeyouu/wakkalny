@@ -1,3 +1,10 @@
+<?php
+include "../controller/userC.php";
+
+
+$userc = new userC();
+$listeusers=$userc->showUser();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -61,7 +68,7 @@
 			<nav class="user-nav" role="navigation">
 				<ul>
 					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="medium current-menu-item"><a href="my_profile.html" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
+					<li class="medium current-menu-item"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
@@ -85,16 +92,25 @@
 			
 		
 			<!--content-->
+						
 			<section class="content">
 				<!--row-->
 				<div class="row">
 					<!--profile left part-->
+						<?php
+            				foreach($listeusers as $user){
+   						?>
 					<div class="my_account one-fourth">
 						<figure>
-							<img src="images/avatar4.jpg" alt="" />
+							<img src="images/<?php echo $user['image'];?>" />
 						</figure>
 						<div class="container">
-							<h2>Anabelle Q.</h2> 
+						
+							<h2>
+								<?php echo $user['nom'];?>
+								<?php echo $user['prenom'];?>
+							</h2> 
+							
 						</div>
 					</div>
 					<!--//profile left part-->
@@ -103,29 +119,34 @@
 						<nav class="tabs">
 							<ul>
 								<li class="active"><a href="#about" title="About me">About me</a></li>
-								<li><a href="#recipes" title="My recipes">My recipes</a></li>
+								<li ><a href="#recipes" title="My recipes">Uptade profile</a></li>
 								<li><a href="#favorites" title="My favorites">My favorites</a></li>
 								<li><a href="#posts" title="My posts">My posts</a></li>
 							</ul>
 						</nav>
 						
 						<!--about-->
+						
 						<div class="tab-content" id="about">
 							<div class="row">
+							
 								<dl class="basic two-third">
 									<dt>Name</dt>
-									<dd>Anabelle Q.</dd>
-									<dt>Favorite cusine</dt>
-									<dd>Thai, Mexican</dd>
-									<dt>Favorite appliances</dt>
-									<dd>Blender, sharp knife</dd>
-									<dt>Favorite spices</dt>
-									<dd>Chilli, Oregano, Basil</dd>
-									<dt>Recipes submitted</dt>
-									<dd>9</dd>
-									<dt>Posts submitted</dt>
-									<dd>9</dd>
+									<dd><?php echo $user['nom'];?></dd>
+									<dt>Surname</dt>
+									<dd><?php echo $user['prenom'];?></dd>
+									<dt>Email</dt>
+									<dd><?php echo $user['email'];?></dd>
+									<dt>Adress </dt>
+									<dd><?php echo $user['adresse'];?></dd>
+									<dt>Phone number</dt>
+									<dd><?php echo $user['tel'];?></dd>
+									<dt>Role</dt>
+									<dd><?php echo $user['role'];?></dd>
 								</dl>
+							<?php
+							}
+							?>
 								
 								<div class="one-third">
 									<ul class="boxed gold">
@@ -145,70 +166,98 @@
 							</div>
 						</div>
 						<!--//about-->
-					
-						<!--my recipes-->
-						<div class="tab-content" id="recipes">
-							<div class="entries row">
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img6.jpg" alt="" />
-										<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-								
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img5.jpg" alt="" />
-										<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-								
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img8.jpg" alt="" />
-										<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-							</div>
-						</div>
-						<!--//my recipes-->
+
 						
+
+					
+						<!--update profile-->
+						
+						<?php
+							$error = "";
+							
+							if(isset($_POST["nom"])&&
+							isset($_POST["prenom"])&&
+							isset($_POST["email"])&&
+							isset($_POST["mdp"])&&
+							isset($_POST["tel"])&&
+							isset($_POST["adresse"])&&
+							isset($_POST["role"])
+							)
+							{
+								if(!empty($_POST["nom"])&&
+									!empty($_POST["prenom"])&&
+									!empty($_POST["email"])&&
+									!empty($_POST["mdp"])&&
+									!empty($_POST["tel"])&&
+									!empty($_POST["adresse"])&&
+									!empty($_POST["role"])
+									){
+								$user1 = new user(
+									$_POST["nom"],
+									$_POST["prenom"],
+									$_POST["email"],
+									$_POST["mdp"],
+									$_POST["tel"],
+									$_POST["adresse"],
+									$_POST["role"],
+								);
+								$userc->updateUser($user1, $_GET['id']);
+								header('Location:my_profile.php');
+								}
+							
+								else
+									$error = "Missing information";
+							}
+								
+						?>
+
+						<div class="tab-content" id="recipes">
+							<?php
+								if (isset($_GET['id'])){
+								$user1 = $userc->recupererUser($_GET['id']);
+							?>
+								
+										<!--content-->
+											<section class="content center full-width">
+												<div class="modal container">
+													<h3>Modify user</h3>
+													<div class="f-row">
+														<input type="text" name="id" id="id" value = "<?php echo $user1['id'];?>" disabled  />
+													</div>
+													<div class="f-row">
+														<input type="text" name="nom" placeholder="Your name"  value = "<?php echo $user1['nom'];?>"  />
+													</div>
+													<div class="f-row">
+														<input type="text" name="prenom" placeholder="Your surname"  value = "<?php echo $user1['prenom'];?>" />
+													</div>
+													<div class="f-row">
+														<input type="email" name="email" placeholder="Your email"  value = "<?php echo $user1['email'];?>" />
+													</div>
+													<div class="f-row">
+														<input type="text" name="adresse" placeholder="Your adress"  value = "<?php echo $user1['adresse'];?>"  />
+													</div>
+													<div class="f-row">
+														<input type="number" name="tel" placeholder="Your phone number" value = "<?php echo $user1['tel'];?>" />
+													</div>
+													<div class="f-row">
+														<input type="text" name="role" placeholder="Your role" value = "<?php echo $user1['role'];?>" />
+													</div>
+													<div class="f-row bwrap">
+														<input type="submit" value="modifier" />
+													</div>
+													<div class="cta">
+														<a href="my_profile.php" class="button big">Cancel</a>
+													</div>
+												</div>
+											</section>
+										<!--//content-->
+								<?php
+								}
+								?>	
+						</div>
+						<!--//update profile-->
+						 
+					
 						
 						<!--my favorites-->
 						<div class="tab-content" id="favorites">
@@ -405,7 +454,6 @@
 	<script src="js/scripts.js"></script>
 </body>
 
-<!-- Mirrored from www.themeenergy.com/themes/html/social-chef/my_profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Apr 2021 21:55:38 GMT -->
 </html>
 
 
