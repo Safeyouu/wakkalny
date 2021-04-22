@@ -1,3 +1,13 @@
+<?php
+include "../controller/shopC.php";
+
+$shopc = new shopC();
+$listeproducts=$shopc->affichershop();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -103,238 +113,36 @@
 				<section class="content three-fourth">
 					<!--entries-->
 					<div class="entries row">
+					<?php
+                    foreach($listeproducts as $shop){
+        			?>
 						<!--item-->
 						<div class="entry one-third">
 							<figure>
-								<img src="images/img6.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
+								<img src="images/<?php echo $shop['image'];?>" alt="" />
+								<!--<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>-->
 							</figure>
 							<div class="container">
-								<h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
+								<h2><a href="recipe.html"><?php echo $shop['description'];?></a></h2> 
 								<div class="actions">
 									<div>
-										<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
+										<div class="difficulty"><a > <?php echo $shop['nom'];?></a></div>
+										<div class="likes"><a > <?php echo $shop['prix'];?></a></div>
+										<div class="comments"> <a><?php echo $shop['nb_stock'];?></a></div> 
 									</div>
 								</div>
 							</div>
 						</div>
 						<!--item-->
+						<?php
+                       
+					}
+
+
+						?>
 						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img5.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
 						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img8.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
 						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img7.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Refreshing banana split with a twist for adults</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img3.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Sushi mania: this is the best sushi you have ever tasted</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img4.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Princess puffs - an old classic at its best</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img13.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Tasty salmon apetizers with sour cream</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img14.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">An incredible vegetarian hamburger</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img15.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Spaghetti carbonara with rustic bread</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img16.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Homemade cheesy spinach pizza with an egg on top</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img17.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Heavenly light and creamy vanilla tart</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<!--item-->
-						<div class="entry one-third">
-							<figure>
-								<img src="images/img18.jpg" alt="" />
-								<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-							</figure>
-							<div class="container">
-								<h2><a href="recipe.html">Exquisite plum and cherry pie</a></h2> 
-								<div class="actions">
-									<div>
-										<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-										<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-										<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--item-->
-						
-						<div class="quicklinks">
-							<a href="#" class="button">More recipes</a>
-							<a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
-						</div>
 					</div>
 					<!--//entries-->
 				</section>
@@ -344,25 +152,13 @@
 				<aside class="sidebar one-fourth">
 					<div class="widget">
 						<ul class="categories right">
-							<li class="active"><a href="#">All recipes</a></li>
-							<li><a href="#">Apetizers</a></li>
-							<li><a href="#">Cocktails</a></li>
-							<li><a href="#">Deserts</a></li>
-							<li><a href="#">Eggs</a></li>
-							<li><a href="#">Equipment</a></li>
-							<li><a href="#">Events</a></li>
-							<li><a href="#">Fish</a></li>
-							<li><a href="#">Fitness</a></li>
-							<li><a href="#">Healthy</a></li>
-							<li><a href="#">Asian</a></li>
-							<li><a href="#">Mexican</a></li>
-							<li><a href="#">Pizza</a></li>
-							<li><a href="#">Kids</a></li>
-							<li><a href="#">Meat</a></li>
-							<li><a href="#">Snacks</a></li>
-							<li><a href="#">Salads</a></li>
-							<li><a href="#">Storage</a></li>
-							<li><a href="#">Vegetarian</a></li>
+							<li class="active"><a href="#">All products</a></li>
+							<li><a href="#">Bakeware</a></li>
+							<li><a href="#">Cookware</a></li>
+							<li><a href="#">Gas Stoves</a></li>
+							<li><a href="#">Kitchen Tools</a></li>
+							<li><a href="#">Tableware</a></li>
+						
 						</ul>
 					</div>
 					<div class="widget">
