@@ -7,7 +7,7 @@
     {
 
         function ajouterrecette($recette){
-			$sql="INSERT INTO recette ( titre , prept , cookingt , difficulty , nb_ppl , category , description , photo) 
+			$sql="INSERT INTO recette (titre , prept , cookingt , difficulty , nb_ppl , category , description , photo) 
 			VALUES (:titre , :prept, :cookingt , :difficulty , :nb_ppl , :category , :description , :photo)";
 			$db = config::getConnexion();
 			try{
@@ -29,6 +29,20 @@
 				echo 'Erreur: '.$e->getMessage();
 			}			
 		}
+
+		function afficherrecette(){
+			
+			$sql="SELECT * FROM recette";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}	
+		}
+    
 
 
 

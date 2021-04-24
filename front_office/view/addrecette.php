@@ -40,12 +40,13 @@ if(
             $_POST["photo"]
         );
         $recettec->ajouterrecette($recette1);
-        header('Location:recipe.html');
-    }
+        header('Location:recipes.html');
+    }}
     else{
         $error= "missing info";
+      
     }
-}
+
 ?>
  <html>   
-    
+     

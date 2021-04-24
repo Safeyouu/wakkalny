@@ -3,18 +3,18 @@
 class recette
 {
 
-    private  $idrecette ;
-    private  $titre ;
-    private  $prept ;
-    private  $cookingt ;
-    private  $difficulty ;
-    private  $nb_ppl ;
-    private  $category ;
-    private  $descrption ;
-    private  $photo ;
+    private  $idrecette=null ;
+    private  $titre=null ;
+    private  $prept =null;
+    private  $cookingt=null ;
+    private  $difficulty=null ;
+    private  $nb_ppl=null ;
+    private  $category=null ;
+    private  $descrption=null ;
+    private  $photo=null ;
 
 
-    public function __construct(string $titre,string $prept,string $cookingt,string $difficulty,int $nb_ppl,string $category,string $description,string $photo)
+    public function __construct(string $titre,int $prept,int $cookingt,string $difficulty,int $nb_ppl,string $category,string $description,string $photo)
     {
         $this->titre=$titre;
         $this->prept=$prept;
@@ -25,57 +25,57 @@ class recette
         $this->description=$description;
         $this->photo=$photo;
     }
-    function getrecette(){
+    function getidrecette():int{
 		return $this->idrecette;
 	}
-	function gettitre(){
+	function gettitre():string{
 		return $this->titre;
 	}
-	function getprept(){
+	function getprept():int{
 		return $this->prept;
 	}
-	function getcookingt(){
+	function getcookingt():int{
 		return $this->cookingt;
-	}
-    function getdifficulty(){
+	} 
+    function getdifficulty():string{
 		return $this->difficulty;
 	}
-    function getnb_ppl(){
+    function getnb_ppl():int{
 		return $this->nb_ppl;
 	}
-    function getcategory(){
+    function getcategory():string{
 		return $this->category;
 	}
-    function getdescription(){
+    function getdescription():string{
 		return $this->description;
 	}
-    function getphoto(){
+    function getphoto():string{
 		return $this->photo;
 	}
 
     
-	function settitre($titre){
+	function settitre($titre):void{
 		$this->titre=$titre;
 	}
-	function setprept($prept){
+	function setprept($prept):void{
 		$this->prept=$prept;
 	}
-	function setcookingt($cookingt){
+	function setcookingt($cookingt):void{
 		$this->cookingt=$cookingt;
 	}
-    function setdifficulty($difficulty){
+    function setdifficulty($difficulty):void{
 		$this->difficulty=$difficulty;
 	}
-    function setnb_ppl($nb_ppl){
+    function setnb_ppl($nb_ppl):void{
 		$this->nb_ppl=$nb_ppl;
 	}
-    function setcategory($category){
+    function setcategory($category):void{
 		$this->category=$category;
 	}
-    function setdescription($description){
+    function setdescription($description):void{
 		$this->description=$description;
 	}
-    function setphoto($photo){
+    function setphoto($photo):void{
 		$this->photo=$photo;
 	}
 }
