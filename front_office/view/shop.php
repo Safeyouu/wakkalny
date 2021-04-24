@@ -129,6 +129,23 @@ $listeproducts=$shopc->affichershop();
 										<div class="difficulty"><a > <?php echo $shop['nom'];?></a></div>
 										<div class="likes"><a > <?php echo $shop['prix'];?></a></div>
 										<div class="comments"> <a><?php echo $shop['nb_stock'];?></a></div> 
+										<div><form method="POST" action="supprimershop.php">
+						                <input type="submit" name="supprimer" value="supprimer">
+						               <input type="hidden" value="<?PHP echo $shop['id']; ?>" name="id">
+						          </form>      
+					             </div>
+								 <div><form method="POST" action="modifiershop.php">
+									<a  href="modifiershop.php"<?PHP echo $shop['id']; ?>> </a>      
+									<input type="submit" name="modifier" value="modifier">
+									</form>
+					
+
+					</div>
+                          
+
+
+
+
 									</div>
 								</div>
 							</div>

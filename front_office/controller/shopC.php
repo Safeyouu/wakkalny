@@ -40,7 +40,7 @@
 		}
 
 		function supprimershop($id){
-			$sql="DELETE FROM shop WHERE idshop= :id";
+			$sql="DELETE FROM shop WHERE id= :id";
 			$db = config::getConnexion();
 			$req=$db->prepare($sql);
 			$req->bindValue(':id',$id);
@@ -60,7 +60,7 @@
 						description = :description, 
                         nb_stock = :nb_stock, 
                         image= : image, 	
-					WHERE idshop = :id'
+					WHERE id = :id'
 				);
 				$query->execute([
 					'nom' => $shop->getnom(),
@@ -76,7 +76,7 @@
 			}
 		}
 		function recuperershop($id){
-			$sql="SELECT * from shop where idshop=$id";    
+			$sql="SELECT * from shop where id=$id";    
 			$db = config::getConnexion();
 			try{
 				$query=$db->prepare($sql);
@@ -91,7 +91,7 @@
 		}
 
 		function recuperershop1($id){
-			$sql="SELECT * from shop where idshop=$id";
+			$sql="SELECT * from shop where id=$id";
 			$db = config::getConnexion();
 			try{
 				$query=$db->prepare($sql);
