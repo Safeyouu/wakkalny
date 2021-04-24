@@ -7,8 +7,11 @@ $user1 = null;
 
 $userc = new userC();
 
+
+
+
 if(isset($_POST["nom"])&&
-    isset($_POST["prenom"])&&
+    
     isset($_POST["email"])&&
     isset($_POST["mdp"])&&
     isset($_POST["adresse"])&&
@@ -19,7 +22,7 @@ if(isset($_POST["nom"])&&
     )
     {
         if(!empty($_POST["nom"])&&
-            !empty($_POST["prenom"])&&
+            
             !empty($_POST["email"])&&
             !empty($_POST["mdp"])&&
             !empty($_POST["adresse"])&&
@@ -27,9 +30,9 @@ if(isset($_POST["nom"])&&
            
             !empty($_POST["image"])
             ){
-        $user1 = new user(
+                $user1 = new user(
             $_POST["nom"],
-            $_POST["prenom"],
+           
             $_POST["email"],
             $_POST["mdp"],
             $_POST["adresse"],
@@ -37,6 +40,9 @@ if(isset($_POST["nom"])&&
           
             $_POST["image"]
         );
+
+        
+
         $userc->addUser($user1);
         header('Location:my_profile.php');
     }

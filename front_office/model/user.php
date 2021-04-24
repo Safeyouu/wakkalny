@@ -1,17 +1,19 @@
 <?php
 class user {
     private $id;
+	private $username;
     private $nom;
-    private $prenom;
+	private $prenom;
     private $email;
     private $mdp;
     private $adresse;
     private $tel;
     private $role;
 	private $image;
-    public function __construct(string $nom,string $prenom,string $email,string $mdp,string $adresse,int $tel,string $image)
+    public function __construct(string $username,string $nom,string $prenom,string $email,string $mdp,string $adresse,int $tel,string $image)
     {
-        $this->nom=$nom;
+        $this->username=$username;
+		$this->nom=$nom;
         $this->prenom=$prenom;
         $this->email=$email;
         $this->mdp=$mdp;
@@ -24,6 +26,9 @@ class user {
 
     function getid(){
 		return $this->id;
+	}
+	function getusername(){
+		return $this->username;
 	}
 	function getnom(){
 		return $this->nom;
@@ -50,6 +55,9 @@ class user {
 		return $this->image;
 	}
 
+	function setusername($username){
+		$this->username=$username;
+	}
 	function setnom($nom){
 		$this->nom=$nom;
 	}

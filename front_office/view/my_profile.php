@@ -1,6 +1,6 @@
 <?php
 include "../controller/userC.php";
-
+include_once "../model/user.php";
 
 $userc = new userC();
 $listeusers=$userc->showUser();
@@ -97,29 +97,19 @@ $listeusers=$userc->showUser();
 				<!--row-->
 				<div class="row">
 					<!--profile left part-->
-						<?php
-            				foreach($listeusers as $user){
-   						?>
-					<div class="my_account one-fourth">
-						<figure>
-							<img src="images/<?php echo $user['image'];?>" />
-						</figure>
-						<div class="container">
 						
-							<h2>
-								<?php echo $user['nom'];?>
-								<?php echo $user['prenom'];?>
-							</h2> 
-							
-						</div>
+					<div class="my_account one-fourth" >
+						
+						
 					</div>
+					
 					<!--//profile left part-->
 					
 					<div class="three-fourth">
 						<nav class="tabs">
 							<ul>
 								<li class="active"><a href="#about" title="About me">About me</a></li>
-								<li ><a href="#recipes" title="My recipes">Uptade profile</a></li>
+								<li><a href="#update" title="My favorites">Update profile</a></li>
 								<li><a href="#favorites" title="My favorites">My favorites</a></li>
 								<li><a href="#posts" title="My posts">My posts</a></li>
 							</ul>
@@ -129,12 +119,19 @@ $listeusers=$userc->showUser();
 						
 						<div class="tab-content" id="about">
 							<div class="row">
-							
+							<?php
+            				foreach($listeusers as $user){
+   							?>
 								<dl class="basic two-third">
-									<dt>Name</dt>
+								<figure >
+									<img src="images/<?php echo $user['image'];?>" style=" display: block;margin-left: auto;margin-right: auto;"/>
+								</figure>
+									<dt>Username</dt>
+									<dd><?php echo $user['username'];?></dd>
+									<dt>First Name</dt>
 									<dd><?php echo $user['nom'];?></dd>
-									<dt>Surname</dt>
-									<dd><?php echo $user['prenom'];?></dd>
+									<dt>Laste Name</dt>
+									<dd><?php echo $user['nom'];?></dd>
 									<dt>Email</dt>
 									<dd><?php echo $user['email'];?></dd>
 									<dt>Adress </dt>
@@ -143,13 +140,17 @@ $listeusers=$userc->showUser();
 									<dd><?php echo $user['tel'];?></dd>
 									<dt>Role</dt>
 									<dd><?php echo $user['role'];?></dd>
+									
+									
+									<a href="#update?id=<?php echo $user['id'];?>"><button>Modifier</button></a>
+									
 								</dl>
 							<?php
 							}
 							?>
 								
 								<div class="one-third">
-									<ul class="boxed gold">
+									<!--<ul class="boxed gold">
 										<li class="light"><a href="#" title="Best recipe"><i class="icon icon-themeenergy_crown"></i> <span>Had a best recipe</span></a></li>
 										<li class="medium"><a href="#" title="Was featured"><i class="icon icon-themeenergy_top-rankings"></i> <span>Was featured</span></a></li>
 										<li class="dark"><a href="#" title="Added a first recipe"><i class="icon  icon-themeenergy_medal-first-place"></i> <span>Added a first recipe</span></a></li>
@@ -161,7 +162,7 @@ $listeusers=$userc->showUser();
 										<li class="dark"><a href="recipes.html" title="Fish"><i class="icon icon-themeenergy_cup2"></i> <span>Won a contest</span></a></li>
 										<li class="light"><a href="recipes.html" title="Healthy"><i class="icon icon-themeenergy_share3"></i> <span>Shared a recipe</span></a></li>
 										<li class="medium"><a href="#" title="Was featured"><i class="icon icon-themeenergy_top-rankings"></i> <span>Was featured</span></a></li>
-									</ul>
+									</ul>-->
 								</div>
 							</div>
 						</div>
@@ -174,8 +175,10 @@ $listeusers=$userc->showUser();
 						
 						<?php
 							$error = "";
+							$userU = new userC();
 							
-							if(isset($_POST["nom"])&&
+							if(isset($_POST["username"])&&
+							isset($_POST["nom"])&&
 							isset($_POST["prenom"])&&
 							isset($_POST["email"])&&
 							isset($_POST["mdp"])&&
@@ -184,7 +187,8 @@ $listeusers=$userc->showUser();
 							isset($_POST["role"])
 							)
 							{
-								if(!empty($_POST["nom"])&&
+								if(!empty($_POST["username"])&&
+									!empty($_POST["nom"])&&
 									!empty($_POST["prenom"])&&
 									!empty($_POST["email"])&&
 									!empty($_POST["mdp"])&&
@@ -192,7 +196,9 @@ $listeusers=$userc->showUser();
 									!empty($_POST["adresse"])&&
 									!empty($_POST["role"])
 									){
+										echo "<h1>test</h1>";
 								$user1 = new user(
+									$_POST["username"],
 									$_POST["nom"],
 									$_POST["prenom"],
 									$_POST["email"],
@@ -211,37 +217,52 @@ $listeusers=$userc->showUser();
 								
 						?>
 
-						<div class="tab-content" id="recipes">
+						<div class="tab-content" id="update">
 							<?php
-								if (isset($_GET['id'])){
-								$user1 = $userc->recupererUser($_GET['id']);
+								//if (isset($_GET['id'])){
+								//$user1 = $userU->recupererUser($_GET['id']);
 							?>
 								
 										<!--content-->
+										<form method="POST" >
 											<section class="content center full-width">
 												<div class="modal container">
 													<h3>Modify user</h3>
 													<div class="f-row">
+														<label for="">ID :</label>
 														<input type="text" name="id" id="id" value = "<?php echo $user1['id'];?>" disabled  />
 													</div>
 													<div class="f-row">
-														<input type="text" name="nom" placeholder="Your name"  value = "<?php echo $user1['nom'];?>"  />
+													<label for=""> Username :</label>
+														<input type="text" name="username" placeholder="Your Username"  value = "<?php echo $user1['username'];?>"  />
 													</div>
 													<div class="f-row">
-														<input type="text" name="prenom" placeholder="Your surname"  value = "<?php echo $user1['prenom'];?>" />
+													<label for="">First Name :</label>
+														<input type="text" name="nom" placeholder="Your first name"  value = "<?php echo $user1['nom'];?>"  />
 													</div>
 													<div class="f-row">
+													<label for="">Last Name :</label>
+														<input type="text" name="prenom" placeholder="Your last name"  value = "<?php echo $user1['prenom'];?>"  />
+													</div>
+													<div class="f-row">
+													<label for="">Email :</label>
 														<input type="email" name="email" placeholder="Your email"  value = "<?php echo $user1['email'];?>" />
 													</div>
 													<div class="f-row">
+													<label for="">Adress :</label>
 														<input type="text" name="adresse" placeholder="Your adress"  value = "<?php echo $user1['adresse'];?>"  />
 													</div>
 													<div class="f-row">
-														<input type="number" name="tel" placeholder="Your phone number" value = "<?php echo $user1['tel'];?>" />
+													<label for="">Phone Number :</label> <br>
+														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "<?php echo $user1['tel'];?>" />
 													</div>
-													<div class="f-row">
-														<input type="text" name="role" placeholder="Your role" value = "<?php echo $user1['role'];?>" />
+													
+													<section>
+													<h42>Photo</h4>
+													<div class="f-row full">
+														<input type="file" name="image" />
 													</div>
+													</section>
 													<div class="f-row bwrap">
 														<input type="submit" value="modifier" />
 													</div>
@@ -250,9 +271,10 @@ $listeusers=$userc->showUser();
 													</div>
 												</div>
 											</section>
+										</form>
 										<!--//content-->
 								<?php
-								}
+								//}
 								?>	
 						</div>
 						<!--//update profile-->

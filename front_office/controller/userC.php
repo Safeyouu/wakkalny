@@ -4,13 +4,14 @@
  
     class userC {
         function addUser($user){
-            $sql="INSERT INTO user ( nom , prenom , email , mdp , adresse , tel , role , image) 
-			VALUES (:nom , :prenom , :email , :mdp , :adresse , :tel , :role , :image)";
+            $sql="INSERT INTO user (username , nom , prenom , email , mdp , adresse , tel , role , image) 
+			VALUES (:username , :nom  , :prenom , :email , :mdp , :adresse , :tel , :role , :image)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
                 $user->setrole("ROLE_USER");
 				$query->execute([
+                    'username' => $user->getusername(),
 					'nom' => $user->getnom(),
 					'prenom' => $user->getprenom(),
 					'email' => $user->getemail(),
@@ -26,6 +27,10 @@
 				echo 'Erreur: '.$e->getMessage();
             }
         }
+
+
+
+          
 
         /* ************************************* */
 
@@ -45,14 +50,14 @@
           /* ************************************* */
 
     
-        public function getUserbyemail($email) {
+        public function getUserbyname($username) {
             try {
                 $pdo = config::getConnexion();
                 $query = $pdo->prepare(
-                    'SELECT * FROM user WHERE email = :email'
+                    'SELECT * FROM user WHERE username = :username'
                 );
                 $query->execute([
-                    'email' => $email
+                    'username' => $username
                 ]);
                 return $query->fetch();
             } catch (Exception $e) {
@@ -80,19 +85,22 @@
 
 
         function updateUser($user,$id){
-		    $sql="UPDATE user SET  nom=:nom,prenom=:prenom,email=:email,adresse=:adresse,tel=:tel,image=:image WHERE id=:id";
+		    $sql="UPDATE user SET  username=:username,nom=:nom,prenom=:prenom,email=:email,adresse=:adresse,tel=:tel,image=:image WHERE id=:id";
 		
 		    $db = config::getConnexion();
 		    //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
         try{		
             $query=$db->prepare($sql);
+            $username=$user->getusername();
             $nom=$user->getnom();
+            $prenom=$user->getprenom();
             $prenom=$user->getemail();
             $adresse=$user->getadresse();
             $tel=$user->gettel();
             $image=$user->getimage();
             $datas = array( 
                 ':id'=>$id,
+                ':username'=>$username,
                 ':nom'=>$nom,
                 ':prenom'=>$prenom,
                 ':email'=>$email,
@@ -100,6 +108,7 @@
                 ':tel'=>$tel,
                 ':image'=>$image);
             $query->bindValue(':id',$id);
+            $query->bindValue(':username',$username);
             $query->bindValue(':nom',$nom);
             $query->bindValue(':prenom',$prenom);
             $query->bindValue(':email',$email);
@@ -119,6 +128,33 @@
             
         }
 
+        /*public function updateThread($user, $id) {
+            try {
+                $db = config::getConnexion();
+                $sql="UPDATE user SET  username=:username,nom=:nom,prenom=:prenom,email=:email,adresse=:adresse,tel=:tel,image=:image WHERE id=:id";
+                $query = $db->prepare($sql);
+                $query->bindValue(':id', $id);
+                $username=$user->getusername();
+                $nom=$user->getnom();
+                $prenom=$user->getprenom();
+                $prenom=$user->getemail();
+                $adresse=$user->getadresse();
+                $tel=$user->gettel();
+                $image=$user->getimage();
+                $query->bindValue(':username',$username);
+                $query->bindValue(':nom',$nom);
+                $query->bindValue(':prenom',$prenom);
+                $query->bindValue(':email',$email);
+                $query->bindValue(':adresse',$adresse);
+                $query->bindValue(':tel',$tel);
+                $query->bindValue(':image',$image);
+                
+                    $query->execute();
+            } catch (PDOException $e) {
+                $e->getMessage();
+            }
+        }*/
+
         /* ************************************* */
 
 
@@ -136,6 +172,24 @@
                 die('Erreur: '.$e->getMessage());
             }
         }
+
+        /*function recupererUser($id){
+        $db = config::getConnexion();
+		try{
+			$sql="SELECT * from user where id=:IDid";
+			$req=$db->prepare($sql);
+			$req->bindValue(':id',$id);
+			$req->execute();
+
+			$user=$req->fetch();
+			return $user;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+        }*/
+
+      
 
     }
 
