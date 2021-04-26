@@ -96,7 +96,20 @@ $error=  "Missing information";
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
-					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span>
+					<ul>
+							
+							<li><a href="addshop.php" title="Add shop">add shop</a></li>
+							<li><a href="addcategoriep.php" title="add category">add category </a></li>
+						</ul>
+				
+				
+				
+				</a>
+				
+				
+				
+				</li>
 				</ul>
 			</nav>
 			

@@ -64,10 +64,10 @@ $listeproducts=$shopc->affichershop();
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
-					<li  class="current-menu-item"><a href="shop.html" title="Shop" ><span>Shop</span></a> 
+					<li  class="current-menu-item"><a href="shop.php" title="Shop" ><span>Shop</span></a> 
 					<ul>
 						<li><a href="addshop.php" title="Add shop">add shop</a></li>
-                 
+						<li><a href="addcategoriep.php" title="add category">add category</a></li>
 
 
 					</ul>
@@ -134,10 +134,14 @@ $listeproducts=$shopc->affichershop();
 						               <input type="hidden" value="<?PHP echo $shop['id']; ?>" name="id">
 						          </form>      
 					             </div>
-								 <div><form method="POST" action="modifiershop.php">
-									<a  href="modifiershop.php"<?PHP echo $shop['id']; ?>> </a>      
-									<input type="submit" name="modifier" value="modifier">
+								 <div>
+									 
+								 <form method="POST" action="modifiershop.php">
+									 <input type="text" style="display:none" name="id" value="<?PHP echo $shop['id'] ?>">
+									<input type="submit"  value="modifier">
 									</form>
+
+									<!--<a  href="modifiershop.php?id=<?PHP echo $shop['id']; ?>"> Mdifeir get </a>  -->
 					
 
 					</div>

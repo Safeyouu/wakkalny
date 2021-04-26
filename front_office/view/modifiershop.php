@@ -20,6 +20,7 @@
             !empty($_POST["image"])
            
         ) {
+			echo 'test';
             $shop = new shop(
                 $_POST['titre'],
                 $_POST['prix'], 
@@ -87,7 +88,7 @@
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
-					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
 				</ul>
 			</nav>
 			
@@ -112,7 +113,7 @@
 			<nav class="breadcrumbs">
 				<ul>
 					<li><a href="index.html" title="Home">Home</a></li>
-                    <li><a href="shop.html" title="shop">shop</a></li>
+                    <li><a href="shop.php" title="shop">shop</a></li>
 					<li>Submit shop</li>
 				</ul>
 			</nav>
@@ -128,9 +129,9 @@
 				<section class="content full-width">
 					<div class="submit_shop container">
                     <?php
-                    //$shop=$shopC->recuperershop($_GET['id'])
+                    $shop=$shopC->recuperershop($_POST['id'])
                     ?>
-                    <form  name="myForm" method="POST" action="" >
+                    <form  name="myForm" method="POST" action="shop.php" >
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>

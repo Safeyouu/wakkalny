@@ -58,7 +58,6 @@
 						<ul>
 							
 							<li><a href="addshop.php" title="Add shop">add shop</a></li>
-							<li><a href="addcategoriep.php" title="add category">add category </a></li>
 
 						</ul>
 					
@@ -87,24 +86,15 @@
 			<!--content-->
 				<section class="content center full-width">
 					<div class="modal container">
-						<h3>Login</h3>
+						<h3>products category</h3>
 						<div class="f-row">
-							<input type="text" placeholder="Your username" />
+               <label >product name</label>
+
+							<input type="text" placeholder="product name" />
 						</div>
-						<div class="f-row">
-							<input type="password" placeholder="Your password" />
-						</div>
-						
-						<div class="f-row">
-							<input type="checkbox" />
-							<label>Remember me next time</label>
-						</div>
-						
 						<div class="f-row bwrap">
-							<input type="submit" value="login" />
+							<input type="submit" value="submit" />
 						</div>
-						<p><a href="#">Forgotten password?</a></p>
-						<p>Dont have an account yet? <a href="register.html">Sign up.</a></p>
 					</div>
 				</section>
 				<!--//content-->

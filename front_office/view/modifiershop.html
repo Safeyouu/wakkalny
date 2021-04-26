@@ -16,12 +16,7 @@
 		<script src="../../../../use.fontawesome.com/e808bf9397.js"></script>
 		<link rel="shortcut icon" href="images/favicon.ico" />
 		
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-		<![endif]-->
+		
 	</head>
 <body>
 	<!--preloader-->
@@ -54,15 +49,7 @@
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
-					<li><a href="shop.php" title="Shop"><span>Shop</span></a>
-						<ul>
-							
-							<li><a href="addshop.php" title="Add shop">add shop</a></li>
-							<li><a href="addcategoriep.php" title="add category">add category </a></li>
-
-						</ul>
-					
-					</li>
+					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
 				</ul>
 			</nav>
 			
@@ -87,7 +74,8 @@
 			<nav class="breadcrumbs">
 				<ul>
 					<li><a href="index.html" title="Home">Home</a></li>
-					<li>Submit a recipe</li>
+                    <li><a href="shop.html" title="shop">shop</a></li>
+					<li>Submit shop</li>
 				</ul>
 			</nav>
 			<!--//breadcrumbs-->
@@ -95,82 +83,58 @@
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
-					<h1>Add a new recipe</h1>
+					<h1>Add shop</h1>
 				</header>
 					
 				<!--content-->
 				<section class="content full-width">
-					<div class="submit_recipe container">
-						<form>
+					<div class="submit_shop container">
+                    <?php
+                    //$shop=$shopC->recuperershop($_GET['id'])
+                    ?>
+                    <form  name="myForm" method="POST" action="modifiershop.php" >
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
-									<div class="full"><input type="text" placeholder="Recipe title" /></div>
+									<div class="full"><input type="text" placeholder=" nom" id="nom" name="nom" value="<?php echo $shop['nom']; ?>" /></div>
 								</div>
+
+
+
+                                <section>
+                                    <h2>Description</h2>
+                                    <div class="f-row">
+                                        <div class="full"><textarea placeholder="description"id="description" name="description" value="<?php echo $shop['description']; ?>" ></textarea></div>
+                                    </div>
+                                </section>
+
+                                <div class="f-row">
+                                <div class="third"><input type="text" placeholder="prix" id="prix" name="prix" value="<?php echo $shop['prix']; ?>"/></div>
+									
+									
+								</div>
+
+
+
+
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time" /></div>
-									<div class="third"><input type="text" placeholder="Cooking time" /></div>
-									<div class="third"><input type="text" placeholder="Difficulty" /></div>
+                                
+									<div class="third"><input type="text" placeholder="nb_stock" id="nb_stock" name="nb_stock" value="<?php echo $shop['nb_stock']; ?>"/></div>
+									
 								</div>
-								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Serves how many people?" /></div>
-									<div class="third"><select><option selected="selected">Select a category</option></select></div>
-								</div>
+							
 							</section>
 							
 							<section>
-								<h2>Description</h2>
-								<div class="f-row">
-									<div class="full"><textarea placeholder="Recipe title"></textarea></div>
+								<h2>image</h2>
+								<div class="f-row full">
+									<input type="file" id="image" name="image" value="<?php echo $shop['image']; ?>"/>
 								</div>
 							</section>	
-							
-							<section>
-								<h2>Ingredients</h2>
-								<div class="f-row ingredient">
-									<div class="large"><input type="text" placeholder="Ingredient" /></div>
-									<div class="small"><input type="text" placeholder="Quantity" /></div>
-									<div class="third"><select><option selected="selected">Select a category</option></select></div>
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row full">
-									<button class="add">Add an ingredient</button>
-								</div>
-							</section>	
-							
-							<section>
-								<h2>Instructions <span>(enter instructions, each step at a time)</span></h2>
-								<div class="f-row instruction">
-									<div class="full"><input type="text" placeholder="Instructions" /></div>
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row full">
-									<button class="add">Add a step</button>
-								</div>
-							</section>
-							
-							<section>
-								<h2>Photo</h2>
-								<div class="f-row full">
-									<input type="file" />
-								</div>
-							</section>	
-							
-							<section>
-								<h2>Status <span>(would you like to further edit this recipe or are you ready to publish it?)</span></h2>
-								<div class="f-row full">
-									<input type="radio" id="r1" name="radio"/>
-									<label for="r1">I am still working on it</label>
-								</div>
-								<div class="f-row full">
-									<input type="radio" id="r2" name="radio"/>
-									<label for="r2">I am ready to publish this recipe</label>
-								</div>
-							</section>
 							
 							<div class="f-row full">
-								<input type="submit" class="button" id="submitRecipe" value="Publish this recipe" />
+								<input type="submit" class="button" id="submitshop" value="Publish shop" />
 							</div>
 						</form>
 					</div>
@@ -236,5 +200,3 @@
 </body>
 
 </html>
-
-

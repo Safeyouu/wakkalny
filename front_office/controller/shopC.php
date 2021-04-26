@@ -55,11 +55,11 @@
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
-					'UPDATE Album SET
-                        id = : id,  
+					'UPDATE shop SET
+                        id = :id,  
 						description = :description, 
                         nb_stock = :nb_stock, 
-                        image= : image, 	
+                        image= :image, 	
 					WHERE id = :id'
 				);
 				$query->execute([
