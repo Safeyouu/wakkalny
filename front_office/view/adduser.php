@@ -10,10 +10,12 @@ $userc = new userC();
 
 
 
-if(isset($_POST["nom"])&&
-    
+if(isset($_POST["username"])&&
+    isset($_POST["nom"])&&
+    isset($_POST["prenom"])&&
     isset($_POST["email"])&&
     isset($_POST["mdp"])&&
+    isset($_POST["mdp1"])&&
     isset($_POST["adresse"])&&
     isset($_POST["tel"])&&
    
@@ -21,18 +23,20 @@ if(isset($_POST["nom"])&&
 
     )
     {
-        if(!empty($_POST["nom"])&&
-            
+        
+        if(!empty($_POST["username"])&&
+            !empty($_POST["nom"])&&
+            !empty($_POST["prenom"])&&
             !empty($_POST["email"])&&
             !empty($_POST["mdp"])&&
             !empty($_POST["adresse"])&&
             !empty($_POST["tel"])&&
-           
             !empty($_POST["image"])
             ){
                 $user1 = new user(
+            $_POST["username"],
             $_POST["nom"],
-           
+            $_POST["prenom"],
             $_POST["email"],
             $_POST["mdp"],
             $_POST["adresse"],
@@ -40,6 +44,8 @@ if(isset($_POST["nom"])&&
           
             $_POST["image"]
         );
+        
+        
 
         
 

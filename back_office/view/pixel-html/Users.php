@@ -1,3 +1,12 @@
+<?php
+include "../../controller/userC.php";
+include_once "../../model/user.php";
+
+$userc = new userC();
+$listeusers=$userc->showUser();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,15 +138,12 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Basic Table</h4>
+                        <h4 class="page-title">Table of Users</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a
-                            href="http://wrappixel.com/templates/pixeladmin/" target="_blank"
-                            class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade
-                            to Pro</a>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
-                            <li class="active">Basic Table</li>
+                            <li class="active">Table of Users</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -146,62 +152,47 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+                            <h3 class="box-title">Table of Users</h3>
                             <p class="text-muted">Add class <code>.table</code></p>
                             <div class="table-responsive">
                                 <table class="table">
+                                <?php
+            				        foreach($listeusers as $user){
+   							    ?>
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Username</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>Adress</th>
+                                            <th>Phone number</th>
+                                            <th>Email</th>
                                             <th>Role</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
+                                        <tr> 
+                                            <td><?php echo $user['id'];?></td>
+                                            <td><?php echo $user['username'];?></td>
+                                            <td><?php echo $user['nom'];?></td>
+                                            <td><?php echo $user['prenom'];?></td>
+                                            <td><?php echo $user['adresse'];?></td>
+                                            <td><?php echo $user['tel'];?></td>
+                                            <td><?php echo $user['email'];?></td>
+                                            <td><?php echo $user['role'];?></td>
+                                            <td>
+                                                <form method="POST" action="deleteuser.php">
+                                                <input type="submit" name="supprimer" value="Delete">
+                                                <input type="hidden" value="<?php echo $user['id'];?>" name="id">	
+                                                
+                                            </td>
+                                            
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                            <td>developer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                            <td>supporter</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                            <td>supporter</td>
-                                        </tr>
+                                <?php
+                                    }
+                                ?>
                                     </tbody>
                                 </table>
                             </div>

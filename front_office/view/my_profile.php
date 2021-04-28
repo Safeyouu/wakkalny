@@ -131,7 +131,7 @@ $listeusers=$userc->showUser();
 									<dt>First Name</dt>
 									<dd><?php echo $user['nom'];?></dd>
 									<dt>Laste Name</dt>
-									<dd><?php echo $user['nom'];?></dd>
+									<dd><?php echo $user['prenom'];?></dd>
 									<dt>Email</dt>
 									<dd><?php echo $user['email'];?></dd>
 									<dt>Adress </dt>
@@ -142,7 +142,10 @@ $listeusers=$userc->showUser();
 									<dd><?php echo $user['role'];?></dd>
 									
 									
-									<a href="#update?id=<?php echo $user['id'];?>"><button>Modifier</button></a>
+									<form method="POST" action="updateprofile.php">
+									 <input type="text" style="display:none" name="id" value="<?PHP echo $user['id'] ?>">
+									<input type="submit"  value="modifier">
+									</form>
 									
 								</dl>
 							<?php
@@ -224,7 +227,7 @@ $listeusers=$userc->showUser();
 							?>
 								
 										<!--content-->
-										<form method="POST" >
+										<form method="POST" action="">
 											<section class="content center full-width">
 												<div class="modal container">
 													<h3>Modify user</h3>
@@ -256,7 +259,6 @@ $listeusers=$userc->showUser();
 													<label for="">Phone Number :</label> <br>
 														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "<?php echo $user1['tel'];?>" />
 													</div>
-													
 													<section>
 													<h42>Photo</h4>
 													<div class="f-row full">
