@@ -1,3 +1,37 @@
+<?php
+include '../model/categorie.php';
+include '../controller/categorieC.php';
+$error = "";
+
+$categorie1 = null;
+
+$categoriec = new categorieC();
+
+if(isset($_POST["nom"])
+    
+    )
+    {
+        if(!empty($_POST["nom"])
+            
+            ){
+        $categorie1 = new categorie(
+            $_POST["nom"]
+            
+
+        );
+   $categoriec->ajoutercategorie($categorie1);
+   header('location:shop.php');
+    }
+    else {
+
+$error=  "Missing information";
+    }
+    }
+    ?>  
+
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -87,15 +121,20 @@
 				<section class="content center full-width">
 					<div class="modal container">
 						<h3>products category</h3>
+						<form  methode="POST" action="shop.php">
+
 						<div class="f-row">
                <label >product name</label>
 
-							<input type="text" placeholder="product name" />
+							<input type="text" placeholder="product name" id="nom" name="nom" />  
 						</div>
 						<div class="f-row bwrap">
-							<input type="submit" value="submit" />
+						<div  class="third bwrap"   >
+						<input type="submit"   value="submit" /> </div>	
 						</div>
+						</form>
 					</div>
+				
 				</section>
 				<!--//content-->
 			</div>

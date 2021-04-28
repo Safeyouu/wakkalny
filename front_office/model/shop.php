@@ -1,5 +1,5 @@
 <?php
-class Shop {
+class Shop { 
 private  $id=null;
 private  $nom=null;
 private  $description=null;
@@ -10,7 +10,6 @@ private  $image=null;
 public function __construct(  string $nom, string $description,int $nb_stock ,string $prix,string $image) 
 //construct:pour exagerer tous les attributs de saisir (intialisation)
 {
-
 $this->nom=$nom;
 $this->description=$description;
 $this->nb_stock=$nb_stock;

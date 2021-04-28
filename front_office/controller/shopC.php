@@ -1,5 +1,5 @@
 <?PHP
-	include "../config.php";
+	include_once "../config.php";
 	require_once '../Model/shop.php';
 
 	class shopC {
@@ -10,15 +10,12 @@
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql); //pour preparer la requete
-			
-				$query->execute([
-					'nom' => $shop->getnom(),
-					'description' => $shop->getdescription(),
-					'nb_stock' => $shop->getnb_stock(),
-					'prix' => $shop->getprix(),
-					'image' => $shop->getimage(),
-			
-				]);			
+				$query->bindValue('nom', $shop->getnom());
+				$query->bindValue('description',  $shop->getdescription());
+				$query->bindValue('nb_stock',  $shop->getnb_stock());
+				$query->bindValue('prix',  $shop->getprix());
+				$query->bindValue('image',  $shop->getimage(),PDO::PARAM_LOB);
+				$query->execute();			
 			}
 			catch (Exception $e){
 				echo 'Erreur: '.$e->getMessage();
@@ -27,8 +24,8 @@
 		}
 		
 		function affichershop(){
-			
-			$sql="SELECT * FROM shop";
+
+			$sql="SELECT id,nom,description,nb_stock,prix,image FROM shop";
 			$db = config::getConnexion();
 			try{
 				$liste = $db->query($sql);
@@ -52,27 +49,28 @@
 			}
 		}
 		function modifiershop($shop, $id){
-			try {
+			
+			echo 'test modif C' ;
 				$db = config::getConnexion();
 				$query = $db->prepare(
-					'UPDATE shop SET
-                        id = :id,  
+					'UPDATE shop SET                     
+						nom = :nom, 
 						description = :description, 
                         nb_stock = :nb_stock, 
-                        image= :image, 	
-					WHERE id = :id'
+                        image= :image  	
+					WHERE id = :id '
 				);
-				$query->execute([
-					'nom' => $shop->getnom(),
-					'description' => $shop->getdescription(),
-					'nb_stock' => $shop->getnb_stock(),
-                    'image' => $shop->getimage(),
-                    'id' => $id
-
-				]);
+				$query->bindValue('nom' , $shop->getnom()) ;
+				$query->bindValue('description' , $shop->getdescription());
+				$query->bindValue('nb_stock' , $shop->getnb_stock());
+				$query->bindValue('image' , $shop->getimage());
+				$query->bindValue('id' , $id);
+				try {
+				$query->execute();
+				echo "test" ;
 				echo $query->rowCount() . " records UPDATED successfully <br>";
 			} catch (PDOException $e) {
-				$e->getMessage();
+				echo $e->getMessage();
 			}
 		}
 		function recuperershop($id){
@@ -81,9 +79,8 @@
 			try{
 				$query=$db->prepare($sql);
 				$query->execute();
-
-				$user=$query->fetch();
-				return $user;
+				$shop=$query->fetch();
+				return $shop;
 			}
 			catch (Exception $e){
 				die('Erreur: '.$e->getMessage());

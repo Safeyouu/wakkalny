@@ -7,30 +7,31 @@
 	
 	if (
 		isset($_POST["nom"]) && 
-        isset($_POST["decription"]) &&
+        isset($_POST["description"]) &&
         isset($_POST["nb_stock"]) && 
         isset($_POST["prix"])  &&
-        isset($_POST["image"]) 
+        isset($_POST["image"]) &&
+		isset($_POST['id'])
 	){
+		
 		if (
-            !empty($_POST["titre"]) && 
-            !empty($_POST["prix"]) && 
+            !empty($_POST["nom"]) && 
+            !empty($_POST["description"]) && 
             !empty($_POST["nb_stock"])  && 
             !empty($_POST["prix"]) &&
             !empty($_POST["image"])
            
         ) {
-			echo 'test';
             $shop = new shop(
-                $_POST['titre'],
-                $_POST['prix'], 
+                $_POST['nom'],
+                $_POST['description'], 
                 $_POST['nb_stock'], 
                 $_POST['prix'], 
                 $_POST['image']
 			);
 			
-            $shopC->modifiershop($shop, $_GET['id']);
-            header('refresh:5;url=shop.php');
+            $shopC->modifiershop($shop, $_POST['id']);
+            header('refresh:3;url=shop.php'); // redirect to shop.php
         }
         else
             $error = "Missing information";
@@ -122,29 +123,26 @@
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
-					<h1>Add shop</h1>
+					<h1>modifier shop</h1>
 				</header>
 					
 				<!--content-->
 				<section class="content full-width">
 					<div class="submit_shop container">
                     <?php
-                    $shop=$shopC->recuperershop($_POST['id'])
+                    $shop=$shopC->recuperershop($_POST['id']);
                     ?>
-                    <form  name="myForm" method="POST" action="shop.php" >
+                    <form  name="myForm" method="POST" action="modifiershop.php" >
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
 									<div class="full"><input type="text" placeholder=" nom" id="nom" name="nom" value="<?php echo $shop['nom']; ?>" /></div>
 								</div>
-
-
-
                                 <section>
                                     <h2>Description</h2>
                                     <div class="f-row">
-                                        <div class="full"><textarea placeholder="description"id="description" name="description" value="<?php echo $shop['description']; ?>" ></textarea></div>
+                                        <div class="full"><textarea placeholder="description" id="description" name="description" value="<?php echo $shop['description']; ?>" ><?php echo $shop['description']; ?></textarea></div>
                                     </div>
                                 </section>
 
@@ -154,7 +152,7 @@
 									
 								</div>
 
-
+								<input type="text" style="display:none" name="id" value="<?PHP echo $shop['id'] ?>">
 
 
 								<div class="f-row">
@@ -169,6 +167,7 @@
 								<h2>image</h2>
 								<div class="f-row full">
 									<input type="file" id="image" name="image" value="<?php echo $shop['image']; ?>"/>
+									
 								</div>
 							</section>	
 							

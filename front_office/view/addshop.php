@@ -7,13 +7,14 @@ $shop1 = null;
 
 $shopc = new shopC();
 
-if(isset($_POST["nom"])&&
+if(
+	isset($_POST["nom"])&&
     isset($_POST["description"])&&
     isset($_POST["nb_stock"])&&
     isset($_POST["prix"])&&
     isset($_POST["image"])
     )
-    {
+    {	echo 'test1';
         if(!empty($_POST["nom"])&&
             !empty($_POST["description"])&&
             !empty($_POST["nb_stock"])&&
@@ -28,8 +29,10 @@ if(isset($_POST["nom"])&&
             $_POST["image"]
 
         );
+
+		echo 'test2';
    $shopc->ajoutershop($shop1);
-   header('location:shop.php');
+   //header('location:shop.php');
     }
     else {
 
@@ -100,7 +103,7 @@ $error=  "Missing information";
 					<ul>
 							
 							<li><a href="addshop.php" title="Add shop">add shop</a></li>
-							<li><a href="addcategoriep.php" title="add category">add category </a></li>
+							<li><a href="addcategoriep.php" title="Add category">add category </a></li>
 						</ul>
 				
 				
@@ -149,7 +152,7 @@ $error=  "Missing information";
 				<!--content-->
 				<section class="content full-width">
 					<div class="submit_shop container">
-                    <form  name="myForm" method="POST" action="" >
+                    <form  name="myForm" method="POST" action="addshop.php" > 
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
@@ -162,7 +165,7 @@ $error=  "Missing information";
                                 <section>
                                     <h2>Description</h2>
                                     <div class="f-row">
-                                        <div class="full"><textarea placeholder="description"id="description" name="description" ></textarea></div>
+                                        <div class="full"><textarea placeholder="description" id="description" name="description" ></textarea></div>
                                     </div>
                                 </section>
 

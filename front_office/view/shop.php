@@ -1,11 +1,17 @@
 <?php
 include "../controller/shopC.php";
+include "../controller/categorieC.php";
 
 $shopc = new shopC();
 $listeproducts=$shopc->affichershop();
 
-?>
 
+
+
+$categoriec = new categorieC();
+$listecat=$categoriec->affichercategorie();
+
+?>
 
 
 <!DOCTYPE html>
@@ -119,7 +125,7 @@ $listeproducts=$shopc->affichershop();
 						<!--item-->
 						<div class="entry one-third">
 							<figure>
-								<img src="images/<?php echo $shop['image'];?>" alt="" />
+								<img name="image" src="images/<?php echo $shop['image'];?>" alt="" />
 								<!--<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>-->
 							</figure>
 							<div class="container">
@@ -139,9 +145,9 @@ $listeproducts=$shopc->affichershop();
 								 <form method="POST" action="modifiershop.php">
 									 <input type="text" style="display:none" name="id" value="<?PHP echo $shop['id'] ?>">
 									<input type="submit"  value="modifier">
-									</form>
+									</form> 
 
-									<!--<a  href="modifiershop.php?id=<?PHP echo $shop['id']; ?>"> Mdifeir get </a>  -->
+									<!--<a  href="modifiershop.php?id=<?PHP echo $shop['id']; ?>"> Mdifeir get </a> -->
 					
 
 					</div>
@@ -171,14 +177,14 @@ $listeproducts=$shopc->affichershop();
 				
 				<!--right sidebar-->
 				<aside class="sidebar one-fourth">
+				<?php
+            foreach($listecat as $categorie){
+        ?>
 					<div class="widget">
 						<ul class="categories right">
-							<li class="active"><a href="#">All products</a></li>
+							<li class="active"><a href="#">categories</a></li>
 							<li><a href="#">Bakeware</a></li>
-							<li><a href="#">Cookware</a></li>
-							<li><a href="#">Gas Stoves</a></li>
-							<li><a href="#">Kitchen Tools</a></li>
-							<li><a href="#">Tableware</a></li>
+							
 						
 						</ul>
 					</div>
@@ -186,6 +192,7 @@ $listeproducts=$shopc->affichershop();
 						<h3>Advertisment</h3>
 						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
 					</div>
+					<?php } ?>
 				</aside>
 				<!--//right sidebar-->
 			</div>
