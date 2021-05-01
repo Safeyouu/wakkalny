@@ -178,21 +178,18 @@ $listecat=$categoriec->affichercategorie();
 				<!--right sidebar-->
 				<aside class="sidebar one-fourth">
 				<?php
-            foreach($listecat as $categorie){
+           		// foreach($listecat as $categorie){
         ?>
 					<div class="widget">
 						<ul class="categories right">
 							<li class="active"><a href="#">categories</a></li>
-							<li><a href="#">Bakeware</a></li>
+							<li><a href="#"><?php// echo $categorie['nom'];?>kasouronet</a></li>
 							
 						
 						</ul>
 					</div>
-					<div class="widget">
-						<h3>Advertisment</h3>
-						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
-					</div>
-					<?php } ?>
+					 
+					<?php //} ?>
 				</aside>
 				<!--//right sidebar-->
 			</div>

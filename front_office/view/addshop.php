@@ -32,7 +32,7 @@ if(
 
 		echo 'test2';
    $shopc->ajoutershop($shop1);
-   //header('location:shop.php');
+   header('location:shop.php');
     }
     else {
 

@@ -7,7 +7,6 @@ private  $nom=null;
 public function __construct(  string $nom) 
 //construct:pour exagerer tous les attributs de saisir (intialisation)
 {
-
 $this->nom=$nom;
 }
 

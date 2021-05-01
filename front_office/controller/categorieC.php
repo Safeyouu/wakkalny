@@ -10,12 +10,8 @@
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql); //pour preparer la requete
-			
-				$query->execute([
-					'nom' => $categorie->getnom()
-					
-			
-				]);			
+				$query->bindValue('nom', $categorie->getnom());
+				$query->execute();			
 			}
 			catch (Exception $e){
 				echo 'Erreur: '.$e->getMessage();

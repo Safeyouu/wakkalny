@@ -7,21 +7,16 @@ $categorie1 = null;
 
 $categoriec = new categorieC();
 
-if(isset($_POST["nom"])
-    
-    )
-    {
-        if(!empty($_POST["nom"])
-            
-            ){
-        $categorie1 = new categorie(
-            $_POST["nom"]
-            
+if(isset($_POST["nom"]))
 
-        );
-   $categoriec->ajoutercategorie($categorie1);
-   header('location:shop.php');
-    }
+    { echo'tesssssssst';
+        if(!empty($_POST["nom"]))
+		{
+			$categorie1 = new categorie($_POST["nom"]);
+			echo 'test';
+			$categoriec->ajoutercategorie($categorie1);
+			header('location:shop.php');
+		}
     else {
 
 $error=  "Missing information";
@@ -121,7 +116,7 @@ $error=  "Missing information";
 				<section class="content center full-width">
 					<div class="modal container">
 						<h3>products category</h3>
-						<form  methode="POST" action="shop.php">
+						<form  methode="POST" action="addcategoriep.php">
 
 						<div class="f-row">
                <label >product name</label>
