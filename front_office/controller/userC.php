@@ -29,6 +29,46 @@
         }
 
 
+        function checklogin($username,$mdp)
+        {
+            $sql="SELECT count(*) FROM user WHERE username=:username AND mdp=:mdp ";
+                $db = config::getConnexion();
+            
+                $query=$db->prepare($sql);
+                 
+                $query->bindParam(':username',$username);
+                $query->bindParam(':mdp',$mdp);
+                $query->execute();
+
+
+              
+                if( $query->rowCount() ==1 )
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            
+            
+        }
+
+
+        function sanitizeString($string)
+        {
+            $string = strip_tags($string);
+            $string = str_replace(' ','',$string);
+            return $string;
+        }
+
+
+        function sanitizePassworrd($string)
+        {
+            $string = md5($string);
+            return $string;
+        }
+
 
           
 

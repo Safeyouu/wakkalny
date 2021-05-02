@@ -156,9 +156,7 @@ $listeusers=$userc->showUser();
                             <p class="text-muted">Add class <code>.table</code></p>
                             <div class="table-responsive">
                                 <table class="table">
-                                <?php
-            				        foreach($listeusers as $user){
-   							    ?>
+                               
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -173,6 +171,9 @@ $listeusers=$userc->showUser();
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+            				        foreach($listeusers as $user){
+   							    ?>
                                         <tr> 
                                             <td><?php echo $user['id'];?></td>
                                             <td><?php echo $user['username'];?></td>

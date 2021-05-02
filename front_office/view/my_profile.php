@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../controller/userC.php";
 include_once "../model/user.php";
 
@@ -41,11 +42,11 @@ $listeusers=$userc->showUser();
 	<header class="head" role="banner">
 		<!--wrap-->
 		<div class="wrap clearfix">
-			<a href="index.html" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li><a href="index.html" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
@@ -54,15 +55,27 @@ $listeusers=$userc->showUser();
 							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
 						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.html" title="Login page">Login page</a></li><li><a href="register.html" title="Register page">Register page</a></li>
-						</ul>
+						
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<?php  
+					if(isset($_SESSION['username']))  
+					{  
+					?>
+						<li style="color:coral; font-size:10px;text-transform: lowercase" >
+							<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="20" height="20" ><i  style="color:black; font-size:17px;">*</i><?php echo $_SESSION['username']; ?>
+							
+							 
+						</li>
+						<li  style=" font-size:13px;text-transform: lowercase"> <a href="logout.php" id="logout"><span class="" >Logout</span></a> </li>
+
+					<?php  
+					}
+					?>
 				</ul>
+				
 			</nav>
 			
 			<nav class="user-nav" role="navigation">
@@ -84,7 +97,7 @@ $listeusers=$userc->showUser();
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
-					<li><a href="index.html" title="Home">Home</a></li>
+					<li><a href="index.php" title="Home">Home</a></li>
 					<li>My account</li>
 				</ul>
 			</nav>
@@ -120,36 +133,36 @@ $listeusers=$userc->showUser();
 						<div class="tab-content" id="about">
 							<div class="row">
 							<?php
-            				foreach($listeusers as $user){
+            				//foreach($listeusers as $user){
    							?>
 								<dl class="basic two-third">
 								<figure >
-									<img src="images/<?php echo $user['image'];?>" style=" display: block;margin-left: auto;margin-right: auto;"/>
+									<img src="images/<?php //echo $user['image'];?><?php echo $_SESSION['image']; ?>" style=" display: block;margin-left: auto;margin-right: auto;"/>
 								</figure>
 									<dt>Username</dt>
-									<dd><?php echo $user['username'];?></dd>
+									<dd><?php //echo $user['username'];?><?php echo $_SESSION['username']; ?></dd>
 									<dt>First Name</dt>
-									<dd><?php echo $user['nom'];?></dd>
+									<dd><?php //echo $user['nom'];?><?php echo $_SESSION['nom']; ?></dd>
 									<dt>Laste Name</dt>
-									<dd><?php echo $user['prenom'];?></dd>
+									<dd><?php// echo $user['prenom'];?><?php echo $_SESSION['prenom']; ?></dd>
 									<dt>Email</dt>
-									<dd><?php echo $user['email'];?></dd>
+									<dd><?php// echo $user['email'];?><?php echo $_SESSION['email']; ?></dd>
 									<dt>Adress </dt>
-									<dd><?php echo $user['adresse'];?></dd>
+									<dd><?php //echo $user['adresse'];?><?php echo $_SESSION['adresse']; ?></dd>
 									<dt>Phone number</dt>
-									<dd><?php echo $user['tel'];?></dd>
+									<dd><?php// echo $user['tel'];?><?php echo $_SESSION['tel']; ?></dd>
 									<dt>Role</dt>
-									<dd><?php echo $user['role'];?></dd>
+									<dd><?php //echo $user['role'];?><?php echo $_SESSION['role']; ?></dd>
 									
 									
 									<form method="POST" action="updateprofile.php">
-									 <input type="text" style="display:none" name="id" value="<?PHP echo $user['id'] ?>">
+									 <input type="text" style="display:none" name="id" value="<?PHP //echo $user['id'] ?><?php echo $_SESSION['id']; ?>">
 									<input type="submit"  value="modifier">
 									</form>
 									
 								</dl>
 							<?php
-							}
+							//}
 							?>
 								
 								<div class="one-third">
@@ -179,16 +192,9 @@ $listeusers=$userc->showUser();
 						<?php
 							$error = "";
 							$userU = new userC();
+							$username=$_SESSION['username']; 
 							
-							if(isset($_POST["username"])&&
-							isset($_POST["nom"])&&
-							isset($_POST["prenom"])&&
-							isset($_POST["email"])&&
-							isset($_POST["mdp"])&&
-							isset($_POST["tel"])&&
-							isset($_POST["adresse"])&&
-							isset($_POST["role"])
-							)
+							if(isset($_POST["update"]))
 							{
 								if(!empty($_POST["username"])&&
 									!empty($_POST["nom"])&&
@@ -266,7 +272,7 @@ $listeusers=$userc->showUser();
 													</div>
 													</section>
 													<div class="f-row bwrap">
-														<input type="submit" value="modifier" />
+														<input type="submit" value="Update" name="update" />
 													</div>
 													<div class="cta">
 														<a href="my_profile.php" class="button big">Cancel</a>

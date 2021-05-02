@@ -1,16 +1,17 @@
 <?php
 class user {
-    private $id;
-	private $username;
-    private $nom;
-	private $prenom;
-    private $email;
-    private $mdp;
-    private $adresse;
-    private $tel;
-    private $role;
-	private $image;
-    public function __construct(string $username,string $nom,string $prenom,string $email,string $mdp,string $adresse,int $tel,string $image)
+    private $id = null;
+	private $username = null;
+    private $nom = null;
+	private $prenom = null;
+    private $email = null;
+    private $mdp = null;
+    private $adresse = null;
+    private $tel = null;
+    private $role = null;
+	private $image = null;
+	
+    public function __construct(string $username,string $nom,string $prenom,string $adresse,int $tel,string $email,string $mdp,string $image)
     {
         $this->username=$username;
 		$this->nom=$nom;
@@ -82,7 +83,6 @@ class user {
 	function setimage($image){
 		$this->image=$image;
 	}
-	
 
 }
 
