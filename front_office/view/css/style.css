@@ -433,11 +433,15 @@ dl 			{display:inline-block;width:100%;margin:0 0 22px;}
 .tabs li a 				{display:inline-block;width:100%;height:100%;padding:0 15px;color:rgb(68, 68, 68);}
 .tabs .active  a,
 .tabs a:hover 		{background:#ff7b74;color:rgb(255, 255, 255);}
+.tabs li a 				{display:inline-block;width:100%;height:100%;padding:0 15px;color:#444;}
+.tabs .active  a,
+.tabs a:hover 		{background:#ff7b74;color:#fff;}
 .tabs .active:before	{display:block;border-color: #ff7b74 transparent transparent;border-style: solid;border-width: 8px 8px 0;top:48px;content: "";height: 0;left:48%;position: absolute;width: 0;} 		
 
 .container .tabs 			{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;margin:0;}
 .container .tabs li 			{border:1px solid #ddd;}
 .container .tab-content 		{padding:0 15px;border:1px solid rgb(221, 221, 221);border-top:0;margin:0 0 20px;float:left;width:100%;}
+.container .tab-content 		{padding:0 15px;border:1px solid #ddd;border-top:0;margin:0 0 20px;float:left;width:100%;}
 
 
 /*MY PROFILE*/
@@ -951,3 +955,4 @@ h2.large 		{background-size:100% 123px;font-size:24px;}
 
 
 
+}
