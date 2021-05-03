@@ -10,18 +10,7 @@ $user1 = null;
 $userc = new userC();
 
 
-function sanitizeString($string)
-{
-	$string = strip_tags($string);
-	$string = str_replace(' ','',$string);
-	return $string;
-}
 
-function sanitizePassworrd($string)
-{
-	$string = md5($string);
-	return $string;
-}
 
 
 if(isset($_POST['login']))
@@ -30,9 +19,10 @@ if(isset($_POST['login']))
         if(!empty($_POST["username"])&&
             !empty($_POST["mdp"]))
 			{
-                $user1 = new user(
-					sanitizeString($_POST["username"]),
-					sanitizePassworrd($_POST["mdp"])
+				
+                $Logedin = $userc->Logedin(
+					($_POST["username"]),
+					($_POST["mdp"])
 			);
 
 			$username=$_POST["username"];
@@ -48,8 +38,12 @@ if(isset($_POST['login']))
 			$_SESSION['adresse']=$_POST['adresse'];
 			$_SESSION['tel']=$_POST['tel'];
 			$_SESSION['email']=$_POST['email'];
+			$_SESSION['role']=$_POST['role'];
 				
-				header('Location:index.php');
+					header('Location:index.php');
+
+				
+				
 			}
 			else
 			{
@@ -76,7 +70,11 @@ if(isset($_POST['login']))
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+
 <title>Wakkalny</title>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/icons.css" />
 <link rel="stylesheet" href="cssR/style1.css"/>
 <link rel="shortcut icon" href="images/favicon.ico" />
 		
@@ -85,13 +83,48 @@ if(isset($_POST['login']))
 <script src="bootstrap/js/bootstrap.min.js"></script>	
 </head>
 
-	<body>
+<body style="background-image: url(images/bgr/aa.jpg); background-repeat: no-repeat; background-size: cover ">
+	
+	<!--header-->
+<header class="head" role="banner">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.html" title="Blog"><span>Blog</span></a>
+						<ul>
+							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
+						</ul>
+					</li>
+						
+					</li>
+					
+					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					
+				</ul>
+				
+			</nav>
+			
+			<nav class="user-nav" role="navigation">
+				<ul>
+					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
 	
 	
 	
-	<div class="wrapper">
 	
-	<div class="container">
 			
 		<div class="col-lg-12">
 		
@@ -125,7 +158,7 @@ if(isset($_POST['login']))
 					</div>
 					<div class="input-group">
 						<label>Password</label>
-						<input type="password" name="password" placeholder="Enter passowrd" required>
+						<input type="password" name="mdp" placeholder="Enter passowrd" required>
 					</div>
 					
 					<div class="input-group">
@@ -139,9 +172,9 @@ if(isset($_POST['login']))
 			
 		</div>
 		
-	</div>
+	
 			
-	</div>
-										
+	
+				
 	</body>
 </html>

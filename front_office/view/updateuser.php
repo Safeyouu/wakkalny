@@ -1,9 +1,56 @@
 <?php
+session_start();
+
 include "../controller/userC.php";
 include_once "../model/user.php";
+$error = "";
 
-$userc = new userC();
-$listeusers=$userc->showUser();
+$user1 = null;
+
+$userc = new userC();      
+$user=$userc->getUserbyname($_SESSION['username']);
+
+
+if (isset($_POST['update']) )
+{
+       
+
+
+        
+        $id=$_POST['id'];
+        $username=$_POST['username'];
+		$nom=$_POST['nom'];
+        $prenom=$_POST['prenom'];
+        $adresse=$_POST['adresse'];
+        $tel=$_POST['tel'];
+        $email=$_POST['email'];
+        $mdp=$_POST['mdp'];
+        $image=$_POST['image'];
+       
+
+
+        $sql="UPDATE user SET id='$id',username='$username',nom='$nom',prenom='$prenom',adresse='$adresse',tel='$tel',email='$email',mdp='$mdp',image='$image' where id='$id'";
+            $db = config::getConnexion();
+            try{
+            $req=$db->prepare($sql);
+            $req->execute();
+			header('Location:my_profile.php');
+            exit();
+            
+        }
+            catch (Exception $e){
+                echo 'Erreur: '.$e->getMessage();
+
+           
+            
+            }
+}
+
+
+?>
+
+<?php
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,11 +88,11 @@ $listeusers=$userc->showUser();
 	<header class="head" role="banner">
 		<!--wrap-->
 		<div class="wrap clearfix">
-			<a href="index.html" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li><a href="index.html" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
@@ -54,15 +101,27 @@ $listeusers=$userc->showUser();
 							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
 						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.html" title="Login page">Login page</a></li><li><a href="register.html" title="Register page">Register page</a></li>
-						</ul>
+						
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<?php  
+					if(isset($_SESSION['username']))  
+					{  
+					?>
+						<li style="color:coral; font-size:10px;text-transform: lowercase" >
+							<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="20" height="20" ><i  style="color:black; font-size:17px;">*</i><?php echo $_SESSION['username']; ?>
+							
+							 
+						</li>
+						<li  style=" font-size:13px;text-transform: lowercase"> <a href="logout.php" id="logout"><span class="" >Logout</span></a> </li>
+
+					<?php  
+					}
+					?>
 				</ul>
+				
 			</nav>
 			
 			<nav class="user-nav" role="navigation">
@@ -84,8 +143,9 @@ $listeusers=$userc->showUser();
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
-					<li><a href="index.html" title="Home">Home</a></li>
-					<li>My account</li>
+					<li><a href="index.php" title="Home">Home</a></li>
+					<li><a href="my_profile.php" title="Home">My account</a></li>
+					<li>Update Profile</li>
 				</ul>
 			</nav>
 			<!--//breadcrumbs-->
@@ -105,29 +165,80 @@ $listeusers=$userc->showUser();
 					
 					<!--//profile left part-->
 					
-					<div class="three-fourth">
-						<nav class="tabs">
-							<ul>
-								<li><a href="my_profile.php" title="About me">About me</a></li>
-								<li  class="active"><a href="#update" title="My favorites">Update profile</a></li>
-								<li><a href="#favorites" title="My favorites">My favorites</a></li>
-								<li><a href="#posts" title="My posts">My posts</a></li>
-							</ul>
-						</nav>
+					
+					
+                    
 						
 						<!--about-->
 						
-						<div class="tab-content" id="about">
-							<div class="row">
+						<div class="tab-content" id="about" style="text-align: center">
+							<div class="row" >
 							
-								<dl class="basic two-third">
+                            <?php
+								if (isset($_SESSION['username'])){
+								//$user1 = $userU->recupererUser($_SESSION['id']);
+							?>
 								
-									
-								</dl>
+										<!--content-->
+										<form method="POST" action="updateuser.php">
+											<section class="content center full-width" >
+												<div class="modal container">
+													<h3>Edit Profile</h3>
+													<div class="f-row">
+													
+														<input type="hidden" name="id" placeholder="Your Username"  value = "<?php echo $user['id']; ?>"  />
+													</div>
+													<div class="f-row">
+													<label for=""> Username :</label>
+														<input type="text" name="username" placeholder="Your Username"  value = "<?php echo $user['username']; ?>"  />
+													</div>
+													<div class="f-row">
+													<label for="">First Name :</label>
+														<input type="text" name="nom" placeholder="Your first name"  value = "<?php echo $user['nom']; ?>"  />
+													</div>
+													<div class="f-row">
+													<label for="">Last Name :</label>
+														<input type="text" name="prenom" placeholder="Your last name"  value = "<?php echo $user['prenom']; ?>"  />
+													</div>
+													<div class="f-row">
+													<label for="">Email :</label>
+														<input type="email" name="email" placeholder="Your email"  value = "<?php echo $user['email']; ?>" />
+													</div>
+													<div class="f-row">
+													<label for="">Password :</label>
+														<input type="text" name="mdp" placeholder="Your password"  value = "<?php echo $user['mdp']; ?>" />
+													</div>
+													<div class="f-row">
+													<label for="">Adress :</label>
+														<input type="text" name="adresse" placeholder="Your adress"  value = "<?php echo $user['adresse']; ?>"  />
+													</div>
+													<div class="f-row">
+													<label for="">Phone Number :</label> <br>
+														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "<?php echo $user['tel']; ?>" />
+													</div>
+													<section>
+													<h42>Photo</h4>
+													<div class="f-row full">
+														<input type="file" name="image" />
+													</div>
+													</section>
+													<div class="f-row bwrap">
+														<input type="submit" value="Update" name="update" />
+													</div>
+													<div class="cta">
+														<a href="my_profile.php" class="button big">Cancel</a>
+													</div>
+												</div>
+											</section>
+										</form>
+										<!--//content-->
+								<?php
+								}
+								?>	
 							
 								
-								<div class="one-third">
-									<!--<ul class="boxed gold">
+								<!--<div class="one-third">
+									<ul class="boxed gold">
 										<li class="light"><a href="#" title="Best recipe"><i class="icon icon-themeenergy_crown"></i> <span>Had a best recipe</span></a></li>
 										<li class="medium"><a href="#" title="Was featured"><i class="icon icon-themeenergy_top-rankings"></i> <span>Was featured</span></a></li>
 										<li class="dark"><a href="#" title="Added a first recipe"><i class="icon  icon-themeenergy_medal-first-place"></i> <span>Added a first recipe</span></a></li>
@@ -139,8 +250,8 @@ $listeusers=$userc->showUser();
 										<li class="dark"><a href="recipes.html" title="Fish"><i class="icon icon-themeenergy_cup2"></i> <span>Won a contest</span></a></li>
 										<li class="light"><a href="recipes.html" title="Healthy"><i class="icon icon-themeenergy_share3"></i> <span>Shared a recipe</span></a></li>
 										<li class="medium"><a href="#" title="Was featured"><i class="icon icon-themeenergy_top-rankings"></i> <span>Was featured</span></a></li>
-									</ul>-->
-								</div>
+									</ul>
+								</div>-->
 							</div>
 						</div>
 						<!--//about-->
@@ -151,18 +262,11 @@ $listeusers=$userc->showUser();
 						<!--update profile-->
 						
 						<?php
-							$error = "";
+							/*$error = "";
 							$userU = new userC();
 							
-							if(isset($_POST["username"])&&
-							isset($_POST["nom"])&&
-							isset($_POST["prenom"])&&
-							isset($_POST["email"])&&
-							isset($_POST["mdp"])&&
-							isset($_POST["tel"])&&
-							isset($_POST["adresse"])&&
-							isset($_POST["role"])
-							)
+							
+							if(isset($_POST["update"]))
 							{
 								if(!empty($_POST["username"])&&
 									!empty($_POST["nom"])&&
@@ -184,75 +288,25 @@ $listeusers=$userc->showUser();
 									$_POST["adresse"],
 									$_POST["role"],
 								);
-								$userc->updateUser($user1, $_GET['id']);
-								header('Location:my_profile.php');
-								}
-							
+
+
+								 
+								$userc->haja($user1);
+
+
+								$userc->update($user1,$_POST['id']);
+								
+									$_SESSION['username']=$_POST['username'];
+									header('Location:my_profile.php');
+								
+									}
 								else
 									$error = "Missing information";
 							}
-								
+								*/
 						?>
 
-						<div class="tab-content" id="update">
-							<?php
-								//if (isset($_GET['id'])){
-								//$user1 = $userU->recupererUser($_GET['id']);
-							?>
-								
-										<!--content-->
-										<form method="POST" >
-											<section class="content center full-width">
-												<div class="modal container">
-													<h3>Modify user</h3>
-													<div class="f-row">
-														<label for="">ID :</label>
-														<input type="text" name="id" id="id" value = "<?php echo $user1['id'];?>" disabled  />
-													</div>
-													<div class="f-row">
-													<label for=""> Username :</label>
-														<input type="text" name="username" placeholder="Your Username"  value = "<?php echo $user1['username'];?>"  />
-													</div>
-													<div class="f-row">
-													<label for="">First Name :</label>
-														<input type="text" name="nom" placeholder="Your first name"  value = "<?php echo $user1['nom'];?>"  />
-													</div>
-													<div class="f-row">
-													<label for="">Last Name :</label>
-														<input type="text" name="prenom" placeholder="Your last name"  value = "<?php echo $user1['prenom'];?>"  />
-													</div>
-													<div class="f-row">
-													<label for="">Email :</label>
-														<input type="email" name="email" placeholder="Your email"  value = "<?php echo $user1['email'];?>" />
-													</div>
-													<div class="f-row">
-													<label for="">Adress :</label>
-														<input type="text" name="adresse" placeholder="Your adress"  value = "<?php echo $user1['adresse'];?>"  />
-													</div>
-													<div class="f-row">
-													<label for="">Phone Number :</label> <br>
-														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "<?php echo $user1['tel'];?>" />
-													</div>
-													
-													<section>
-													<h42>Photo</h4>
-													<div class="f-row full">
-														<input type="file" name="image" />
-													</div>
-													</section>
-													<div class="f-row bwrap">
-														<input type="submit" value="modifier" />
-													</div>
-													<div class="cta">
-														<a href="my_profile.php" class="button big">Cancel</a>
-													</div>
-												</div>
-											</section>
-										</form>
-										<!--//content-->
-								<?php
-								//}
-								?>	
+						
 						</div>
 						<!--//update profile-->
 						 
@@ -391,7 +445,7 @@ $listeusers=$userc->showUser();
 							<!--//entries-->
 						</div>
 						<!--//my posts-->
-					</div>
+					
 				</div>
 				<!--//row-->
 			</section>

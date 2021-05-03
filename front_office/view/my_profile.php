@@ -4,7 +4,7 @@ include "../controller/userC.php";
 include_once "../model/user.php";
 
 $userc = new userC();
-$listeusers=$userc->showUser();
+$user=$userc->getUserbyname($_SESSION['username']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,6 +41,16 @@ $listeusers=$userc->showUser();
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -58,22 +68,9 @@ $listeusers=$userc->showUser();
 						
 					</li>
 					
-					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
-					<?php  
-					if(isset($_SESSION['username']))  
-					{  
-					?>
-						<li style="color:coral; font-size:10px;text-transform: lowercase" >
-							<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="20" height="20" ><i  style="color:black; font-size:17px;">*</i><?php echo $_SESSION['username']; ?>
-							
-							 
-						</li>
-						<li  style=" font-size:13px;text-transform: lowercase"> <a href="logout.php" id="logout"><span class="" >Logout</span></a> </li>
-
-					<?php  
-					}
-					?>
+					
 				</ul>
 				
 			</nav>
@@ -118,47 +115,50 @@ $listeusers=$userc->showUser();
 					
 					<!--//profile left part-->
 					
+					
 					<div class="three-fourth">
-						<nav class="tabs">
-							<ul>
-								<li class="active"><a href="#about" title="About me">About me</a></li>
-								<li><a href="#update" title="My favorites">Update profile</a></li>
-								<li><a href="#favorites" title="My favorites">My favorites</a></li>
-								<li><a href="#posts" title="My posts">My posts</a></li>
+						<nav>
+							<ul style="width:auto;">
+								<li  class="active"><h2><a href="#about" title="About me" style="color: black">Profile</a></h2></li>
 							</ul>
 						</nav>
 						
 						<!--about-->
 						
-						<div class="tab-content" id="about">
+						<div class="tab-content" id="about" style="text-align: center">
 							<div class="row">
 							<?php
-            				//foreach($listeusers as $user){
+            				//foreach($malek as $user){
    							?>
 								<dl class="basic two-third">
-								<figure >
-									<img src="images/<?php //echo $user['image'];?><?php echo $_SESSION['image']; ?>" style=" display: block;margin-left: auto;margin-right: auto;"/>
+								<figure style="display: block; margin-left: auto; margin-right: auto; width: 50%;" >
+									<img src="images/<?php echo $user['image']; ?>" />
 								</figure>
+								
+									
 									<dt>Username</dt>
-									<dd><?php //echo $user['username'];?><?php echo $_SESSION['username']; ?></dd>
+									<dd><?php echo $user['username']; ?></dd>
 									<dt>First Name</dt>
-									<dd><?php //echo $user['nom'];?><?php echo $_SESSION['nom']; ?></dd>
+									<dd><?php echo $user['nom']; ?></dd>
 									<dt>Laste Name</dt>
-									<dd><?php// echo $user['prenom'];?><?php echo $_SESSION['prenom']; ?></dd>
+									<dd><?php echo $user['prenom']; ?></dd>
 									<dt>Email</dt>
-									<dd><?php// echo $user['email'];?><?php echo $_SESSION['email']; ?></dd>
+									<dd><?php echo $user['email']; ?></dd>
 									<dt>Adress </dt>
-									<dd><?php //echo $user['adresse'];?><?php echo $_SESSION['adresse']; ?></dd>
+									<dd><?php echo $user['adresse']; ?></dd>
 									<dt>Phone number</dt>
-									<dd><?php// echo $user['tel'];?><?php echo $_SESSION['tel']; ?></dd>
+									<dd><?php echo $user['tel']; ?></dd>
 									<dt>Role</dt>
-									<dd><?php //echo $user['role'];?><?php echo $_SESSION['role']; ?></dd>
+									<dd><?php echo $user['role']; ?></dd>
+									<td>
+									<div class="f-row bwrap">
+										<a href="updateuser.php?id=<?php echo $_SESSION['username'];?>"><button>Update</button></a>
+									</div>
+											
+									</td>
 									
 									
-									<form method="POST" action="updateprofile.php">
-									 <input type="text" style="display:none" name="id" value="<?PHP //echo $user['id'] ?><?php echo $_SESSION['id']; ?>">
-									<input type="submit"  value="modifier">
-									</form>
+								
 									
 								</dl>
 							<?php
@@ -190,9 +190,9 @@ $listeusers=$userc->showUser();
 						<!--update profile-->
 						
 						<?php
-							$error = "";
+							/*$error = "";
 							$userU = new userC();
-							$username=$_SESSION['username']; 
+							
 							
 							if(isset($_POST["update"]))
 							{
@@ -216,20 +216,28 @@ $listeusers=$userc->showUser();
 									$_POST["adresse"],
 									$_POST["role"],
 								);
-								$userc->updateUser($user1, $_GET['id']);
-								header('Location:my_profile.php');
-								}
-							
+
+
+								 
+								$userc->haja($user1);
+
+
+								$userc->update($user1,$_POST['id']);
+								
+									$_SESSION['username']=$_POST['username'];
+									header('Location:my_profile.php');
+								
+									}
 								else
 									$error = "Missing information";
 							}
-								
+								*/
 						?>
 
 						<div class="tab-content" id="update">
 							<?php
-								//if (isset($_GET['id'])){
-								//$user1 = $userU->recupererUser($_GET['id']);
+								if (isset($_SESSION['id'])){
+								$user1 = $userU->recupererUser($_SESSION['id']);
 							?>
 								
 										<!--content-->
@@ -237,33 +245,34 @@ $listeusers=$userc->showUser();
 											<section class="content center full-width">
 												<div class="modal container">
 													<h3>Modify user</h3>
-													<div class="f-row">
-														<label for="">ID :</label>
-														<input type="text" name="id" id="id" value = "<?php echo $user1['id'];?>" disabled  />
-													</div>
+													
 													<div class="f-row">
 													<label for=""> Username :</label>
-														<input type="text" name="username" placeholder="Your Username"  value = "<?php echo $user1['username'];?>"  />
+														<input type="text" name="username" placeholder="Your Username"  value = ""  />
 													</div>
 													<div class="f-row">
 													<label for="">First Name :</label>
-														<input type="text" name="nom" placeholder="Your first name"  value = "<?php echo $user1['nom'];?>"  />
+														<input type="text" name="nom" placeholder="Your first name"  value = ""  />
 													</div>
 													<div class="f-row">
 													<label for="">Last Name :</label>
-														<input type="text" name="prenom" placeholder="Your last name"  value = "<?php echo $user1['prenom'];?>"  />
+														<input type="text" name="prenom" placeholder="Your last name"  value = ""  />
 													</div>
 													<div class="f-row">
 													<label for="">Email :</label>
-														<input type="email" name="email" placeholder="Your email"  value = "<?php echo $user1['email'];?>" />
+														<input type="email" name="email" placeholder="Your email"  value = "" />
+													</div>
+													<div class="f-row">
+													<label for="">Password :</label>
+														<input type="password" name="mdp" placeholder="Your password"  value = "" />
 													</div>
 													<div class="f-row">
 													<label for="">Adress :</label>
-														<input type="text" name="adresse" placeholder="Your adress"  value = "<?php echo $user1['adresse'];?>"  />
+														<input type="text" name="adresse" placeholder="Your adress"  value = ""  />
 													</div>
 													<div class="f-row">
 													<label for="">Phone Number :</label> <br>
-														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "<?php echo $user1['tel'];?>" />
+														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "" />
 													</div>
 													<section>
 													<h42>Photo</h4>
@@ -277,12 +286,13 @@ $listeusers=$userc->showUser();
 													<div class="cta">
 														<a href="my_profile.php" class="button big">Cancel</a>
 													</div>
+													
 												</div>
 											</section>
 										</form>
 										<!--//content-->
 								<?php
-								//}
+								}
 								?>	
 						</div>
 						<!--//update profile-->

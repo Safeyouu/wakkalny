@@ -9,7 +9,7 @@
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
-                $user->setrole("ROLE_USER");
+                $user->setrole(false);
 				$query->execute([
                     'username' => $user->getusername(),
 					'nom' => $user->getnom(),
@@ -28,27 +28,37 @@
             }
         }
 
+        public function Logedin($username,$mdp){
+            $sql = "SELECT * FROM user WHERE username='$username' && mdp='$pass'";
+
+            $db = config::getConnexion();
+    
+            $logedin = $db->query($sql);
+            return $logedin->fetchAll();
+        }
 
         function checklogin($username,$mdp)
         {
-            $sql="SELECT count(*) FROM user WHERE username=:username AND mdp=:mdp ";
+            $sql="SELECT * FROM user WHERE username=:username AND mdp=:mdp LIMIT 1";
                 $db = config::getConnexion();
             
                 $query=$db->prepare($sql);
                  
-                $query->bindParam(':username',$username);
-                $query->bindParam(':mdp',$mdp);
-                $query->execute();
-
+                
+                $query->execute(array(':username'=>$username, ':mdp'=>$mdp));
+                $row=$query->fetch(PDO::FETCH_ASSOC);
 
               
-                if( $query->rowCount() ==1 )
+                if( $query->rowCount() )
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    if($username==$row["username"] AND $mdp==$row["mdp"]) 
+                    {
+                       return true ;
+                    }
+                    else
+                    {
+                        return false ;
+                    }
                 }
             
             
@@ -70,6 +80,38 @@
         }
 
 
+        function checkusername($username)
+        {
+            $sql = "SELECT * FROM user WHERE username=:username LIMIT 1";
+            $db = config::getConnexion();
+            $query = $db->prepare($sql);
+            $query->execute(['username' => $username]);
+            if($query->rowCount()){
+                echo 'Username already exists. Please try a new one';
+            }
+            else 
+            {
+                $query->execute();
+            }
+        }
+
+        function checkemail($email)
+        {
+            $sql = "SELECT * FROM user WHERE email=:email LIMIT 1";
+            $db = config::getConnexion();
+            $query = $db->prepare($sql);
+            $query->execute(['email' => $email]);
+            if($query->rowCount()){
+                echo 'Email already exists. Please try a new one';
+            }
+            else 
+            {
+                $query->execute();
+            }
+        }
+
+        
+        
           
 
         /* ************************************* */
@@ -124,7 +166,7 @@
             /* ************************************* */
 
 
-        function updateUser($user,$id){
+        /*function updateUser($user,$id){
 		    $sql="UPDATE user SET  username=:username,nom=:nom,prenom=:prenom,email=:email,adresse=:adresse,tel=:tel,image=:image WHERE id=:id";
 		
 		    $db = config::getConnexion();
@@ -166,9 +208,48 @@
             print_r($datas);
             }
             
+        }*/
+
+        public function haja($user){
+        $currentusername=$_SESSION['username'];
+        $sql="SELECT * FROM user WHERE username=:username";
+        $db = config::getConnexion();
+        $query=$db->prepare($sql);
+        $query->bindParam(":username = $currentusername");
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $id=$user->getid();
+        $id = $result['id'];
+
         }
 
-        /*public function updateThread($user, $id) {
+        public function update($user,$id){
+            $sql="UPDATE user SET  username=:username,nom=:nom,prenom=:prenom,email=:email,adresse=:adresse,tel=:tel,image=:image WHERE id=:id";
+            $db = config::getConnexion();
+            $query = $db->prepare($sql);
+            $username=$user->getusername();
+            $nom=$user->getnom();
+            $prenom=$user->getprenom();
+            $prenom=$user->getemail();
+            $mdp=$user->getmdp();
+            $adresse=$user->getadresse();
+            $tel=$user->gettel();
+            $image=$user->getimage();
+            $query->bindValue(':id', $id);
+            $query->bindValue(':username',$username);
+            $query->bindValue(':nom',$nom);
+            $query->bindValue(':prenom',$prenom);
+            $query->bindValue(':email',$email);
+            $query->bindValue(':adresse',$adresse);
+            $query->bindValue(':tel',$tel);
+            $query->bindValue(':image',$image);
+            return $query->execute();
+
+        }
+
+
+
+       /* public function updateThread($user, $id) {
             try {
                 $db = config::getConnexion();
                 $sql="UPDATE user SET  username=:username,nom=:nom,prenom=:prenom,email=:email,adresse=:adresse,tel=:tel,image=:image WHERE id=:id";
@@ -205,8 +286,8 @@
                 $query=$db->prepare($sql);
                 $query->execute();
 
-                $album=$query->fetch();
-                return $album;
+                $user=$query->fetch();
+                return $user;
             }
             catch (Exception $e){
                 die('Erreur: '.$e->getMessage());

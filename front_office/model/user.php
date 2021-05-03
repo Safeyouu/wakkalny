@@ -11,7 +11,8 @@ class user {
     private $role = null;
 	private $image = null;
 	
-    public function __construct(string $username,string $nom,string $prenom,string $adresse,int $tel,string $email,string $mdp,string $image)
+	
+    public function __construct(string $username,string $nom,string $prenom,string $adresse,int $tel,string $email,string $mdp,string $image,int $role )
     {
         $this->username=$username;
 		$this->nom=$nom;
@@ -21,6 +22,16 @@ class user {
         $this->adresse=$adresse;
         $this->tel=$tel;
 		$this->image=$image;
+		$this->role=$role;
+
+
+    }
+
+	public function login(string $username,string $mdp)
+    {
+        $this->username=$username;
+        $this->mdp=$mdp;
+        
 
     }
 

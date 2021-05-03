@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -34,11 +37,11 @@
 	<header class="head" role="banner">
 		<!--wrap-->
 		<div class="wrap clearfix">
-			<a href="index.html" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li><a href="index.html" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
@@ -49,8 +52,14 @@
 					</li>
 					
 					
-					<li class="current-menu-item"><a href="contact.html" title="Contact"><span>Contact</span></a></li>
+					<li class="current-menu-item"><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<li style="color:coral; font-size:10px;text-transform: lowercase" >
+							<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="20" height="20" ><i  style="color:black; font-size:17px;">*</i><?php echo $_SESSION['username']; ?>
+							
+							 
+						</li>
+						<li  style=" font-size:13px;text-transform: lowercase"> <a href="logout.php" id="logout"><span class="" >Logout</span></a> </li>
 				</ul>
 			</nav>
 			
@@ -135,12 +144,12 @@
 					
 					<nav class="foot-nav">
 						<ul>
-							<li><a href="index.html" title="Home">Home</a></li>
+							<li><a href="index.php" title="Home">Home</a></li>
 							<li><a href="recipes.html" title="Recipes">Recipes</a></li>
 							<li><a href="blog.html" title="Blog">Blog</a></li>
-							<li><a href="contact.html" title="Contact">Contact</a></li>    
+							<li><a href="contact.php" title="Contact">Contact</a></li>    
 							<li><a href="find_recipe.html" title="Search for recipes">Search for recipes</a></li>
-							<li><a href="login.html" title="Login">Login</a></li>	<li><a href="register.html" title="Register">Register</a></li>													
+							<li><a href="login.php" title="Login">Login</a></li>	<li><a href="register.html" title="Register">Register</a></li>													
 						</ul>
 					</nav>
 				</div>

@@ -1,5 +1,6 @@
 <?php
-session_start()
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,10 +34,14 @@ session_start()
 		<div class="spinner"></div>
 	</div>
 	<!--//preloader-->
-	
+	<?php  
+			if(!isset($_SESSION['username']))  
+			{  
+		?>
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -54,39 +59,25 @@ session_start()
 						
 					</li>
 					
-					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
-					<?php  
-					if(isset($_SESSION['username']))  
-					{  
-					?>
-						<li style="color:coral; font-size:10px;text-transform: lowercase" >
-							<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="20" height="20" ><i  style="color:black; font-size:17px;">*</i><?php echo $_SESSION['username']; ?>
-							
-							 
-						</li>
-						<li  style=" font-size:13px;text-transform: lowercase"> <a href="logout.php" id="logout"><span class="" >Logout</span></a> </li>
-
-					<?php  
-					}
-					else
-					{
-					?>
-						<li  > <a href="logout.php" id="logout"><span class="" >Login</span></a> </li>
-					<?php
-					}
-					?>
+					
+					
+						
+					
 				</ul>
 			</nav>
-			
+				
 			<nav class="user-nav" role="navigation">
 				<ul>
+					<form method="POST">
 					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
+					<!--<li class="medium"><a href="my_profile.php" title="My account" name="my_account" ><i class="icon icon-themeenergy_chef-hat"></i> <span >My account</span></a></li>-->
 					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+					</form>
 				</ul>
 			</nav>
 		</div>
+		
 		<!--//wrap-->
 	</header>
 	<!--//header-->
@@ -105,10 +96,101 @@ session_start()
 						<h1>Welcome to Wakkalny!</h1>
 						<p>Wakkalny is the ultimate <strong>cooking social community</strong>, where recipes come to life. Wanna know what you will gain by joining us? Lorem ipsum dolor sit amet, this is some teaser text.</p>
 						<p>You will win awesome prizes, make new friends and share delicious recipes. </p>
-						<a href="register.html" class="button white more medium">Join our community <i class="fa fa-chevron-right"></i></a>
-						<p>Already a member? Click <a href="login.html">here</a> to login.</p>
+						<a href="register.php" class="button white more medium">Join our community <i class="fa fa-chevron-right"></i></a>
+						<p>Already a member? Click <a href="login.php">here</a> to login.</p>
 					</article>
+					<?php
+					}
 					
+					else
+					{ 
+						include "../controller/userC.php";
+						include_once "../model/user.php";
+
+						$userc = new userC();
+						$user=$userc->getUserbyname($_SESSION['username']);
+					?>
+	<!--header-->
+	<header class="head" role="banner">
+		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:white; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				
+				</li>
+				<?php
+				if($user['role'] == 1)
+				{
+
+				
+				?>
+				<li style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="../../back_office/view/pixel-html" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">dachboard</button></span></a> 
+				</li>
+				<?php
+					}
+					?>
+			</li>
+		</nav>
+		
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li class="current-menu-item"><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.html" title="Blog"><span>Blog</span></a>
+						<ul>
+							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
+						</ul>
+					</li>
+						
+					</li>
+					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+						
+					</ul>
+			</nav>
+				
+			<nav class="user-nav" role="navigation">
+				<ul>
+					<form method="POST">
+					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+					<li class="medium"><a href="my_profile.php" title="My account" name="my_account" ><i class="icon icon-themeenergy_chef-hat"></i> <span >My account</span></a></li>
+					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+					</form>
+				</ul>
+			</nav>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
+		<!--main-->
+	<main class="main" role="main">
+		<!--intro-->
+		<div class="intro">
+			<figure class="bg"><img src="images/intro.jpg" alt="" /></figure>
+			
+			<!--wrap-->
+			<div class="wrap clearfix">
+				<!--row-->
+				<div class="row">
+					<article class="three-fourth text">
+						<h1>Welcome to Wakkalny!</h1>
+						<p><strong style="color: #85b4d0;font-size:25px"><?php echo $_SESSION['username']; ?></strong> you are  now one of the <strong>cooking social community</strong>, we hope you have a great experience with us.</p>
+						
+					</article>
+					<?php  
+					}
+					
+					?>
 					<!--search recipes widget-->
 					<div class="one-fourth">
 						<div class="widget container">
@@ -157,7 +239,7 @@ session_start()
 					<div class="icons dynamic-numbers">
 						
 							<div class="cta">
-								<a href="login.html" class="button big">Join us!</a>
+								<!--<a href="login.html" class="button big">Join us!</a>-->
 							</div>
 						</div>
 						<!--//row-->
@@ -536,7 +618,7 @@ session_start()
 							<li><a href="index.php" title="Home">Home</a></li>
 							<li><a href="recipes.html" title="Recipes">Recipes</a></li>
 							<li><a href="blog.html" title="Blog">Blog</a></li>
-							<li><a href="contact.html" title="Contact">Contact</a></li>    
+							<li><a href="contact.php" title="Contact">Contact</a></li>    
 							<li><a href="find_recipe.html" title="Search for recipes">Search for recipes</a></li>
 							<li><a href="login.html" title="Login">Login</a></li>	<li><a href="register.html" title="Register">Register</a></li>													
 						</ul>
