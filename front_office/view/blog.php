@@ -6,6 +6,10 @@ $listeblogs=$blogc->afficherblog();
 
 
 
+
+
+
+
 ?>
 
 
@@ -55,7 +59,7 @@ $listeblogs=$blogc->afficherblog();
 					</li>
 					<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
+							<li><a href="blog.php" title="Blog post">Blog post</a></li>
 							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
 
 						</ul>
@@ -108,7 +112,25 @@ $listeblogs=$blogc->afficherblog();
 				<header class="s-title">
 					<h1>Blog</h1>
 				</header>
+
+
+
+
+
+
+</section>
 				
+
+
+
+
+
+
+
+
+
+
+
 				<!--content-->
 				<section class="content three-fourth">
 					  
@@ -132,15 +154,17 @@ $listeblogs=$blogc->afficherblog();
 							</div>
 						
 						
-						
-						
-						
 							<div class="actions">
 								<div>
 									
-									<div class="leave_comment"><a href="blog_single.php#respond">Leave a comment</a></div>
-									<div class="more"><a href="blog_single.php">Read more</a></div>
+									<div class="more"> <?php echo "<a href=blog_single.php?idblog=" .$blog['idblog'].">"; ?> Leave a comment</a></div>
+									<div class="more"> <?php echo "<a  href=blog_single.php?idblog=" .$blog['idblog'].">";   ?> Read more</a></div>
+									<div class="more"> <?php echo "<a  href=updateblog.php?idblog=" .$blog['idblog'].">";   ?>  modifier</a></div>
+									<form method="POST" action="deleteblog.php">
+                                    <input type="submit" name="supprimer" value="supprimer">
+	                                <input type="hidden" value="<?PHP echo $blog['idblog']; ?>" name="idblog">
 								</div>
+								
 							</div>
 						</div>
 			

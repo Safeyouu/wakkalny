@@ -1,12 +1,26 @@
 <?php
-include "../controller/blogC.php";
+ include "../controller/blogC.php";
 
-$blogc = new blogC();
-$listeblogs=$blogc->afficherblog();
+ include "../controller/commentaireC.php";
 
+
+$id = $_GET['idblog'];
+    $blogc= new blogC();
+        $pdo=config::getConnexion();
+        $query= $pdo ->prepare("select * from blog where idblog= '$id'");
+        $query->execute();
+         $result = $query->fetchAll();
+
+
+
+
+
+		 $commentairec = new commentaireC();
+		 $listecommentaire=$commentairec->affichercommentaire();
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -107,7 +121,7 @@ $listeblogs=$blogc->afficherblog();
 				<section class="content three-fourth">
 					<!--blog entry-->
 					<?php
-            foreach($listeblogs as $blog){
+            foreach($result as $blog){
         ?>
 					<article class="post single">
 						<div class="entry-meta">
@@ -117,88 +131,56 @@ $listeblogs=$blogc->afficherblog();
 							</div>
 						</div>
 						<div class="container">
-							<div class="entry-featured"><a href="#"><img src="images/<?php echo $blog['image'];?>" /></a></div>
+							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" Style="height:500px; width:800px;" /></a></div>
 							<div class="entry-content">
-								<p class="lead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-								<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-								<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
+								<p><?php echo $blog['sujet'];?> </p>
 							</div>
-						</div>
+
+					   </div>
+							<div class="third bwrap"><a href="add_commentaire.php" class="button white more medium">add comment<i class="fa fa-chevron-right"></i></a></div>
+									
+							
+							
+						
+						
 					</article>
 					<?php
             }    
             ?>
 					<!--//blog entry-->
 					
-					<!--comments-->
-					<div class="comments" id="comments">
+
+				<!--comments-->
+				<?php
+				
+           foreach($listecommentaire as $commentaire){
+        ?>
+				<div class="comments" id="comments">
 						<ol class="comment-list">
 							<!--comment-->
 							<li class="comment depth-1">
-								<div class="avatar"><a href="my_profile.html"><img src="images/avatar1.jpg" alt="" /></a></div>
+								<div class="avatar"><a href="my_profile.html"><img src="images/abatar0.jpg"  /></a></div>
 								<div class="comment-box">
 									<div class="comment-author meta"> 
-										<strong>Kimberly C.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
+										<strong><?php echo $commentaire ["nom"] ?></strong>
+										<strong><?php echo $commentaire ["prenom"] ?></strong>
 									</div>
 									<div class="comment-text">
-										<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
+										<p>	<?php echo $commentaire ["commentaire"] ?></p>
 									</div>
 								</div> 
 							</li> 
 							<!--//comment-->	
+							<div class="actions">
+								<div>
+								
+						
 						</ol>
+       <?php } ?>
+						
 					</div>
 					<!--//comments-->
-	
-					<!--respond-->
-					<div class="comment-respond" id="respond">
-						<h2>Leave a reply</h2>
-						<div class="container">
-							<p><strong>Note:</strong> Comments on the web site reflect the views of their authors, and not necessarily the views of the socialchef internet portal. Requested to refrain from insults, swearing and vulgar expression. We reserve the right to delete any comment without notice explanations.</p>
-							<p>Your email address will not be published. Required fields are signed with <span class="req">*</span></p>
-							<form>
-								<div class="f-row">
-									<div class="third">
-										<input type="text" placeholder="Your name" />
-										<span class="req">*</span>
-									</div>
-									
-									<div class="third">
-										<input type="email" placeholder="Your email" />
-										<span class="req">*</span>
-									</div>
-									
-									<div class="third">
-										<input type="text" placeholder="Your website" />
-									</div>
-								
-								</div>
-								<div class="f-row">
-									<textarea></textarea>
-								</div>
-								
-								<div class="f-row">
-									<div class="third bwrap">
-										<input type="submit" value="Submit comment" />
-									</div>
-								</div>
-								
-								<div class="bottom">
-									<div class="f-row checkbox">
-										<input type="checkbox" id="ch1" />
-										<label for="ch1">Notify me of replies to my comment via e-mail</label>
-									</div>
-									<div class="f-row checkbox">
-										<input type="checkbox" id="ch2" />
-										<label for="ch2">Notify me of new articles by email.</label>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-					<!--//respond-->
 				</section>
 				<!--//content-->
 			
