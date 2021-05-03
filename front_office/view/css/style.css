@@ -430,6 +430,9 @@ dl 			{display:inline-block;width:100%;margin:0 0 22px;}
 .tabs 				{float:left;width:100%;background:#fff;margin:0 0 30px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,0.15);-moz-box-shadow:0 1px 0 rgba(0,0,0,0.15);box-shadow:0 1px 0 rgba(0,0,0,0.15);}
 .tabs li 				{float:left;height:50px;font-size:13px;line-height:50px;font-weight:500;border-right:1px solid #ddd;text-transform:uppercase;width:25%;text-align:center;position:relative;}
 .tabs li:last-child 	{border-right:none;}
+.tabs li a 				{display:inline-block;width:100%;height:100%;padding:0 15px;color:rgb(68, 68, 68);}
+.tabs .active  a,
+.tabs a:hover 		{background:#ff7b74;color:rgb(255, 255, 255);}
 .tabs li a 				{display:inline-block;width:100%;height:100%;padding:0 15px;color:#444;}
 .tabs .active  a,
 .tabs a:hover 		{background:#ff7b74;color:#fff;}
@@ -437,6 +440,7 @@ dl 			{display:inline-block;width:100%;margin:0 0 22px;}
 
 .container .tabs 			{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;margin:0;}
 .container .tabs li 			{border:1px solid #ddd;}
+.container .tab-content 		{padding:0 15px;border:1px solid rgb(221, 221, 221);border-top:0;margin:0 0 20px;float:left;width:100%;}
 .container .tab-content 		{padding:0 15px;border:1px solid #ddd;border-top:0;margin:0 0 20px;float:left;width:100%;}
 
 
@@ -947,4 +951,8 @@ h2.large 		{background-size:100% 123px;font-size:24px;}
 .slicknav_nav {top:90px;}
 
 .quicklinks .button {width:90%;margin:0 0 15px;}
+}
+
+
+
 }
