@@ -9,7 +9,9 @@ $recette1 = null;
 
 $recettec = new recetteC();
 
-if(
+
+
+    if ( 
     isset($_POST["titre"])&&
     isset($_POST["prept"])&&
     isset($_POST["cookingt"])&&
@@ -17,49 +19,42 @@ if(
     isset($_POST["nb_ppl"])&&
     isset($_POST["category"])&&
     isset($_POST["description"])&&
-    isset($_POST["photo"])
-    )
-    {
-        if(!empty($_POST["titre"])&&
-            !empty($_POST["prept"])&&
-            !empty($_POST["cookingt"])&&
-            !empty($_POST["difficulty"])&&
-            !empty($_POST["nb_ppl"])&& 
-            !empty($_POST["category"])&&
-            !empty($_POST["description"])&&
-            !empty($_POST["photo"])
+    isset($_POST["photo"] ))
+{
+       
+    $titre=$_POST["titre"];
+    $prept=$_POST["prept"];
+    $cookingt=$_POST["cookingt"];
+    $difficulty=$_POST["difficulty"];
+    $nb_ppl=$_POST["nb_ppl"];
+    $category=$_POST["category"];
+    $description=$_POST["description"];
+    $photo=$_POST["photo"];
 
-            ){
-				
-        $recette1 = new recette(
-            $_POST["titre"],
-            $_POST["prept"],
-            $_POST["cookingt"],
-            $_POST["difficulty"],
-            $_POST["nb_ppl"],
-            $_POST["category"],
-            $_POST["description"],
-            $_POST["photo"]
-        );
-		if(!$recettec->checkname($_POST['titre']))
-			{
-				echo ' <p> . the title <p style="color: red;">' . $_POST['titre'] . ' </p>  already exists. Please try a new one . </p>';
-			}
-else {
-        $recettec->ajouterrecette($recette1);
-        header('Location:recipes.php');
-	}
-    }}
-    else{
-        $error= "missing info";
-      
-    }
+        
+        
+       
+    $sql="UPDATE recette SET titre='$titre',prept='$prept',cookingt='$cookingt',difficulty='$difficulty',nb_ppl='$nb_ppl',category='$category',description='$description',photo='$photo' WHERE idrecette='$idrecette'";
 
+            $db = config::getConnexion();
+            try{
+            $req=$db->prepare($sql);
+            $req->execute();
+			header('Location:recipes.php');
+            exit();
+            
+        }
+            catch (Exception $e){
+                echo 'Erreur: '.$e->getMessage();
+
+           
+            
+            }
+}
 ?>
- 
-     
 
-<!DOCTYPE html>
+
+   <!DOCTYPE html>
 <html>
 
 	<head>
@@ -152,7 +147,12 @@ else {
 				<header class="s-title">
 					<h1>Add a new recipe</h1>
 				</header>
-				<form method="POST" action="">
+                <?php
+			if (isset($_GET['idrecette'])){
+				$recette1 = $recettec->recuperrecette($_GET['idrecette']);
+				
+		?>
+				<form method="POST" action="recipe.php">
 				<!--content-->
 				<section class="content full-width">
 					
@@ -162,16 +162,16 @@ else {
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
-									<div class="full"><input type="text"   placeholder="Recipe title" id="titre" name="titre" required /></div>
+									<div class="full"><input type="text"   placeholder="Recipe title" id="titre" name="titre"  value = "<?php echo $recette1['titre'];?>" /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time"  name="prept" id="prept" required /></div>
-									<div class="third"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt" required  /></div>
-									<div class="third"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty" required /></div>
+									<div class="third"><input type="text" placeholder="Preparation time"  name="prept" id="prept"  value = "<?php echo $recette1['prept'];?>" /></div>
+									<div class="third"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt"  value = "<?php echo $recette1['cookingt'];?>" /></div>
+									<div class="third"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty"  value = "<?php echo $recette1['difficulty'];?>" /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl" required  /></div>
-									<div class="third"><input type="text"  placeholder="category" id="category" name="category" required  /></div>
+									<div class="third"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl"  value = "<?php echo $recette1['nb_ppl'];?>" /></div>
+									<div class="third"><input type="text"  placeholder="category" id="category" name="category"  value = "<?php echo $recette1['category'];?>"  /></div>
 								
 									
 								</div>
@@ -180,15 +180,14 @@ else {
 							<section>
 								<h2>Description</h2>
 								<div class="f-row">
-									<div class="full"><textarea  placeholder="Recipe title"  id="description" name="description" required  ></textarea></div>
+									<div class="full"><textarea  placeholder="Recipe title"  id="description" name="description"  value = "<?php echo $recette1['description'];?>"  ></textarea></div>
 								</div>
 							</section>	
 							
-						
 							<section>
 								<h2>Photo</h2>
 								<div class="f-row full">
-									<input type="file" name="photo" id="photo" required  />
+									<input type="file" name="photo" id="photo"  value = "<?php echo $recette1['photo'];?>"/>
 								</div>
 							</section>	
 							 
@@ -203,6 +202,7 @@ else {
 				</section>
 				<!--//content-->
 			</form>
+          <?php  } ?>
 			</div>
 			<!--//row-->
 		</div>

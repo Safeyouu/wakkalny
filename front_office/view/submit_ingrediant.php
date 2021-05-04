@@ -1,54 +1,28 @@
 <?php
-include '../model/recette.php';
-include '../controller/recetteC.php';
+include '../model/ingrediant.php';
+include '../controller/ingrediantC.php';
 
 
 $error = "";
 
-$recette1 = null;
+$ingrediant1 = null;
 
-$recettec = new recetteC();
+$ingrediantc = new ingrediantC();
 
 if(
-    isset($_POST["titre"])&&
-    isset($_POST["prept"])&&
-    isset($_POST["cookingt"])&&
-    isset($_POST["difficulty"])&&
-    isset($_POST["nb_ppl"])&&
-    isset($_POST["category"])&&
-    isset($_POST["description"])&&
-    isset($_POST["photo"])
+    isset($_POST["nom"])&&
+    isset($_POST["quantite"])
     )
     {
-        if(!empty($_POST["titre"])&&
-            !empty($_POST["prept"])&&
-            !empty($_POST["cookingt"])&&
-            !empty($_POST["difficulty"])&&
-            !empty($_POST["nb_ppl"])&& 
-            !empty($_POST["category"])&&
-            !empty($_POST["description"])&&
-            !empty($_POST["photo"])
-
+        if(!empty($_POST["nom"])&&
+            !empty($_POST["quantite"])
             ){
-				
-        $recette1 = new recette(
-            $_POST["titre"],
-            $_POST["prept"],
-            $_POST["cookingt"],
-            $_POST["difficulty"],
-            $_POST["nb_ppl"],
-            $_POST["category"],
-            $_POST["description"],
-            $_POST["photo"]
+        $ingrediant1 = new ingrediants(
+            $_POST["nom"],
+            $_POST["quantite"]
         );
-		if(!$recettec->checkname($_POST['titre']))
-			{
-				echo ' <p> . the title <p style="color: red;">' . $_POST['titre'] . ' </p>  already exists. Please try a new one . </p>';
-			}
-else {
-        $recettec->ajouterrecette($recette1);
-        header('Location:recipes.php');
-	}
+        $ingrediantc->ajouteringrediants($ingrediant1);
+        header('Location:recipe.php');
     }}
     else{
         $error= "missing info";
@@ -56,7 +30,7 @@ else {
     }
 
 ?>
- 
+ <html>   
      
 
 <!DOCTYPE html>
@@ -123,8 +97,9 @@ else {
 				<ul>
 					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.html" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-					<li class="dark current-menu-item"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
-				</ul>
+					<li class="dark current-menu-item"><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
+					
+                </ul>
 			</nav>
 		</div>
 		</div>
@@ -140,9 +115,8 @@ else {
 			<nav class="breadcrumbs">
 				<ul>
 					<li><a href="index.html" title="Home">Home</a></li>
-					<li><a href="submit_ingrediant.php" >submit an ingrediant</a></li>
-					<li>Submit a recipe</li>
-					
+					<li><a href="submit_recipe.php">Submit a recipe</a></li>
+					<li>Submit an ingrediant</li>
 				</ul>
 			</nav>
 			<!--//breadcrumbs-->
@@ -150,7 +124,7 @@ else {
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
-					<h1>Add a new recipe</h1>
+					<h1>Add a new ingrediant</h1>
 				</header>
 				<form method="POST" action="">
 				<!--content-->
@@ -161,41 +135,20 @@ else {
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
-								<div class="f-row">
-									<div class="full"><input type="text"   placeholder="Recipe title" id="titre" name="titre" required /></div>
-								</div>
-								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time"  name="prept" id="prept" required /></div>
-									<div class="third"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt" required  /></div>
-									<div class="third"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty" required /></div>
-								</div>
-								<div class="f-row">
-									<div class="third"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl" required  /></div>
-									<div class="third"><input type="text"  placeholder="category" id="category" name="category" required  /></div>
 								
-									
-								</div>
-							</section>
-							
-							<section>
-								<h2>Description</h2>
 								<div class="f-row">
-									<div class="full"><textarea  placeholder="Recipe title"  id="description" name="description" required  ></textarea></div>
+									<div class="third"><input type="text" placeholder="nom"  name="nom" id="nom" /></div>
+									<div class="third"><input type="text" placeholder="quantite"  name="quantite" id="quantite" /></div>
 								</div>
-							</section>	
+							
 							
 						
-							<section>
-								<h2>Photo</h2>
-								<div class="f-row full">
-									<input type="file" name="photo" id="photo" required  />
-								</div>
-							</section>	
+							
 							 
 							
 							
 							<div class="f-row full">
-								<input type="submit" class="button" id="submitRecipe" value="Publish this recipe" />
+								<input href="recipe.php?idrecette=" type="submit" class="button" id="submit_igrediant" value="Publish this recipe" />
 							</div>
 						
 					</div>

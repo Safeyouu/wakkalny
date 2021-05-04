@@ -1,3 +1,24 @@
+<?php
+
+include "../controller/recetteC.php";
+include "../controller/ingrediantC.php";
+
+$recettec= new recetteC();
+$recette=$recettec->getUserbyname($_POST['titre']);
+
+//$id = $_GET['idrecette'];
+$id = isset($_GET['idrecette']) ? $_GET['idrecette'] : '';
+    
+        $pdo=config::getConnexion();
+        $query= $pdo ->prepare("select * from recette where idrecette= '$id'");
+        $query->execute();
+         $result = $query->fetchAll();
+		 
+$ingrediantc=new ingrediantC();
+ $listingrediant= $ingrediantc->afficheringrediants();
+		 
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -86,26 +107,26 @@
 			<!--//breadcrumbs-->
 			
 			<!--row-->
+			<?php
+
+foreach ($result as $recette) { ?>
 			<div class="row">
 				<header class="s-title">
-					<h1>A luxurious black amp; white chocolate cupcake</h1>
+					<h1> <?php echo $recette ['titre']; ?></h1>
 				</header>
 				<!--content-->
 				<section class="content three-fourth">
+
 					<!--recipe-->
-						<div class="recipe">
+				
+					<div class="recipe">
 							<div class="row">
 								<!--two-third-->
 								<article class="two-third">
-									<div class="image"><a href="#"><img src="images/img.jpg" alt="" /></a></div>
-									<div class="intro"><p><strong>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas</strong></p> <p>Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p></div>
-									<div class="instructions">
-										<ol>
-											<li>Heat oven to 160C/140C fan/gas 3 and line a 12-hole muffin tin with cases. Gently melt the butter, chocolate, sugar and 100ml hot water together in a large saucepan, stirring occasionally, then set aside to cool a little while you weigh the other ingredients.</li>
-											<li>Stir the eggs and vanilla into the chocolate mixture. Put the flour into a large mixing bowl, then stir in the chocolate mixture until smooth. Spoon into cases until just over three-quarters full (you may have a little mixture leftover), then set aside for 5 mins before putting on a low shelf in the oven and baking for 20-22 mins. Leave to cool.</li>
-											<li>For the icing, melt the chocolate in a heatproof bowl over a pan of barely simmering water. Once melted, turn off the heat, stir in the double cream and sift in the icing sugar. When spreadable, top each cake with some and decorate with your favourite sprinkles and sweets.</li>
-										</ol>
-									</div>
+
+									<div class="photo"><a href="#"><img src=" images/<?php echo $recette ['photo']; ?>"  /></a></div>
+									<div class="intro"><p><strong><?php echo $recette ['description']; ?></p></div>
+									
 								</article>
 								<!--//two-third-->
 								
@@ -113,44 +134,50 @@
 								<article class="one-third">
 									<dl class="basic">
 										<dt>Preparation time</dt>
-										<dd>15 mins</dd>
+										<dd> <?php echo $recette ['prept']; ?></dd>
 										<dt>Cooking time</dt>
-										<dd>30 mins</dd>
+										<dd> <?php echo $recette ['cookingt']; ?></dd>
 										<dt>Difficulty</dt>
-										<dd>easy</dd>
+										<dd> <?php echo $recette ['difficulty']; ?></dd>
 										<dt>Serves</dt>
-										<dd>4 people</dd>
+										<dd> <?php echo $recette ['nb_ppl']; ?></dd>
 									</dl>
 									
 									<dl class="user">
 										<dt>Category</dt>
-										<dd>Deserts</dd>
-										<dt>Posted by</dt>
-										<dd>Jennifer W.</dd>
+										<dd> <?php echo $recette ['category']; ?></dd>
+										
 									</dl>
-									
+
+        <?php foreach ($listingrediant as $ingrediants) { ?>
 									<dl class="ingredients">
-										<dt>300g</dt>
-										<dd>Self-raising flour</dd>
-										<dt>200g</dt>
-										<dd>Butter</dd>
-										<dt>200g</dt>
-										<dd>Plain chocolate</dd>
-										<dt>2</dt>
-										<dd>Eggs</dd>
-										<dt>1 tbsp</dt>
-										<dd>Vanilla extract</dd>
-										<dt>200 g</dt>
-										<dd>Brown sugar</dd>
-										<dt>100 ml</dt>
-										<dd>Double cream</dd>
-										<dt>handful</dt>
-										<dd>Sprinkles</dd>
+										<dt><?php echo $ingrediants ['nom']; ?></dt>
+										<dd><?php echo $ingrediants ['quantite']; ?></dd>
+					<form method="POST" action="deleteingrediant.php">
+                    <input type="submit" name="supprimer" value="supprimer">
+	                <input type="hidden" value="<?PHP echo $ingrediants ['id']; ?>" name="id">
+					<a href="modifieringrediant.php?id=<?php echo $ingrediants['id'];?>">Modifier</a>
+
+	
 									</dl>
+									<?php } ?>
+							<div class="actions">
+								<div>
+								<div class="third bwrap">
+								<a href="submit_ingrediant.php" class="button white more medium">add ingrediant<i class="fa fa-chevron-right"></i></a>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+
+
+									
 								</article>
 								<!--//one-third-->
 							</div>
 						</div>
+						<?php } ?>
 						<!--//recipe-->
 							
 						<!--comments-->
@@ -280,45 +307,6 @@
 				</section>
 				<!--//content-->
 				
-				<!--right sidebar-->
-				<aside class="sidebar one-fourth">
-					<div class="widget nutrition">
-						<h3>Nutrition facts <span>(per serving)</span></h3>
-						<table>
-							<tr>
-								<td>Calories </td>
-								<td>505</td>
-							</tr>
-							<tr>
-								<td>Protein</td>
-								<td>59g</td>
-							</tr>
-							<tr>
-								<td>Carbs</td>
-								<td>59g</td>
-							</tr>
-							<tr>
-								<td>Fat</td>
-								<td>29g</td>
-							</tr>
-							<tr>
-								<td>Saturates</td>
-								<td>17g</td>
-							</tr>
-							<tr>
-								<td>Fibre</td>
-								<td>2g</td>
-							</tr>
-							<tr>
-								<td>Sugar</td>
-								<td>44g</td>
-							</tr>
-							<tr>
-								<td>Salt</td>
-								<td>0.51g</td>
-							</tr>
-						</table>
-					</div>
 					
 					<div class="widget share">
 						<ul class="boxed">
