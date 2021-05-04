@@ -1,3 +1,14 @@
+<?php
+include "../controller/shopC.php";
+
+
+$shopc = new shopC();
+$listeproducts=$shopc->affichershop();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +121,7 @@
                                     aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
                         <li>
-                            <a href="Products.html" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
+                            <a href="Products.php" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Products</span></a>
                         </li>
     
@@ -153,55 +164,33 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                            <th>Role</th>
+                                            <th>nom</th>
+                                            <th>description</th>
+                                            <th>nb_stock</th>
+                                            <th>prix</th>
+                                            <th>image</th>
                                         </tr>
                                     </thead>
+                                    <?php
+            foreach($listeproducts as $shop){
+        ?>
+                                    
+                                    
+                                
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
+                                            <td><?php echo $shop ["id"] ?></td>
+                                            <td><?php echo $shop ["nom"] ?></td>
+                                            <td><?php echo $shop ["description"] ?></td>
+                                            <td><?php echo $shop ["nb_stock"] ?></td>
+                                            <td><?php echo $shop ["prix"] ?></td>
+                                            <td><a href=""><img src="images/<?php echo $shop['image'];?>"Style="height:70px; width:100px;" /></a>  </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                            <td>developer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                            <td>supporter</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                            <td>supporter</td>
-                                        </tr>
+                                        
+                                    </tbody>
+                                    <?php
+            }
+            ?>
                                     </tbody>
                                 </table>
                             </div>

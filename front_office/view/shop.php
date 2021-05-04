@@ -70,6 +70,7 @@ $listecat=$categoriec->affichercategorie();
 					</li>
 					
 					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
+
 					<li  class="current-menu-item"><a href="shop.php" title="Shop" ><span>Shop</span></a> 
 					<ul>
 						<li><a href="addshop.php" title="Add shop">add shop</a></li>
@@ -177,6 +178,9 @@ $listecat=$categoriec->affichercategorie();
 				
 				<!--right sidebar-->
 				<aside class="sidebar one-fourth">
+
+
+				
 				<?php
            		// foreach($listecat as $categorie){
         ?>
