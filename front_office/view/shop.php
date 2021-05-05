@@ -3,13 +3,29 @@ include "../controller/shopC.php";
 include "../controller/categorieC.php";
 
 $shopc = new shopC();
-$listeproducts=$shopc->affichershop();
-
-
-
+$categoriec = new categorieC();
 
 $categoriec = new categorieC();
-$listecat=$categoriec->affichercategorie();
+$listeproducts=$shopc->affichershop();
+$listecat = $categoriec->affichercategorie();
+$stats = $shopc->getProductNumberPerCategories();
+if(isset($_GET["idCategorie"]))
+    { 
+        if(!empty($_GET["idCategorie"]))
+		{
+			$listeproducts=$shopc->searchShopByCategorie($_GET["idCategorie"]);
+		}
+    	else {
+
+			$error=  "Missing information";
+    	}
+    }
+	else
+    $listeproducts=$shopc->affichershop();
+
+
+
+
 
 ?>
 
@@ -99,8 +115,39 @@ $listecat=$categoriec->affichercategorie();
 	<!--//header-->
     <!--main-->
 	<main class="main" role="main">
+
+	<section class="content full-width">
+					<div class="icons dynamic-numbers">
+						<header class="s-title">
+							<h2 class="ribbon large">Number Of Product per Category</h2>
+						</header>
+						
+						<!--row-->
+						<div class="row">
+						<?php foreach($stats as $s){ ?>
+
+							<!--item-->
+							<div class="one-sixth">
+								<div class="container">
+									
+									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
+									<span class="subtitle"><?php echo $s['nom'] ?></span>
+								</div>
+							</div>
+							<!--//item-->
+							
+							<?php } ?>					
+
+						
+							
+						</div>
+						<!--//row-->
+					</div>
+				</section>
+
+
 		<!--wrap-->
-		<div class="wrap clearfix">
+		
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
@@ -120,7 +167,7 @@ $listecat=$categoriec->affichercategorie();
 				<section class="content three-fourth">
 					<!--entries-->
 					<div class="entries row">
-					<?php
+					<?php 
                     foreach($listeproducts as $shop){
         			?>
 						<!--item-->
@@ -130,7 +177,7 @@ $listecat=$categoriec->affichercategorie();
 								<!--<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>-->
 							</figure>
 							<div class="container">
-								<h2><a href="recipe.html"><?php echo $shop['description'];?></a></h2> 
+								<h2><a ><?php echo $shop['description'];?></a></h2> 
 								<div class="actions">
 									<div>
 										<div class="difficulty"><a > <?php echo $shop['nom'];?></a></div>
@@ -180,25 +227,29 @@ $listecat=$categoriec->affichercategorie();
 				<aside class="sidebar one-fourth">
 
 
-				
-				<?php
-           		// foreach($listecat as $categorie){
-        ?>
 					<div class="widget">
 						<ul class="categories right">
-							<li class="active"><a href="#">categories</a></li>
-							<li><a href="#"><?php// echo $categorie['nom'];?>kasouronet</a></li>
+							<li ><a href="shop.php">All Categories</a></li>
 							
-						
+							<?php
+           						 foreach($listecat as $categorie){
+       			 			?>
+							<li class="
+							<?php if( isset($_GET['idCategorie'] ))
+							 { if( $categorie['id'] == $_GET['idCategorie'] )
+							  { echo 'active' ;} 
+							}  ?>
+							" > <a href="shop.php?idCategorie=<?php echo $categorie['id'];?>"><?php echo $categorie['nom'];?></a></li>	
+							<?php } ?>												
 						</ul>
 					</div>
 					 
-					<?php //} ?>
+					
 				</aside>
 				<!--//right sidebar-->
 			</div>
 			<!--//row-->
-		</div>
+		</>
 		<!--//wrap-->
 	</main>
 	<!--//main-->

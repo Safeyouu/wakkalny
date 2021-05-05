@@ -31,7 +31,7 @@
 			);
 			
             $shopC->modifiershop($shop, $_POST['id']);
-            header('refresh:3;url=shop.php'); // redirect to shop.php
+            header('refresh:3;url=shop.php ' ); // redirect to shop.php
         }
         else
             $error = "Missing information";

@@ -1,38 +1,48 @@
 <?php
 include '../model/shop.php';
 include '../controller/shopC.php';
+include "../controller/categorieC.php";
 $error = "";
+
+
+$categoriec = new categorieC();
+$listecat = $categoriec->affichercategorie();
 
 $shop1 = null;
 
 $shopc = new shopC();
+
+
 
 if(
 	isset($_POST["nom"])&&
     isset($_POST["description"])&&
     isset($_POST["nb_stock"])&&
     isset($_POST["prix"])&&
-    isset($_POST["image"])
+    isset($_POST["image"])&&
+	isset($_POST["idCategorie"])
     )
     {	echo 'test1';
         if(!empty($_POST["nom"])&&
             !empty($_POST["description"])&&
             !empty($_POST["nb_stock"])&&
             !empty($_POST["prix"])&&
-            !empty($_POST["image"])
+            !empty($_POST["image"])&&
+			!empty($_POST["idCategorie"])
             ){
         $shop1 = new shop(
             $_POST["nom"],
             $_POST["description"],
             $_POST["nb_stock"],
             $_POST["prix"],
-            $_POST["image"]
+            $_POST["image"],
+			$_POST["idCategorie"]
 
         );
 
 		echo 'test2';
    $shopc->ajoutershop($shop1);
-   header('location:shop.php');
+    header('location:shop.php');
     }
     else {
 
@@ -191,6 +201,15 @@ $error=  "Missing information";
 								<div class="f-row full">
 									<input type="file" id="image" name="image" />
 								</div>
+							</section>	
+
+							<section>
+								<h2>Categorie</h2>
+								<select name="idCategorie">
+									<?php foreach($listecat as $row ) { ?>
+  									 	<option value="<?php echo $row['id'] ?>"><?php echo $row['nom'] ?></option>
+									<?php }; ?> 
+								</select>
 							</section>	
 							
 							<div class="f-row full">

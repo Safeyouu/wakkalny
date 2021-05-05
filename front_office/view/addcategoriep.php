@@ -8,7 +8,6 @@ $categorie1 = null;
 $categoriec = new categorieC();
 
 if(isset($_POST["nom"]))
-
     { echo'tesssssssst';
         if(!empty($_POST["nom"]))
 		{
@@ -116,17 +115,16 @@ $error=  "Missing information";
 				<section class="content center full-width">
 					<div class="modal container">
 						<h3>products category</h3>
-						<form  methode="POST" action="addcategoriep.php">
-
-						<div class="f-row">
-               <label >product name</label>
-
+						<form  method="POST" action="addcategoriep.php">
+							<div class="f-row">
+               				<label >product name</label>
 							<input type="text" placeholder="product name" id="nom" name="nom" />  
-						</div>
-						<div class="f-row bwrap">
-						<div  class="third bwrap"   >
-						<input type="submit"   value="submit" /> </div>	
-						</div>
+							</div>
+							<div class="f-row bwrap">
+								<div  class="third bwrap"   >
+									<input type="submit"   value="submit" />
+							 	</div>	
+							</div>
 						</form>
 					</div>
 				
