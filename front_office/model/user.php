@@ -10,9 +10,12 @@ class user {
     private $tel = null;
     private $role = null;
 	private $image = null;
+	private $key = null;
+	private $confirm = null;
+
 	
 	
-    public function __construct(string $username,string $nom,string $prenom,string $adresse,int $tel,string $email,string $mdp,string $image,int $role )
+    public function __construct(string $username,string $nom,string $prenom,string $adresse,int $tel,string $email,string $mdp,string $image )
     {
         $this->username=$username;
 		$this->nom=$nom;
@@ -22,18 +25,17 @@ class user {
         $this->adresse=$adresse;
         $this->tel=$tel;
 		$this->image=$image;
-		$this->role=$role;
 
 
     }
 
-	public function login(string $username,string $mdp)
+	/*public function login(string $username,string $mdp)
     {
         $this->username=$username;
         $this->mdp=$mdp;
         
 
-    }
+    }*/
 
 
     function getid(){
@@ -66,6 +68,12 @@ class user {
 	function getimage(){
 		return $this->image;
 	}
+	function getkey(){
+		return $this->key;
+	}
+	function getconfirm(){
+		return $this->confirm;
+	}
 
 	function setusername($username){
 		$this->username=$username;
@@ -93,6 +101,12 @@ class user {
 	}
 	function setimage($image){
 		$this->image=$image;
+	}
+	function setkey($key){
+		$this->key=$key;
+	}
+	function setconfirm($confirm){
+		$this->confirm=$confirm;
 	}
 
 }

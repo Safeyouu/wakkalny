@@ -3,15 +3,13 @@ session_start();
 
 include '../model/user.php';
 include '../controller/userC.php';
+
+
 $error = "";
 
 $user1 = null;
 
 $userc = new userC();
-
-
-
-
 
 
 
@@ -30,7 +28,7 @@ if(isset($_POST["register"]))
                 $user1 = new user(
 				$userc->sanitizeString($_POST["username"]),
 				$userc->sanitizeString($_POST["nom"]),
-				$userc->sanitizeString($_POST["prenom"]),
+				$_POST["prenom"],
 				$userc->sanitizeString($_POST["adresse"]),
 				$_POST["tel"],
 				$userc->sanitizeString($_POST["email"]),
@@ -42,56 +40,55 @@ if(isset($_POST["register"]))
 
 			
 			
-			
+			 if(!$userc->checkusername($_POST['username']))
+			{
+				$error= ' <h2>  the Username (' . $_POST['username'] . ') already exists. Please try a new one . </h2>';
+			}
+			else if(!$userc->checkname($_POST['nom']))
+			{
+				$error= ' <h2>  Your First Name should have only LETTERS </h2>';
+			}
+			else if(!$userc->checkname($_POST['prenom']))
+			{
+				$error= ' <h2>  Your Last Name should have only LETTERS </h2>';
+			}
+			else if(!$userc->checkemail($_POST['email']))
+			{
+				$error= ' <h2>  The Email (' . $_POST['email'] . ') already exists. Please try a new one . </h2> ';
+			}
+			else if(!$userc->checkpass($_POST['mdp']))
+			{
+				$error= ' <h2>  should be at least 4 characters in length and should include at least one upper case letter, one number, and one special character.</h2> ';
+			}
+			else
+			{
         
-			$userc->addUser($user1);
-			$_SESSION['id']=$_POST['id'];
-			$_SESSION['username']=$_POST['username'];
-			$_SESSION['nom']=$_POST['nom'];
-			$_SESSION['prenom']=$_POST['prenom'];
-			$_SESSION['adresse']=$_POST['adresse'];
-			$_SESSION['tel']=$_POST['tel'];
-			$_SESSION['email']=$_POST['email'];
-			$_SESSION['role']=$_POST['role'];
-			$_SESSION['image']=$_POST['image'];
+				$userc->addUser($user1);
+				$_SESSION['id']=$_POST['id'];
+				$_SESSION['username']=$_POST['username'];
+				$_SESSION['nom']=$_POST['nom'];
+				$_SESSION['prenom']=$_POST['prenom'];
+				$_SESSION['adresse']=$_POST['adresse'];
+				$_SESSION['tel']=$_POST['tel'];
+				$_SESSION['email']=$_POST['email'];
+				$_SESSION['role']=$_POST['role'];
+				$_SESSION['image']=$_POST['image'];
 
+				header('Location:index.php');
 
+			}
 
-			header('Location:index.php');
+			
 		}
 		else{
-			$error= "Wrong input";
+			$error= "Fill in the blanks ";
 		}
 	
-
-/*
-		if(empty($_POST["username"])){$error = "Please enter username";}
-		else if(empty($_POST["nom"])){$error = "Please enter first name";}
-		else if(empty($_POST["prenom"])){$error = "Please enter last name";}
-		else if(empty($_POST["adresse"])){$error = "Please enter adress";}
-		else if(empty($_POST["tel"])){$error = "Please enter pjone number";}
-		else if(empty($_POST["email"])){$error = "Please enter a valid email address";}
-		else if(empty($_POST["mdp"])){$error = "Please enter password";}
-		else if(strlen($_POST["mdp"]) < 4 ){$error = "Password must be atleast 4 characters";}
-
-		else if($error = "") {
-			$user1 = new user(
-				$_POST["username"],
-				$_POST["nom"],
-				$_POST["prenom"],
-				$_POST["adresse"],
-				$_POST["tel"],
-				$_POST["email"],
-				$_POST["mdp"]);
-        
-				
-			$userc->addUser($user1);
-			header('Location:index.php');
-		}
-*/
-
-
+		
 	}
+
+
+	
 ?>
 
 
@@ -154,65 +151,46 @@ if(isset($_POST["register"]))
 		</div>
 
 		<div id="section_lading">
-			<!--<div class="content">
 					
 				
-				<?php
-				/*if($error = "")
-				{
-					
-					?>
-						<div class="error">
-							<strong> <?php echo $error; ?></strong>
-						</div>
-					<?php
-					
-				}
-				else if($error = "")
-				{
-				?>
-					<div class="error success">
-						<strong>Register Successfully..... Please Click On Login Account Link</strong>
-					</div>
-				<?php
-				}*/
-				?>   
-				</div>-->
+				 
+				
 				
 		<form method="post" action="register.php">
 			
 			<div class="input-group">
+			<i style="color: red;"><?php echo $error;?></i>
 				<label>Username</label>
-				<input type="text" name="username" placeholder="Your Username" required>
+				<input type="text" name="username" placeholder="Your Username" >
 			</div>
 			<div class="input-group">
 				<label>First name</label>
-				<input type="text" name="nom"  placeholder="Your First name" required>
+				<input type="text" name="nom"  placeholder="Your First name" >
 			</div>
 			<div class="input-group">
 				<label>Last name</label>
-				<input type="text" name="prenom"  placeholder="Your Last name" required>
+				<input type="text" name="prenom"  placeholder="Your Last name" >
 			</div>
 			<div class="input-group">
 				<label>Adress</label>
-				<input type="text" name="adresse" placeholder="Your Adress" required>
+				<input type="text" name="adresse" placeholder="Your Adress" >
 			</div>
 			<div class="input-group">
 				<label>Phone number</label>
-				<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" required>
+				<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" >
 			</div>
 			<div class="input-group">
 				<label>Email</label>
-				<input type="email" name="email"  placeholder="Your email" required>
+				<input type="email" name="email"  placeholder="Your email" >
 			</div>
 			<div class="input-group">
 				<label>Password</label>
-				<input type="password" name="mdp"  placeholder="Your password" required>
+				<input type="password" name="mdp"  placeholder="Your password" >
 			</div>
 			<section>
 					<h42>Photo</h4>
 					<div class="f-row full">
-						<input type="file" name="image" required/>
+						<input type="file" name="image" />
 					</div>
 			</section>
 			
@@ -229,5 +207,3 @@ if(isset($_POST["register"]))
 	</body>
 
 </html>
-
-

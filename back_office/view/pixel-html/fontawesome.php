@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +50,7 @@
                 <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg "
                         href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i
                             class="fa fa-bars"></i></a>
-                    <div class="top-left-part"><a class="logo" href="index.html"><b><img
+                    <div class="top-left-part"><a class="logo" href="index.php"><b><img
                                     src="../plugins/images/pixeladmin-logo.png" alt="home" /></b><span
                                 class="hidden-xs"><img src="../plugins/images/pixeladmin-text.png" alt="home" /></span></a>
                     </div>
@@ -61,7 +64,10 @@
                     </ul>
                     <ul class="nav navbar-top-links navbar-right pull-right">
                         <li>
-                            <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">admin</b> </a>
+                        <a class="profile-pic" href="profile.php">  <i class="fa fa-user fa-fw" aria-hidden="true"></i><b class="hidden-xs"><?php echo $_SESSION['username']; ?></b> </a>
+                        </li>
+                        <li>
+                        <a class="profile-pic" href="../../../front_office/view/logout.php"> <b class="hidden-xs">logout</b> </a>
                         </li>
                     </ul>
                 </div>
@@ -74,23 +80,23 @@
                 <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                     <ul class="nav" id="side-menu">
                         <li style="padding: 10px 0 0;">
-                            <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                            <a href="index.php" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                            <a href="profile.php" class="waves-effect"><i class="fa fa-user fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li>
-                            <a href="fontawesome.html" class="waves-effect"><i class="fa fa-font fa-fw"
+                            <a href="fontawesome.php" class="waves-effect"><i class="fa fa-font fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Icons</span></a>
                         </li>
                         <li>
-                            <a href="Users.html" class="waves-effect"><i class="fa fa-users fa-fw"
+                            <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
                         <li>
-                            <a href="Contact.html" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                            <a href="Contact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
@@ -117,9 +123,8 @@
                         
                     </ul>
                     <div class="center p-20">
-                        <span class="hide-menu"><a href="" target="_blank"
-                                class="btn btn-danger btn-block btn-rounded waves-effect waves-light">Upgrade to
-                                Pro</a></span>
+                    <span class="hide-menu"><a href="../../../front_office/view" target="_blank" class="btn btn-danger btn-block btn-rounded waves-effect waves-light">Back to Wakkalny</a></span>
+
                     </div>
                 </div>
             </div>
@@ -131,10 +136,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Fontawesome Page</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a
-                            href="http://wrappixel.com/templates/pixeladmin/" target="_blank"
-                            class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade
-                            to Pro</a>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
                             <li class="active">Fontawesome Icons</li>
