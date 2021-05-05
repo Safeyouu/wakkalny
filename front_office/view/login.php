@@ -47,7 +47,7 @@ if(isset($_POST['login']))
 			}
 			else
 			{
-				echo "The username and / or password are incorrect";
+				$error= "The username and / or password are incorrect";
 			}
 
 
@@ -153,6 +153,8 @@ if(isset($_POST['login']))
 					
 
 					<div class="input-group">
+					<i style="color: red;"><?php echo $error;?></i>
+
 						<label>Username </label>
 						<input type="text" name="username" placeholder="Enter username" required>
 					</div>

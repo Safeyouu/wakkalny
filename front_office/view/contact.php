@@ -1,5 +1,35 @@
 <?php
 session_start();
+
+include '../controller/contactC.php';
+include_once "../model/contact.php";
+
+
+$contactc = new contactC();
+
+
+$user=$contactc->getUserbyname($_SESSION['username']);
+
+$mail=$user['email'];
+
+	if(isset($_POST['send']))
+	{
+		if(!empty($_POST["sujet"])&&!empty($_POST["message"]))
+		{
+			$contact1 = new contact($_POST["sujet"],$_POST["message"],$mail);
+			
+			$contactc->addContact($contact1);
+			header('Location:index.php');
+		}
+		else
+		{
+			$error="Please write a subject and your message";
+		}
+	}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +66,16 @@ session_start();
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -54,12 +94,7 @@ session_start();
 					
 					<li class="current-menu-item"><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
-					<li style="color:coral; font-size:10px;text-transform: lowercase" >
-							<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="20" height="20" ><i  style="color:black; font-size:17px;">*</i><?php echo $_SESSION['username']; ?>
-							
-							 
-						</li>
-						<li  style=" font-size:13px;text-transform: lowercase"> <a href="logout.php" id="logout"><span class="" >Logout</span></a> </li>
+					
 				</ul>
 			</nav>
 			
@@ -84,23 +119,40 @@ session_start();
 				<!--content-->
 				<section class="content center full-width">
 					<div class="modal container">
-						<form method="post" action="http://www.themeenergy.com/themes/html/social-chef/contact_form_message.php" name="contactform" id="contactform">
+						<form method="post" action="contact.php" >
 							<h3>Contact us</h3>
 							<div id="message" class="alert alert-danger"></div>
+							
 							<div class="f-row">
-								<input type="text" placeholder="Your name" id="name" />
+							<label>Email</label>
+								<input type="email"  id="email" name="mail" value="<?php echo $user['email'];?>"  disabled/>
 							</div>
 							<div class="f-row">
-								<input type="email" placeholder="Your email" id="email" />
+							<label>Phone number</label><br>
+								<input type="tel"  id="phone" name='tel' value="<?php echo $user['tel'];?>"  disabled />
 							</div>
 							<div class="f-row">
-								<input type="number" placeholder="Your phone number" id="phone" />
+							<label>Subject</label>
+								<input type="text" placeholder="Your subject" id="email" name="sujet" value=""  />
 							</div>
 							<div class="f-row">
-								<textarea placeholder="Your message" id="comments"></textarea>
+							<label>Message</label>
+								<textarea placeholder="Your message" name="message" id="comments"></textarea>
+							
+							<div>
+								<p>
+								Please enter the details of your request and, if you have any questions regarding our Terms of Use, please include specific 
+								samples of the usage you wish to give our resouces.If you’re reporting a problem, make sure to include as much information 
+								as possible.Please include any screenshots or videos of issues since this will also help us resolve problems much sooner.Once 
+								your request is submitted, a member of our support staff will respond as soon as possible.
+								</p>
+								<br>
+
+                                <p><strong>Basic information on Data Protection:</strong>Wakkalny Company collects your data to be able to answer to questions, suggested, or complaints filed. </p>
+							</div>
 							</div>
 							<div class="f-row bwrap">
-								<input type="submit" value="Send message" />
+								<button type="submit" class="btn" name="send">Send Message</button>
 							</div>
 						</form>
 					</div>

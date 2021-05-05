@@ -132,7 +132,7 @@ $user=$userc->getUserbyname($_SESSION['username']);
    							?>
 								<dl class="basic two-third">
 								<figure style="display: block; margin-left: auto; margin-right: auto; width: 50%;" >
-									<img src="images/<?php echo $user['image']; ?>" />
+									<img src="images/images/<?php echo $user['image']; ?>" />
 								</figure>
 								
 									
@@ -149,10 +149,21 @@ $user=$userc->getUserbyname($_SESSION['username']);
 									<dt>Phone number</dt>
 									<dd><?php echo $user['tel']; ?></dd>
 									<dt>Role</dt>
-									<dd><?php echo $user['role']; ?></dd>
+									<dd>
+									<?php 
+									if($user['role'] == 0 )
+									{
+										echo "USER";
+									}
+									else 
+									{
+										echo "ADMIN";
+									}
+									 ?>
+									 </dd>
 									<td>
 									<div class="f-row bwrap">
-										<a href="updateuser.php?id=<?php echo $_SESSION['username'];?>"><button>Update</button></a>
+										<a href="updateuser.php?id=<?php echo $_SESSION['username'];?>"><button>Edit Profile</button></a>
 									</div>
 											
 									</td>
@@ -187,251 +198,7 @@ $user=$userc->getUserbyname($_SESSION['username']);
 						
 
 					
-						<!--update profile-->
-						
-						<?php
-							/*$error = "";
-							$userU = new userC();
-							
-							
-							if(isset($_POST["update"]))
-							{
-								if(!empty($_POST["username"])&&
-									!empty($_POST["nom"])&&
-									!empty($_POST["prenom"])&&
-									!empty($_POST["email"])&&
-									!empty($_POST["mdp"])&&
-									!empty($_POST["tel"])&&
-									!empty($_POST["adresse"])&&
-									!empty($_POST["role"])
-									){
-										echo "<h1>test</h1>";
-								$user1 = new user(
-									$_POST["username"],
-									$_POST["nom"],
-									$_POST["prenom"],
-									$_POST["email"],
-									$_POST["mdp"],
-									$_POST["tel"],
-									$_POST["adresse"],
-									$_POST["role"],
-								);
-
-
-								 
-								$userc->haja($user1);
-
-
-								$userc->update($user1,$_POST['id']);
-								
-									$_SESSION['username']=$_POST['username'];
-									header('Location:my_profile.php');
-								
-									}
-								else
-									$error = "Missing information";
-							}
-								*/
-						?>
-
-						<div class="tab-content" id="update">
-							<?php
-								if (isset($_SESSION['id'])){
-								$user1 = $userU->recupererUser($_SESSION['id']);
-							?>
-								
-										<!--content-->
-										<form method="POST" action="">
-											<section class="content center full-width">
-												<div class="modal container">
-													<h3>Modify user</h3>
-													
-													<div class="f-row">
-													<label for=""> Username :</label>
-														<input type="text" name="username" placeholder="Your Username"  value = ""  />
-													</div>
-													<div class="f-row">
-													<label for="">First Name :</label>
-														<input type="text" name="nom" placeholder="Your first name"  value = ""  />
-													</div>
-													<div class="f-row">
-													<label for="">Last Name :</label>
-														<input type="text" name="prenom" placeholder="Your last name"  value = ""  />
-													</div>
-													<div class="f-row">
-													<label for="">Email :</label>
-														<input type="email" name="email" placeholder="Your email"  value = "" />
-													</div>
-													<div class="f-row">
-													<label for="">Password :</label>
-														<input type="password" name="mdp" placeholder="Your password"  value = "" />
-													</div>
-													<div class="f-row">
-													<label for="">Adress :</label>
-														<input type="text" name="adresse" placeholder="Your adress"  value = ""  />
-													</div>
-													<div class="f-row">
-													<label for="">Phone Number :</label> <br>
-														<input type="tel" name="tel" placeholder="Your phone number" pattern="[2-9]{2}[0-9]{3}[0-9]{3}" maxlength="8" value = "" />
-													</div>
-													<section>
-													<h42>Photo</h4>
-													<div class="f-row full">
-														<input type="file" name="image" />
-													</div>
-													</section>
-													<div class="f-row bwrap">
-														<input type="submit" value="Update" name="update" />
-													</div>
-													<div class="cta">
-														<a href="my_profile.php" class="button big">Cancel</a>
-													</div>
-													
-												</div>
-											</section>
-										</form>
-										<!--//content-->
-								<?php
-								}
-								?>	
-						</div>
-						<!--//update profile-->
-						 
 					
-						
-						<!--my favorites-->
-						<div class="tab-content" id="favorites">
-							<div class="entries row">
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img6.jpg" alt="" />
-										<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-								
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img5.jpg" alt="" />
-										<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-								
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img8.jpg" alt="" />
-										<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-							</div>
-						</div>
-						<!--//my favorites-->
-						
-						<!--my posts-->
-						<div class="tab-content" id="posts">
-							<!--entries-->
-							<div class="entries row">
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img12.jpg" alt="" />
-										<figcaption><a href="blog_single.html"><i class="icon icon-themeenergy_eye2"></i> <span>View post</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="blog_single.html">Barbeque party</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="date"><i class="fa fa-calendar"></i><a href="#">22 Dec 2014</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="blog_single.html#comments">27</a></div>
-											</div>
-										</div>
-										<div class="excerpt">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-								
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img11.jpg" alt="" />
-										<figcaption><a href="blog_single.html"><i class="icon icon-themeenergy_eye2"></i> <span>View post</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="blog_single.html">How to make sushi</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="date"><i class="fa fa-calendar"></i><a href="#">22 Dec 2014</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="blog_single.html#comments">27</a></div>
-											</div>
-										</div>
-										<div class="excerpt">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-								
-								<!--item-->
-								<div class="entry one-third">
-									<figure>
-										<img src="images/img10.jpg" alt="" />
-										<figcaption><a href="blog_single.html"><i class="icon icon-themeenergy_eye2"></i> <span>View post</span></a></figcaption>
-									</figure>
-									<div class="container">
-										<h2><a href="blog_single.html">Make your own bread</a></h2> 
-										<div class="actions">
-											<div>
-												<div class="date"><i class="fa fa-calendar"></i><a href="#">22 Dec 2014</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="blog_single.html#comments">27</a></div>
-											</div>
-										</div>
-										<div class="excerpt">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-										</div>
-									</div>
-								</div>
-								<!--item-->
-							</div>
-							<!--//entries-->
-						</div>
-						<!--//my posts-->
 					</div>
 				</div>
 				<!--//row-->

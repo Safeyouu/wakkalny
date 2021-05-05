@@ -1,15 +1,14 @@
 <?php
-class user {
-    private $id;
-	private $sujet;
-    private $tel;
-    private $email;
+class contact {
+    private $id = null;
+	private $sujet = null;
+    private $message = null;
    
-    public function __construct(string $sujet,int $tel,string $email)
+    public function __construct(string $sujet,string $message,string $mail)
     {
         $this->sujet=$sujet;
-		$this->tel=$tel;
-        $this->email=$email;
+		$this->message=$message;
+		$this->mail=$mail;
        
 
     }
@@ -21,22 +20,23 @@ class user {
 	function getsujet(){
 		return $this->sujet;
 	}
-	function gettel(){
-		return $this->tel;
+	function getmessage(){
+		return $this->message;
 	}
-	function getemail(){
-		return $this->email;
+	function getmail(){
+		return $this->mail;
 	}
+	
  
 
 	function setsujet($sujet){
 		$this->sujet=$sujet;
 	}
-	function settel($tel){
-		$this->tel=$tel;
+	function setmessage($message){
+		$this->message=$message;
 	}
-	function setemail($email){
-		$this->email=$email;
+	function setmail($mail){
+		$this->mail=$mail;
 	}
 	
 
