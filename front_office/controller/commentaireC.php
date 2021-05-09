@@ -10,8 +10,8 @@
 		
                  function ajoutercommentaire($commentaire)
                  {
-                    $sql="INSERT INTO commentaire ( nom ,prenom ,email, commentaire ) 
-                    VALUES (:nom , :prenom ,:email , :commentaire)";
+                    $sql="INSERT INTO commentaire ( nom ,prenom ,email,date, commentaire ) 
+                    VALUES (:nom , :prenom ,:email ,:date, :commentaire)";
                     $pdo = config::getConnexion();
                     try
                     {
@@ -21,6 +21,8 @@
                       'nom' => $commentaire->getnom(),
                       'prenom' => $commentaire->getprenom(),
                       'email' => $commentaire->getemail(),
+                      'date' => $commentaire->getdate(),
+
                      'commentaire' => $commentaire->getcommentaire()]);
                   }
                     catch (Exception $e)
@@ -78,7 +80,7 @@
                        /* **************************** */
 
                         function modifiercommentaire($commentaire,$idcom){
-                            $sql="UPDATE commentaire SET  nom=:nom,prenom=:prenom,email=:email,commentaire=:commentaire WHERE idcom=:idcom";
+                            $sql="UPDATE commentaire SET  nom=:nom,prenom=:prenom,email=:email,date=:date,commentaire=:commentaire WHERE idcom=:idcom";
                             
                             $pdo = config::getConnexion();
                             try{		
@@ -86,17 +88,21 @@
                             $nom=$commentaire->getnom();
                             $prenom=$commentaire->getprenom();
                             $email=$commentaire->getemail();
+                            $date=$commentaire->getdate();
                             $commentaire=$commentaire->getcommentaire();
                             $datas = array( 
                                 ':idbblog'=>$idcom,
                                 ':nom'=>$nom,
                                 ':prenom'=>$prenom,
                                 ':email'=>$email,
+                                ':date'=>$date,
                                  ':commentaire'=>$commentaire);
+                                 
                             $query->bindValue(':idcom',$idcom);
                             $query->bindValue(':nom',$nom);
                             $query->bindValue(':prenom',$prenom);
                             $query->bindValue(':email',$email);
+                            $query->bindValue(':date',$date);
                             $query->bindValue(':commentaire',$commentaire);
                             
                             

@@ -162,7 +162,10 @@ $id = $_GET['idblog'];
 							<li class="comment depth-1">
 								<div class="avatar"><a href="my_profile.html"><img src="images/abatar0.jpg"  /></a></div>
 								<div class="comment-box">
+								
+							
 									<div class="comment-author meta"> 
+									<i style="position: relative; left:620px">created <strong><?php echo $commentaire ["date"] ?></strong></i>
 										<strong><?php echo $commentaire ["nom"] ?></strong>
 										<strong><?php echo $commentaire ["prenom"] ?></strong>
 									</div>

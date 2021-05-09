@@ -10,18 +10,21 @@ $commentairec = new commentaireC();
 if(isset($_POST["nom"])&&
     isset($_POST["prenom"])&&
     isset($_POST["email"])&&
+	isset($_POST["date"])&&
     isset($_POST["commentaire"])
     )
     {
         if(!empty($_POST["nom"])&&
             !empty($_POST["prenom"])&&
             !empty($_POST["email"])&&
+			!empty($_POST["date"])&&
             !empty($_POST["commentaire"])
             ){
         $commentaire1 = new commentaire(
             $_POST["nom"],
             $_POST["prenom"],
             $_POST["email"],
+			$_POST["date"],
             $_POST["commentaire"]
         );
         $commentairec->ajoutercommentaire($commentaire1);
@@ -152,6 +155,12 @@ if(isset($_POST["nom"])&&
 									
 									<div class="third">
 										<input type="email" placeholder="Your email" id="email" name="email" />
+										<span class="req">*</span>
+									</div>
+									<div class="third">
+<br>
+
+										<input type="date" placeholder="date" id="date" name="date" />
 										<span class="req">*</span>
 									</div>
 									

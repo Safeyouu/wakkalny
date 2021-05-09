@@ -77,38 +77,31 @@
                        /* **************************** */
 
                        
-                        function modifierblog($blog,$idblog){
-                            $sql="UPDATE blog SET  nom=:nom,titre=:titre,sujet=:sujet,image=:image WHERE idbblog=:idblog";
-                            
-                            $db = config::getConnexion();
-                            try{		
-                            $query=$db->prepare($sql);
-                            $nom=$blog->getnom();
-                            $titre=$blog->gettitre();
-                            $sujet=$blog->getsujet();
-                            $image=$blog->getimage();
-                            $datas = array( 
-                                ':idbblog'=>$idblog,
-                                ':nom'=>$nom,
-                                ':titre'=>$titre,
-                                 ':sujet'=>$sujet,
-                                 ':image'=>$image);
-                            $query->bindValue(':idblog',$idblog);
-                            $query->bindValue(':nom',$nom);
-                            $query->bindValue(':titre',$titre);
-                            $query->bindValue(':sujet',$sujet);
-                            $query->bindValue(':image',$image);
-                            
-                            
-                                $s=$query->execute();
-                            }
-                            catch (Exception $e){
-                                echo " Erreur ! ".$e->getMessage();
-                       echo " Les datas : " ;
-                      print_r($datas);
-                            }
-                            
+                       function modifierblog($blog, $idblog){
+			
+                        echo 'test modif C' ;
+                          $db = config::getConnexion();
+                          $query = $db->prepare(
+                            'UPDATE blog SET                     
+                              nom = :nom, 
+                              titre = :titre, 
+                                          sujet = :sujet, 
+                                          image= :image  	
+                            WHERE idblog = :idblog '
+                          );
+                          $query->bindValue('nom' , $blog->getnom()) ;
+                          $query->bindValue('titre' , $blog->gettitre());
+                          $query->bindValue('sujet' , $blog->getsujet());
+                          $query->bindValue('image' , $blog->getimage());
+                          $query->bindValue('idblog' , $idblog);
+                          try {
+                          $query->execute();
+                          echo "test" ;
+                          echo $query->rowCount() . " records UPDATED successfully <br>";
+                        } catch (PDOException $e) {
+                          echo $e->getMessage();
                         }
+                      }
 
                         function recupererblog($idblog){
                           $sql="SELECT * from blog where idblog=$idblog";

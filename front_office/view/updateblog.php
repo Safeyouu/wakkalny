@@ -1,40 +1,34 @@
 <?php
-include '../model/blog.php';
+
 include '../controller/blogC.php';
-$blog1=null;
+include_once '../model/blog.php';
+
 $error = "";
 $blogC = new blogC();
 
-
-
-
-if(isset($_POST["nom"])&&
+if(
+	isset($_POST["nom"])&&
     isset($_POST["titre"])&&
     isset($_POST["sujet"])&&
     isset($_POST["image"])&&
-	isset($_POST['idblog'])
+	isset($_GET['idblog'])
 
     )
-    {
-        if(!empty($_POST["nom"])&&
-            !empty($_POST["titre"])&&
-            !empty($_POST["sujet"])&&
-            !empty($_POST["image"])
-            ){
+            {
         $blog1 = new blog(
             $_POST["nom"],
             $_POST["titre"],
             $_POST["sujet"],
             $_POST["image"]
         );
-        $blogC->modifierblog($blog1, $_POST['idblog']);   
-             header('Location:blog.php');
+        $blogC->modifierblog($blog1, $_GET['idblog']);   
+             header('location: blog.php ');
+	}
 
-			}
-    else{
+    else
         $error= "missing info";
-    }
-}
+    
+
 ?>
 
 
@@ -134,54 +128,55 @@ if(isset($_POST["nom"])&&
 				</header>
 					
 				<!--content-->
-                <section class="content full-width">
-                <div class="edit_blog container">
-            <?php
+				<section class="content full-width">
 
-           $blog1=$blogC->recupererblog($_GET['idblog']);
-?>
-						<form  name="myForm" method="POST" action="" >
+<div class="submit_blog container">
+				<?php
+
+	$blog1 = $blogC->recupererblog($_GET['idblog']);
+	
+	?>
+	               
+         
+						<form name="myForm"  method="POST" >
 
                             <section>
-								
+							<h2 >nom</h2>
 								<div class="f-row">
-                                
-                                <h2>nom</h2>
-                                <div class="full"><input type="text" placeholder="nom" id="nom" name="nom" value = "<?php echo $blog1['nom']; ?>"  /></div>
+								<div class="full"><input type="text" placeholder=" nom" id="nom" name="nom" value="<?php echo $blog1['nom']; ?>" /></div>
 								</div>
-								<div class="f-row">
-                                <h2>titre</h2>
-									<div class="third"><input type="text" placeholder="titre" id="titre" name="titre" value = "<?php echo $blog1['titre']; ?>"/></div>
+								<h2>titre</h2>
+								<div class="f-row ">
+								<div class="full"><input type="text" placeholder=" titre" id="titre" name="titre" value="<?php echo $blog1['titre']; ?>" /></div>
 								</div>
 								
 							</section>
 							
 							<section>
-								<h2>Description</h2>
-								<div class="f-row">
-								<div class="full"><textarea placeholder="sujet" id="sujet" name="sujet" value="<?php echo $blog1['sujet']; ?>" ><?php echo $blog1['sujet']; ?></textarea></div>
+								<h2 for="sujet">Description</h2>
+								<div class="f-row full">
+								<textarea type="text" name="sujet" id="sujet"  ><?php echo $blog1['sujet']; ?></textarea>
 								</div>
 							</section>	
 							
 							<section>
-								<h2>Photo</h2>
+								<h2 for="image">Photo</h2>
 								<div class="f-row full">
-						<img src="images/<?php echo $blog1['image'];?>" />
-												<!-- <input type="file" id="image" name="image" />-->
+								<img src="images/<?php echo $blog1['image'];?>" Style="height:250px; width:700px;" />
 									 <input type="file" id="image" name="image" value="<?php echo $blog1['image']; ?>"/>
 
 								</div>
 							</section>	
-							
-							<div class="f-row full">
-								<input type="submit" class="button" id="editblog" value="edit this blog" />
-							</div>
+			
             
 						</from>
-               
+		
 
+						<div class="f-row full">
+						<input type="submit" class="button" id="submitblog" value="Publish blog" />
+							</div>
 					</div>
-                
+				
 				</section>
 
 				<!--//content-->
@@ -193,7 +188,7 @@ if(isset($_POST["nom"])&&
 	<!--//main-->
 	
 	
-
+	
 
 
 
