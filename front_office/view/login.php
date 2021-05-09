@@ -94,18 +94,18 @@ if(isset($_POST['login']))
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
 					<li><a href="index.php" title="Home"><span>Home</span></a></li>
-					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
+					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
-					<li><a href="blog.html" title="Blog"><span>Blog</span></a>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
+							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
 						</ul>
 					</li>
 						
 					</li>
 					
-					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
 					
 				</ul>
 				
@@ -113,8 +113,8 @@ if(isset($_POST['login']))
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
 		</div>
