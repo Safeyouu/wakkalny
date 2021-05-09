@@ -58,12 +58,12 @@ $id = $_GET['idblog'];
 	<header class="head" role="banner">
 		<!--wrap-->
 		<div class="wrap clearfix">
-			<a href="index.html" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li><a href="index.html" title="Home"><span>Home</span></a></li>
-					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
@@ -75,20 +75,20 @@ $id = $_GET['idblog'];
 					</li>
 					<li><a href="#" title="Pages"><span>Pages</span></a>
 						<ul>
-							<li><a href="login.html" title="Login page">Login page</a></li><li><a href="register.html" title="Register page">Register page</a></li>
+							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
 						</ul>
 					</li>
 					
-					<li><a href="contact.html" title="Contact"><span>Contact</span></a></li>
-					<li><a href="shop.html" title="Shop"><span>Shop</span></a></li>
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
 				</ul>
 			</nav>
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.html" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="medium"><a href="my_profile.html" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-					<li class="dark"><a href="submit_recipe.html" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
+					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -103,7 +103,7 @@ $id = $_GET['idblog'];
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
-					<li><a href="index.html" title="Home">Home</a></li>
+					<li><a href="index.php" title="Home">Home</a></li>
 					<li><a href="#" title="Blog">Blog</a></li>
 					<li>Post</li>
 				</ul>
@@ -127,7 +127,7 @@ $id = $_GET['idblog'];
 						<div class="entry-meta">
 							
 							<div class="avatar">
-								<a href="my_profile.html"><img src="images/abatar0.jpg" alt="" /><span><?php echo $blog ["nom"] ?></span></a>
+								<a href="my_profile.php"><img src="images/abatar0.jpg" alt="" /><span><?php echo $blog ["nom"] ?></span></a>
 							</div>
 						</div>
 						<div class="container">
@@ -160,7 +160,7 @@ $id = $_GET['idblog'];
 						<ol class="comment-list">
 							<!--comment-->
 							<li class="comment depth-1">
-								<div class="avatar"><a href="my_profile.html"><img src="images/abatar0.jpg"  /></a></div>
+								<div class="avatar"><a href="my_profile.php"><img src="images/abatar0.jpg"  /></a></div>
 								<div class="comment-box">
 								
 							
@@ -245,12 +245,12 @@ $id = $_GET['idblog'];
 					
 					<nav class="foot-nav">
 						<ul>
-							<li><a href="index.html" title="Home">Home</a></li>
-							<li><a href="recipes.html" title="Recipes">Recipes</a></li>
-							<li><a href="blog.html" title="Blog">Blog</a></li>
-							<li><a href="contact.html" title="Contact">Contact</a></li>    
-							<li><a href="find_recipe.html" title="Search for recipes">Search for recipes</a></li>
-							<li><a href="login.html" title="Login">Login</a></li>	<li><a href="register.html" title="Register">Register</a></li>													
+							<li><a href="index.php" title="Home">Home</a></li>
+							<li><a href="recipes.php" title="Recipes">Recipes</a></li>
+							<li><a href="blog.php" title="Blog">Blog</a></li>
+							<li><a href="contact.php" title="Contact">Contact</a></li>    
+							<li><a href="find_recipe.php" title="Search for recipes">Search for recipes</a></li>
+							<li><a href="login.php" title="Login">Login</a></li>	<li><a href="register.php" title="Register">Register</a></li>													
 						</ul>
 					</nav>
 				</div>
