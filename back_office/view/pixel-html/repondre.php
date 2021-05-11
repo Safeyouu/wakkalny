@@ -30,7 +30,7 @@ if(isset($_POST['enyoyer']))
 				$mail->Password = '55028849';
 				$mail->setFrom("no-reply@gmail.com");
 				$mail->Subject = "Reclamation";
-				$mail->Body = '<h2 style="color: blue">Hello,<h2><br><h3 style="color: blue">'.$_POST['message'].'</h3><br><br><br><h3 style="color: blue">Cordially,</h3><br><h3 style="color: blue">Wakkalny.</h3>';
+				$mail->Body = '<h2 style="color: blue">Hello,<h2><h3 style="color: blue">'.$_POST['message'].'</h3><h3 style="color: blue">Cordially, Wakkalny.</h3>';
 				$mail->AddAddress($_POST['mail']);
 				$mail->send();
                 header('Location: contact.php');
