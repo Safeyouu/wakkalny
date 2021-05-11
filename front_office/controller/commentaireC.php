@@ -62,7 +62,7 @@
                                 $query = $pdo->prepare(
                                 'DELETE FROM commentaire WHERE idcom = :idcom' );
                                 $query->execute([
-                                'idblog' => $idcom ]);
+                                'idcom' => $idcom ]);
                             }
                               catch (Exception $e)
                            {
@@ -80,57 +80,47 @@
                        /* **************************** */
 
                         function modifiercommentaire($commentaire,$idcom){
-                            $sql="UPDATE commentaire SET  nom=:nom,prenom=:prenom,email=:email,date=:date,commentaire=:commentaire WHERE idcom=:idcom";
-                            
-                            $pdo = config::getConnexion();
-                            try{		
-                            $query=$db->prepare($sql);
-                            $nom=$commentaire->getnom();
-                            $prenom=$commentaire->getprenom();
-                            $email=$commentaire->getemail();
-                            $date=$commentaire->getdate();
-                            $commentaire=$commentaire->getcommentaire();
-                            $datas = array( 
-                                ':idbblog'=>$idcom,
-                                ':nom'=>$nom,
-                                ':prenom'=>$prenom,
-                                ':email'=>$email,
-                                ':date'=>$date,
-                                 ':commentaire'=>$commentaire);
-                                 
-                            $query->bindValue(':idcom',$idcom);
-                            $query->bindValue(':nom',$nom);
-                            $query->bindValue(':prenom',$prenom);
-                            $query->bindValue(':email',$email);
-                            $query->bindValue(':date',$date);
-                            $query->bindValue(':commentaire',$commentaire);
-                            
-                            
-                            
-                                $s=$query->execute();
-                            }
-                            catch (Exception $e){
-                                echo " Erreur ! ".$e->getMessage();
-                       echo " Les datas : " ;
-                      print_r($datas);
-                            }
+                          echo 'test modif C' ;
+                          $db = config::getConnexion();
+                          $query = $db->prepare(
+                            'UPDATE commentaire SET                     
+                              nom = :nom, 
+                              prenom = :prenom, 
+                              email = :email,
+                              date = :date, 
+                             commentaire= :commentaire  	
+                            WHERE idcom = :idcom '
+                          );
+                          $query->bindValue('nom' , $commentaire->getnom()) ;
+                          $query->bindValue('prenom' , $commentaire->getprenom());
+                          $query->bindValue('email' , $commentaire->getemail());
+                          $query->bindValue('date' , $commentaire->getdate());
+                          $query->bindValue('commentaire' , $commentaire->getcommentaire());
+                          $query->bindValue('idblog' , $idblog);
+                          try {
+                          $query->execute();
+                          echo "test" ;
+                          echo $query->rowCount() . " records UPDATED successfully <br>";
+                        } catch (PDOException $e) {
+                          echo $e->getMessage();
+                        }
                             
                         }
 
                         function recuperercommentaire($idcom){
-                          $sql="SELECT * from commentaire where idcom=$idcom";
-                          $pdo = config::getConnexion();
-                          try{
-                              $query=$db->prepare($sql);
-                              $query->execute();
-                  
-                              $commentaire=$query->fetch();
-                              return $commentaire;
-                          }
-                          catch (Exception $e){
-                              die('Erreur: '.$e->getMessage());
-                          }
-                      }
+                            $sql="SELECT * from commentaire where idcom=$idcom";
+                            $db = config::getConnexion();
+                            try{
+                                $query=$db->prepare($sql);
+                                $query->execute();
+                    
+                                $commentaire=$query->fetch();
+                                return $commentaire;
+                            }
+                            catch (Exception $e){
+                                die('Erreur: '.$e->getMessage());
+                            }
+                        }
                     
   }
 ?>

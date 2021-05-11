@@ -4,7 +4,7 @@
  include "../controller/commentaireC.php";
 
 
-$id = $_GET['idblog'];
+$id= $_GET['idblog'];
     $blogc= new blogC();
         $pdo=config::getConnexion();
         $query= $pdo ->prepare("select * from blog where idblog= '$id'");
@@ -40,12 +40,7 @@ $id = $_GET['idblog'];
 	<script src="../../../../use.fontawesome.com/e808bf9397.js"></script>
 	<link rel="shortcut icon" href="images/favicon.ico" />
 	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-	<![endif]-->
+	
 </head>
 <body>
 	<!--preloader-->
@@ -172,15 +167,19 @@ $id = $_GET['idblog'];
 									<div class="comment-text">
 										<p>	<?php echo $commentaire ["commentaire"] ?></p>
 									</div>
-								</div> 
+									
+								</div> <form method="POST" action="deletecom.php">
+                                    <input type="submit" name="supprimer" value="supprimer">
+	                                <input type="hidden" value="<?PHP echo $commentaire['idcom']; ?>" name="idcom">
 							</li> 
+							<?php } ?>
+
 							<!--//comment-->	
 							<div class="actions">
 								<div>
 								
 						
 						</ol>
-       <?php } ?>
 						
 					</div>
 					<!--//comments-->
