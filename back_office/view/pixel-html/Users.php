@@ -151,7 +151,7 @@ if(isset($_POST['button']))
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
-                            <a href="Blog.html" class="waves-effect"><i class="fa fa fa-reddit-alien fa-fw"
+                            <a href="Blog.php" class="waves-effect"><i class="fa fa fa-reddit-alien fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Blog</span></a>
                         </li>
                         <li>

@@ -122,7 +122,7 @@ if(isset($_POST["register"]))
 					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
-					<li><a href="blog.html" title="Blog"><span>Blog</span></a>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
 							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
 						</ul>

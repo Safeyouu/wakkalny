@@ -85,7 +85,7 @@ $mail=$user['email'];
 					<li><a href="recipes.html" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
-					<li><a href="blog.html" title="Blog"><span>Blog</span></a>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
 							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
 						</ul>
@@ -198,7 +198,7 @@ $mail=$user['email'];
 						<ul>
 							<li><a href="index.php" title="Home">Home</a></li>
 							<li><a href="recipes.html" title="Recipes">Recipes</a></li>
-							<li><a href="blog.html" title="Blog">Blog</a></li>
+							<li><a href="blog.php" title="Blog">Blog</a></li>
 							<li><a href="contact.php" title="Contact">Contact</a></li>    
 							<li><a href="find_recipe.html" title="Search for recipes">Search for recipes</a></li>
 							<li><a href="login.php" title="Login">Login</a></li>	<li><a href="register.html" title="Register">Register</a></li>													
