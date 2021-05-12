@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../model/shop.php';
 include '../controller/shopC.php';
 include "../controller/categorieC.php";
@@ -88,6 +89,16 @@ $error=  "Missing information";
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
