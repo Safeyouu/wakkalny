@@ -5,8 +5,8 @@
 	class shopC {
 		
 		function ajoutershop($shop){
-			$sql="INSERT INTO shop (nom,description,nb_stock,prix,image) 
-			VALUES (:nom,:description,:nb_stock,:prix,:image)";
+			$sql="INSERT INTO shop (nom,description,nb_stock,prix,image , idCategorie) 
+			VALUES (:nom,:description,:nb_stock,:prix,:image , :idCategorie)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql); //pour preparer la requete
@@ -15,6 +15,7 @@
 				$query->bindValue('nb_stock',  $shop->getnb_stock());
 				$query->bindValue('prix',  $shop->getprix());
 				$query->bindValue('image',  $shop->getimage(),PDO::PARAM_LOB);
+				$query->bindValue('idCategorie',  $shop->getidCategorie());
 				$query->execute();			
 			}
 			catch (Exception $e){
@@ -26,6 +27,35 @@
 		function affichershop(){
 
 			$sql="SELECT id,nom,description,nb_stock,prix,image FROM shop";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}	
+		}
+
+		function searchShopByCategorie($idCategorie){
+
+			$sql="SELECT id,nom,description,nb_stock,prix,image FROM shop where idCategorie = ".$idCategorie;
+
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}	
+		}
+
+
+		function getProductNumberPerCategories(){
+
+			$sql="SELECT c.nom as nom , count(s.id) as qqt FROM shop s join categorie c on c.id = s.idCategorie group by c.id";
+
 			$db = config::getConnexion();
 			try{
 				$liste = $db->query($sql);

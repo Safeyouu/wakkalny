@@ -6,6 +6,7 @@ $shopc = new shopC();
 $listeproducts=$shopc->affichershop();
 
 
+
 ?>
 
 
@@ -169,6 +170,7 @@ $listeproducts=$shopc->affichershop();
                                             <th>nb_stock</th>
                                             <th>prix</th>
                                             <th>image</th>
+                                            <th>categorie</th>
                                         </tr>
                                     </thead>
                                     <?php

@@ -6,8 +6,9 @@ private  $description=null;
 private  $nb_stock=null;
 private  $prix=null;
 private  $image=null;
+private  $idCategorie=null;
 
-public function __construct(  string $nom, string $description,int $nb_stock ,string $prix,string $image) 
+public function __construct(  string $nom, string $description,int $nb_stock ,string $prix,string $image , int $idCategorie) 
 //construct:pour exagerer tous les attributs de saisir (intialisation)
 {
 $this->nom=$nom;
@@ -15,6 +16,7 @@ $this->description=$description;
 $this->nb_stock=$nb_stock;
 $this->prix=$prix;
 $this->image=$image;
+$this->idCategorie = $idCategorie ;
 }
 
  function getid():int {
@@ -37,6 +39,9 @@ function getprix():string {
   }
    
 
+  function getidCategorie():int {
+    return $this->idCategorie;
+  }
 
 
 
@@ -55,8 +60,12 @@ function getprix():string {
     $this->prix=$prix;
   }
 
-   function setimage ( $image):void{
+  function setimage ( $image):void{
     $this->image=$image;
+  }
+
+  function setiDCategorie( $idCategorie):void{
+    $this->idCategorie=$idCategorie;
   }
   
 }
