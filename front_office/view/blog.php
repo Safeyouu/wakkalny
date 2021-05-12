@@ -73,7 +73,7 @@ $listeblogs=$blogc->afficherblog();
 					<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
 							<li><a href="blog.php" title="Blog post">Blog post</a></li>
-							<li><a href="error404.php" title="Add Blog">add blog</a></li>
+							<li><a href="error404.html" title="Add Blog">add blog</a></li>
 
 						</ul>
 					</li>

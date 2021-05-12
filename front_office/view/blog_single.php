@@ -1,4 +1,5 @@
 <?php
+session_start();
  include "../controller/blogC.php";
 
  include "../controller/commentaireC.php";
@@ -57,6 +58,18 @@ $id = $_GET['idblog'];
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:white; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				
+				</li>
+				
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -138,10 +151,26 @@ $id = $_GET['idblog'];
 							</div>
 
 					   </div>
-							<div class="third bwrap"><a href="add_commentaire.php" class="button white more medium">add comment<i class="fa fa-chevron-right"></i></a></div>
+					   <?php  
+			if(!isset($_SESSION['username']))  
+			{  
+		?>
+							<div class="third bwrap"><a href="error404.html" class="button white more medium">add comment<i class="fa fa-chevron-right"></i></a></div>
 									
-							
-							
+							<?php
+					}
+					
+					else
+						
+					{   
+						
+						?>
+						
+					<div class="third bwrap"><a href="add_commentaire.php" class="button white more medium">add comment<i class="fa fa-chevron-right"></i></a></div>
+					<?php 
+					}
+						
+					?>
 						
 						
 					</article>
@@ -172,6 +201,12 @@ $id = $_GET['idblog'];
 									<div class="comment-text">
 										<p>	<?php echo $commentaire ["commentaire"] ?></p>
 									</div>
+									<div class="actions">
+									<form method="POST" action="delete_com.php">
+                                    <i style="position: relative; left:650px"><input type="submit" name="supprimer" value="supprimer"></i>
+	                                <input type="hidden" value="<?PHP echo $commentaire['idcom']; ?>" name="idcom">
+									</div>
+
 								</div> 
 							</li> 
 							<!--//comment-->	

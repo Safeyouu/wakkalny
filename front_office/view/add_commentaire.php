@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../model/commentaire.php';
 include '../controller/commentaireC.php';
 $error = "";
@@ -6,24 +7,30 @@ $error = "";
 $commentaire1 = null;
 
 $commentairec = new commentaireC();
+$user=$commentairec->getUserbyname($_SESSION['username']);
 
-if(isset($_POST["nom"])&&
-    isset($_POST["prenom"])&&
-    isset($_POST["email"])&&
+$nom = $user['nom'];
+$prenom = $user['prenom'];
+$email = $user['email'];
+
+
+if(isset($nom)&&
+isset($prenom)&&
+isset($email)&&
 	isset($_POST["date"])&&
     isset($_POST["commentaire"])
     )
     {
-        if(!empty($_POST["nom"])&&
-            !empty($_POST["prenom"])&&
-            !empty($_POST["email"])&&
+        if(!empty($nom)&&
+            !empty($prenom)&&
+            !empty($email)&&
 			!empty($_POST["date"])&&
             !empty($_POST["commentaire"])
             ){
         $commentaire1 = new commentaire(
-            $_POST["nom"],
-            $_POST["prenom"],
-            $_POST["email"],
+			$nom,
+            $prenom,
+            $email,
 			$_POST["date"],
             $_POST["commentaire"]
         );
@@ -71,6 +78,18 @@ if(isset($_POST["nom"])&&
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:white; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				
+				</li>
+				
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -144,17 +163,17 @@ if(isset($_POST["nom"])&&
 								<div class="f-row">
 									<div class="third">
 									 
-										<input type="text" placeholder="Your name" id="nom" name="nom" />
+										<input type="text"  id="nom" name="nom" value="<?php echo $user['nom'];?>" disabled />
 										<span class="req">*</span>
 									</div>
 									<div class="third">
 									 
-										<input type="text" placeholder="your first name" id="prenom" name="prenom" />
+										<input type="text"  id="prenom" name="prenom" value="<?php echo $user['prenom'];?>" disabled/>
 										<span class="req">*</span>
 									</div>
 									
 									<div class="third">
-										<input type="email" placeholder="Your email" id="email" name="email" />
+										<input type="email"  id="email" name="email"value="<?php echo $user['email'];?>" disabled />
 										<span class="req">*</span>
 									</div>
 									<div class="third">

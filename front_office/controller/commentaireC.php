@@ -62,7 +62,7 @@
                                 $query = $pdo->prepare(
                                 'DELETE FROM commentaire WHERE idcom = :idcom' );
                                 $query->execute([
-                                'idblog' => $idcom ]);
+                                'idcom' => $idcom ]);
                             }
                               catch (Exception $e)
                            {
@@ -132,5 +132,21 @@
                           }
                       }
                     
+
+                      /* **************************** */
+                      function getUserbyname($username) {
+                        try {
+                            $pdo = config::getConnexion();
+                            $query = $pdo->prepare(
+                                'SELECT * FROM user WHERE username = :username'
+                            );
+                            $query->execute([
+                                'username' => $username
+                            ]);
+                            return $query->fetch();
+                        } catch (Exception $e) {
+                            $e->getMessage();
+                        }
+                    }
   }
 ?>
