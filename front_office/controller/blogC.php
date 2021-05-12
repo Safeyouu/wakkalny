@@ -118,5 +118,24 @@
                           }
                       }
                     
+
+
+
+
+                     /*  **************************** */
+                      function getUserbyname($username) {
+                        try {
+                            $pdo = config::getConnexion();
+                            $query = $pdo->prepare(
+                                'SELECT * FROM user WHERE username = :username'
+                            );
+                            $query->execute([
+                                'username' => $username
+                            ]);
+                            return $query->fetch();
+                        } catch (Exception $e) {
+                            $e->getMessage();
+                        }
+                    }
   }
 ?>

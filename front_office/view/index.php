@@ -53,7 +53,9 @@ session_start();
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
+						<li><a href="blog.php" title="Blog post">Blog post</a></li>
+							<li><a href="error404.html" title="Add Blog">add blog</a></li>
+
 						</ul>
 					</li>
 						
@@ -147,8 +149,8 @@ session_start();
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.html" title="Blog post">Blog post</a></li>
-						</ul>
+						<li><a href="blog.php" title="Blog post">Blog post</a></li>
+							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>						</ul>
 					</li>
 						
 					</li>

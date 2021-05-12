@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+
 include '../model/blog.php';
 include '../controller/blogC.php';
 $error = "";
@@ -8,19 +10,24 @@ $blog1 = null;
 
 $blogc = new blogC();
 
-if(isset($_POST["nom"])&&
+
+$user=$blogc->getUserbyname($_SESSION['username']);
+
+$nom = $user['nom'];
+
+if(isset($nom)&&
     isset($_POST["titre"])&&
     isset($_POST["sujet"])&&
     isset($_POST["image"])
     )
     {
-        if(!empty($_POST["nom"])&&
+        if(!empty($nom)&&
             !empty($_POST["titre"])&&
             !empty($_POST["sujet"])&&
             !empty($_POST["image"])
             ){
         $blog1 = new blog(
-            $_POST["nom"],
+            $nom,
             $_POST["titre"],
             $_POST["sujet"],
             $_POST["image"]
@@ -139,7 +146,7 @@ if(isset($_POST["nom"])&&
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
-									<div class="full"><input type="text" placeholder="nom" id="nom" name="nom" /></div>
+									<div class="full"><input type="text"  id="nom" name="nom" value="<?php echo $user['nom'];?>" disabled/></div>
 								</div>
 								<div class="f-row">
 									<div class="third"><input type="text" placeholder="titre" id="titre" name="titre" /></div>
