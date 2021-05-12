@@ -130,7 +130,7 @@ if(isset($_POST['enyoyer']))
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
                         <li>
-                            <a href="Contact.html" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                            <a href="Contact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
@@ -194,7 +194,7 @@ if(isset($_POST['enyoyer']))
                                     </thead>
                                     <tbody>
                                     <td><input type="hidden" name="mail" value="<?php echo $mail ?>" ></td>
-                                       <td><input type="textarea" name="message"  ></td>
+                                       <td><textarea type="textarea" name="message" rows="5" cols="30" ></textarea></td>
                                        <td><input type="submit" name="enyoyer" value="Send"></td>
                                        <td><a href="Contact.php">Cancel</a><td>
 

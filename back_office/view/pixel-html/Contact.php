@@ -105,7 +105,7 @@ $listecontact=$contactc->showcontact();
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
                         <li>
-                            <a href="Contact.html" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                            <a href="Contact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
@@ -181,7 +181,7 @@ $listecontact=$contactc->showcontact();
                                             <td><?php echo $contact['id'];?></td>
                                             <td><?php echo $contact['sujet'];?></td>
                                             <td><?php echo $contact['mail'];?></td>
-                                            <td><textarea><?php echo $contact['message'];?></textarea></td>
+                                            <td><textarea rows="5" cols="30"><?php echo $contact['message'];?></textarea></td>
                                             <td><?php echo "<a href=repondre.php?mail=".$contact['mail'].">" ; ?><span>resond</span></a></td>
                                              
                                         </tr>
