@@ -126,6 +126,21 @@
             }
         }
 
+        function checkphone($tel)
+        {
+            $sql = "SELECT * FROM user WHERE tel=:tel LIMIT 1";
+            $db = config::getConnexion();
+            $query = $db->prepare($sql);
+            $query->execute(['tel' => $tel]);
+            if($query->rowCount()){
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
+
         
         
           

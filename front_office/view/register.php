@@ -42,7 +42,7 @@ if(isset($_POST["register"]))
 			
 			 if(!$userc->checkusername($_POST['username']))
 			{
-				$error= ' <h2>  the Username (' . $_POST['username'] . ') already exists. Please try a new one . </h2>';
+				$error= ' <h2>  this Username (' . $_POST['username'] . ') already exists. Please try a new one . </h2>';
 			}
 			else if(!$userc->checkname($_POST['nom']))
 			{
@@ -51,6 +51,10 @@ if(isset($_POST["register"]))
 			else if(!$userc->checkname($_POST['prenom']))
 			{
 				$error= ' <h2>  Your Last Name should have only LETTERS </h2>';
+			}
+			else if(!$userc->checkphone($_POST['tel']))
+			{
+				$error= ' <h2>  this phone number (' . $_POST['tel'] . ') already exists. Please try a new one . </h2> ';
 			}
 			else if(!$userc->checkemail($_POST['email']))
 			{
