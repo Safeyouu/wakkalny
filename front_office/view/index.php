@@ -60,7 +60,8 @@ session_start();
 					</li>
 						
 					</li>
-					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
 					
 

@@ -1,32 +1,6 @@
 <?php
 session_start();
 
-include '../controller/contactC.php';
-include_once "../model/contact.php";
-
-
-$contactc = new contactC();
-
-
-$user=$contactc->getUserbyname($_SESSION['username']);
-
-$mail=$user['email'];
-
-	if(isset($_POST['send']))
-	{
-		if(!empty($_POST["sujet"])&&!empty($_POST["message"]))
-		{
-			$contact1 = new contact($_POST["sujet"],$_POST["message"],$mail);
-			
-			$contactc->addContact($contact1);
-			header('Location:index.php');
-		}
-		else
-		{
-			$error="Please write a subject and your message";
-		}
-	}
-
 
 
 
@@ -62,7 +36,34 @@ $mail=$user['email'];
 		<div class="spinner"></div>
 	</div>
 	<!--//preloader-->
-	
+	<?php  
+			if(isset($_SESSION['username']))  
+			{  
+				include '../controller/contactC.php';
+				include_once "../model/contact.php";
+
+
+				$contactc = new contactC();
+
+				$user=$contactc->getUserbyname($_SESSION['username']);
+				$mail=$user['email'];
+
+				if(isset($_POST['send']))
+				{
+					if(!empty($_POST["sujet"])&&!empty($_POST["message"]))
+					{
+						$contact1 = new contact($_POST["sujet"],$_POST["message"],$mail);
+						
+						$contactc->addContact($contact1);
+						header('Location:index.php');
+					}
+					else
+					{
+						$error="Please write a subject and your message";
+					}
+				}
+
+		?>
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
@@ -164,7 +165,125 @@ $mail=$user['email'];
 		<!--//wrap-->
 	</main>
 	<!--//main-->
-	
+				<?php
+					}
+					
+					else
+					{ 	
+						include '../controller/contactC.php';
+						include_once "../model/contact.php";
+
+
+						$contactc = new contactC();
+
+						if(isset($_POST['send']))
+						{
+							if(!empty($_POST["sujet"])&&!empty($_POST["message"]))
+							{
+								$contact1 = new contact($_POST["sujet"],$_POST["message"],$_POST['mail']);
+								
+								$contactc->addContact($contact1);
+								header('Location:index.php');
+							}
+							else
+							{
+								$error="Please write a subject and your message";
+							}
+						}
+				?>
+
+
+<!--header-->
+<header class="head" role="banner">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
+						<ul>
+							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
+						</ul>
+					</li>
+					
+					
+					<li class="current-menu-item"><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
+					
+				</ul>
+			</nav>
+			
+			<nav class="user-nav" role="navigation">
+				<ul>
+					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
+		
+	<!--main-->
+	<main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--row-->
+			<div class="row">
+				<!--content-->
+				<section class="content center full-width">
+					<div class="modal container">
+						<form method="post" action="contact.php" >
+							<h3>Contact us</h3>
+							<div id="message" class="alert alert-danger"></div>
+							
+							<div class="f-row">
+							<label>Email</label>
+								<input type="email"  id="email" name="mail" value="" placeholder="Your email" />
+							</div>
+							
+							<div class="f-row">
+							<label>Subject</label>
+								<input type="text" placeholder="Your subject" id="email" name="sujet" value=""  />
+							</div>
+							<div class="f-row">
+							<label>Message</label>
+								<textarea placeholder="Your message" name="message" id="comments"></textarea>
+							
+							<div>
+								<p>
+								Please enter the details of your request and, if you have any questions regarding our Terms of Use, please include specific 
+								samples of the usage you wish to give our resouces.If you’re reporting a problem, make sure to include as much information 
+								as possible.Please include any screenshots or videos of issues since this will also help us resolve problems much sooner.Once 
+								your request is submitted, a member of our support staff will respond as soon as possible.
+								</p>
+								<br>
+
+                                <p><strong>Basic information on Data Protection:</strong>Wakkalny Company collects your data to be able to answer to questions, suggested, or complaints filed. </p>
+							</div>
+							</div>
+							<div class="f-row bwrap">
+								<button type="submit" class="btn" name="send">Send Message</button>
+							</div>
+						</form>
+					</div>
+				</section>
+				<!--//content-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+
+				<?php
+					}
+				?>
 	
 	<!--footer-->
 	<footer class="foot" role="contentinfo">

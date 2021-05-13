@@ -87,7 +87,7 @@ if(isset($_POST['enyoyer']))
                 <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg "
                         href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i
                             class="fa fa-bars"></i></a>
-                    <div class="top-left-part"><a class="logo" href="index.html"><b><img
+                    <div class="top-left-part"><a class="logo" href="index.php"><b><img
                                     src="../plugins/images/pixeladmin-logo.png" alt="home" /></b><span
                                 class="hidden-xs"><img src="../plugins/images/pixeladmin-text.png" alt="home" /></span></a>
                     </div>
@@ -126,11 +126,11 @@ if(isset($_POST['enyoyer']))
                                     aria-hidden="true"></i><span class="hide-menu">Icons</span></a>
                         </li>
                         <li>
-                            <a href="Users.html" class="waves-effect"><i class="fa fa-users fa-fw"
+                            <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
                         <li>
-                            <a href="Contact.html" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                            <a href="ontact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
@@ -150,7 +150,7 @@ if(isset($_POST['enyoyer']))
                                     aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
                         <li>
-                            <a href="Products.html" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
+                            <a href="Products.php" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Products</span></a>
                         </li>
     

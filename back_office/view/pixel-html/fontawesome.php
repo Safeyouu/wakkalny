@@ -116,7 +116,7 @@ session_start();
                                     aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
                         <li>
-                            <a href="Products.html" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
+                            <a href="Products.php" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Products</span></a>
                         </li>
     

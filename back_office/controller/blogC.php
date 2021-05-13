@@ -1,6 +1,6 @@
 <?php
- include "../config.php";
- require_once '../Model/blog.php';
+ include "../../config.php";
+ require_once '../../Model/blog.php';
 
  
  

@@ -1,5 +1,5 @@
 <?php
-include "../controller/blogC.php";
+include "../../controller/blogC.php";
 
 $blogc = new blogC();
 $listeblogs=$blogc->afficherblog();
@@ -57,7 +57,7 @@ $listeblogs=$blogc->afficherblog();
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg "
                     href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i
                         class="fa fa-bars"></i></a>
-                <div class="top-left-part"><a class="logo" href="index.html"><b><img
+                <div class="top-left-part"><a class="logo" href="index.php"><b><img
                                 src="../plugins/images/pixeladmin-logo.png" alt="home" /></b><span
                             class="hidden-xs"><img src="../plugins/images/pixeladmin-text.png" alt="home" /></span></a>
                 </div>
@@ -84,23 +84,23 @@ $listeblogs=$blogc->afficherblog();
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="index.php" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                        <a href="Profile.php" class="waves-effect"><i class="fa fa-user fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                     </li>
                     <li>
-                        <a href="fontawesome.html" class="waves-effect"><i class="fa fa-font fa-fw"
+                        <a href="fontawesome.php" class="waves-effect"><i class="fa fa-font fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Icons</span></a>
                     </li>
                     <li>
-                        <a href="Users.html" class="waves-effect"><i class="fa fa-users fa-fw"
+                        <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                     </li>
                     <li>
-                        <a href="Contact.html" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                        <a href="ontact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                     </li>
                     <li>
@@ -120,7 +120,7 @@ $listeblogs=$blogc->afficherblog();
                                 aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                     </li>
                     <li>
-                        <a href="Products.html" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
+                        <a href="Products.php" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Products</span></a>
                     </li>
 

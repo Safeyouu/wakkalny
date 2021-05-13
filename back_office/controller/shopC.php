@@ -1,6 +1,6 @@
 <?PHP
-	include_once "../config.php";
-	require_once '../Model/shop.php';
+	include_once "../../config.php";
+	require_once '../../model/shop.php';
 
 	class shopC {
 		

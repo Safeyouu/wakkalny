@@ -1,3 +1,15 @@
+<?php
+include "../../controller/shopC.php";
+
+
+$shopc = new shopC();
+$listeproducts=$shopc->affichershop();
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +59,7 @@
                 <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg "
                         href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i
                             class="fa fa-bars"></i></a>
-                    <div class="top-left-part"><a class="logo" href="index.html"><b><img
+                    <div class="top-left-part"><a class="logo" href="index.php"><b><img
                                     src="../plugins/images/pixeladmin-logo.png" alt="home" /></b><span
                                 class="hidden-xs"><img src="../plugins/images/pixeladmin-text.png" alt="home" /></span></a>
                     </div>
@@ -74,23 +86,23 @@
                 <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                     <ul class="nav" id="side-menu">
                         <li style="padding: 10px 0 0;">
-                            <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                            <a href="index.php" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                            <a href="Profile.php" class="waves-effect"><i class="fa fa-user fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li>
-                            <a href="fontawesome.html" class="waves-effect"><i class="fa fa-font fa-fw"
+                            <a href="fontawesome.php" class="waves-effect"><i class="fa fa-font fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Icons</span></a>
                         </li>
                         <li>
-                            <a href="Users.html" class="waves-effect"><i class="fa fa-users fa-fw"
+                            <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
                         <li>
-                            <a href="Contact.html" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                            <a href="ontact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
@@ -110,7 +122,7 @@
                                     aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
                         <li>
-                            <a href="Products.html" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
+                            <a href="Products.php" class="waves-effect"><i class="fa fa-shopping-cart fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Products</span></a>
                         </li>
     
@@ -153,55 +165,34 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                            <th>Role</th>
+                                            <th>nom</th>
+                                            <th>description</th>
+                                            <th>nb_stock</th>
+                                            <th>prix</th>
+                                            <th>image</th>
+                                            <th>categorie</th>
                                         </tr>
                                     </thead>
+                                    <?php
+            foreach($listeproducts as $shop){
+        ?>
+                                    
+                                    
+                                
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
+                                            <td><?php echo $shop ["id"] ?></td>
+                                            <td><?php echo $shop ["nom"] ?></td>
+                                            <td><?php echo $shop ["description"] ?></td>
+                                            <td><?php echo $shop ["nb_stock"] ?></td>
+                                            <td><?php echo $shop ["prix"] ?></td>
+                                            <td><a href=""><img src="images/<?php echo $shop['image'];?>"Style="height:70px; width:100px;" /></a>  </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                            <td>developer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                            <td>supporter</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                            <td>supporter</td>
-                                        </tr>
+                                        
+                                    </tbody>
+                                    <?php
+            }
+            ?>
                                     </tbody>
                                 </table>
                             </div>
