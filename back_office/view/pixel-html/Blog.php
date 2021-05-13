@@ -104,7 +104,7 @@ $listeblogs=$blogc->afficherblog();
                                 aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                     </li>
                     <li>
-                        <a href="ontact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                        <a href="Contact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                     </li>
                     <li>
