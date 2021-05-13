@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from www.themeenergy.com/themes/html/social-chef/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Apr 2021 21:54:57 GMT -->
+<!-- Mirrored from www.themeenergy.com/themes/html/social-chef/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Apr 2021 21:54:57 GMT -->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,14 +53,18 @@ session_start();
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
+						<li><a href="blog.php" title="Blog post">Blog post</a></li>
+							<li><a href="error404.php" title="Add Blog">add blog</a></li>
+
 						</ul>
 					</li>
 						
 					</li>
-					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
 					
+
 					
 						
 					
@@ -147,8 +151,8 @@ session_start();
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
+						<li><a href="blog.php" title="Blog post">Blog post</a></li>
+							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>						</ul>
 					</li>
 						
 					</li>
@@ -239,7 +243,7 @@ session_start();
 					<div class="icons dynamic-numbers">
 						
 							<div class="cta">
-								<!--<a href="login.html" class="button big">Join us!</a>-->
+								<!--<a href="login.php" class="button big">Join us!</a>-->
 							</div>
 						</div>
 						<!--//row-->
@@ -358,12 +362,12 @@ session_start();
 									<figcaption><a href="recipe.php"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
 								</figure>
 								<div class="container">
-									<h2><a href="recipe.php ">Super easy blueberry cheesecake</a></h2> 
+									<h2><a href="recipe.php">Super easy blueberry cheesecake</a></h2> 
 									<div class="actions">
 										<div>
 											<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
 											<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-											<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
+											<div class="comments"><i class="fa fa-comment"></i><a href="recipe.php#comments">27</a></div>
 										</div>
 									</div>
 								</div>
@@ -374,15 +378,15 @@ session_start();
 							<div class="entry one-third">
 								<figure>
 									<img src="images/img7.jpg" alt="" />
-									<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
+									<figcaption><a href="recipe.php"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
 								</figure>
 								<div class="container">
-									<h2><a href="recipe.html">Refreshing banana split with a twist for adults</a></h2> 
+									<h2><a href="recipe.php">Refreshing banana split with a twist for adults</a></h2> 
 									<div class="actions">
 										<div>
 											<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
 											<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-											<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
+											<div class="comments"><i class="fa fa-comment"></i><a href="recipe.php#comments">27</a></div>
 										</div>
 									</div>
 								</div>
@@ -636,6 +640,7 @@ session_start();
 	<script src="js/home.js"></script>	
 </body>
 
+<!-- Mirrored from www.themeenergy.com/themes/html/social-chef/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 04 Apr 2021 21:55:27 GMT -->
 </html>
 
 
