@@ -1,3 +1,12 @@
+<?php
+include "../controller/recetteC.php";
+
+$recettec = new recetteC();
+$listerecette=$recettec->afficherrecette();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +87,7 @@
                                     aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="Profile.php" class="waves-effect"><i class="fa fa-user fa-fw"
+                            <a href="profile.php" class="waves-effect"><i class="fa fa-user fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li>
@@ -90,7 +99,7 @@
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
                         <li>
-                            <a href="ontact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
+                            <a href="Contact.php" class="waves-effect"><i class="fa  fa-phone-square fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Contact</span></a>
                         </li>
                         <li>
@@ -98,15 +107,15 @@
                                     aria-hidden="true"></i><span class="hide-menu">Blog</span></a>
                         </li>
                         <li>
-                            <a href="Recipes.html" class="waves-effect"><i class="fa fa-delicious fa-fw"
+                            <a href="Recipes.php" class="waves-effect"><i class="fa fa-delicious fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Recipes</span></a>
                         </li>
                         <li>
-                            <a href="Classes.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                            <a href="Classes.php" class="waves-effect"><i class="fa fa-table fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Classes</span></a>
                         </li>
                         <li>
-                            <a href="Orders.html" class="waves-effect"><i class="fa fa-reorder (alias) fa-fw"
+                            <a href="Orders.php" class="waves-effect"><i class="fa fa-reorder (alias) fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
                         <li>
@@ -153,56 +162,36 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                            <th>Role</th>
+                                            <th>titre</th>
+                                            <th>prept </th>
+                                            <th>cookingt</th>
+                                            <th>difficulty</th>
+                                            <th>nb_ppl</th>
+                                            <th>category</th>
+                                            <th>description</th>
+                                            
                                         </tr>
                                     </thead>
+                                    <?php
+						foreach ($listerecette as $recette ){
+						?>
                                     <tbody>
+                                        
                                         <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
+                                            <td><?php echo $recette['idrecette']; ?></td>
+                                            <td><?php echo $recette['titre']; ?></td>
+                                            <td><?php echo $recette['prept']; ?></td>
+                                            <td><?php echo $recette['cookingt']; ?></td>
+                                            <td><?php echo $recette['difficulty']; ?></td>
+                                            <td><?php echo $recette['nb_ppl']; ?></td>
+                                            <td><?php echo $recette['category']; ?></td>
+                                            <td><?php echo $recette['description']; ?></td>
+
+
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                            <td>developer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                            <td>supporter</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                            <td>supporter</td>
-                                        </tr>
+                                      
                                     </tbody>
+                                    <?php } ?>
                                 </table>
                             </div>
                         </div>

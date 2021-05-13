@@ -146,7 +146,7 @@ if (isset($_POST['update']) )
                                     aria-hidden="true"></i><span class="hide-menu">Blog</span></a>
                         </li>
                         <li>
-                            <a href="Recipes.html" class="waves-effect"><i class="fa fa-delicious fa-fw"
+                            <a href="Recipes.php" class="waves-effect"><i class="fa fa-delicious fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Recipes</span></a>
                         </li>
                         <li>

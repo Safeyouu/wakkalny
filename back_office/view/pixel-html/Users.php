@@ -155,15 +155,15 @@ if(isset($_POST['button']))
                                     aria-hidden="true"></i><span class="hide-menu">Blog</span></a>
                         </li>
                         <li>
-                            <a href="Recipes.html" class="waves-effect"><i class="fa fa-delicious fa-fw"
+                            <a href="Recipes.php" class="waves-effect"><i class="fa fa-delicious fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Recipes</span></a>
                         </li>
                         <li>
-                            <a href="Classes.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                            <a href="Classes.php" class="waves-effect"><i class="fa fa-table fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Classes</span></a>
                         </li>
                         <li>
-                            <a href="Orders.html" class="waves-effect"><i class="fa fa-reorder (alias) fa-fw"
+                            <a href="Orders.php" class="waves-effect"><i class="fa fa-reorder (alias) fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
                         <li>
