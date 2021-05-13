@@ -194,7 +194,7 @@ if(isset($_POST['enyoyer']))
                                     </thead>
                                     <tbody>
                                     <td><input type="hidden" name="mail" value="<?php echo $mail ?>" ></td>
-                                       <td><textarea rows="5" cols="30" type="textarea" name="message"  ></textarea></td>
+                                       <td><input type="textarea" name="message"  ></td>
                                        <td><input type="submit" name="enyoyer" value="Send"></td>
                                        <td><a href="Contact.php">Cancel</a><td>
 
