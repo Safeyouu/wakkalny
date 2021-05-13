@@ -4,7 +4,7 @@ include "../controller/recetteC.php";
 include "../controller/ingrediantC.php";
 
 $recettec= new recetteC();
-$recette=$recettec->getUserbyname($_POST['titre']);
+
 
 //$id = $_GET['idrecette'];
 $id = isset($_GET['idrecette']) ? $_GET['idrecette'] : '';

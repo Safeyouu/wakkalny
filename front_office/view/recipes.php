@@ -3,7 +3,7 @@ include "../controller/recetteC.php";
 
 $recettec = new recetteC();
 $listerecette=$recettec->afficherrecette();
-
+$erreur="";
 ?>
 
 <!DOCTYPE html>
@@ -95,8 +95,33 @@ $listerecette=$recettec->afficherrecette();
 			<div class="row">
 				<header class="s-title">
 					<h1>Recipes</h1>
+				<?php	echo $erreur; ?>
 				</header>
-				
+				<form  method="post" >
+			  <h3 for="query">search a recipe : </h3>
+			  <br> 
+			  <input type="search" name="search" maxlength="80" size="80" id="query" />
+			  <br>  <br>
+			  <input type="submit" namme="recette" value="Rechercher" >
+			
+			</form>
+			<?php
+			if (isset($_POST['search']) && isset($_POST['recette']) )
+			{
+				$recette=$recettec->getrecettebyname($_POST['idrecette']);
+				if ($recette !== false )
+				{
+					header('Location:recipe.php?idrecette='.$recette['idrecette']);
+                 
+								}
+				else 
+				{
+					$erreur="<h2>recipe not found </h2>";
+				}
+			}
+
+			?>
+			<br>
 				<!--content-->
 				<section class="content three-fourth">
 					<!--entries-->
@@ -118,7 +143,7 @@ $listerecette=$recettec->afficherrecette();
 										<form method="POST" action="deleterecette.php">
                     <input type="submit" name="supprimer" value="supprimer">
 	                <input type="hidden" value="<?PHP echo $recette['idrecette']; ?>"  name="idrecette">
-					<a href="modifierrecette.php?id=<?php echo $recette['titre'];?>">Modifier</a>
+					<a href="modifierrecette.php?idrecette=<?php echo $recette['idrecette'];?>">Modifier</a>
 	
                      
                     </form>

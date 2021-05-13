@@ -1,13 +1,12 @@
 <?php
 include '../model/recette.php';
-include '../controller/recetteC.php';
+include_once '../controller/recetteC.php';
 
 
 $error = "";
 
-$recette1 = null;
 
-$recettec = new recetteC();
+$recetteC = new recetteC();
 
 
 
@@ -19,38 +18,27 @@ $recettec = new recetteC();
     isset($_POST["nb_ppl"])&&
     isset($_POST["category"])&&
     isset($_POST["description"])&&
-    isset($_POST["photo"] ))
-{
-       
-    $titre=$_POST["titre"];
-    $prept=$_POST["prept"];
-    $cookingt=$_POST["cookingt"];
-    $difficulty=$_POST["difficulty"];
-    $nb_ppl=$_POST["nb_ppl"];
-    $category=$_POST["category"];
-    $description=$_POST["description"];
-    $photo=$_POST["photo"];
-
-        
-        
-       
-    $sql="UPDATE recette SET titre='$titre',prept='$prept',cookingt='$cookingt',difficulty='$difficulty',nb_ppl='$nb_ppl',category='$category',description='$description',photo='$photo' WHERE idrecette='$idrecette'";
-
-            $db = config::getConnexion();
-            try{
-            $req=$db->prepare($sql);
-            $req->execute();
-			header('Location:recipes.php');
-            exit();
-            
-        }
-            catch (Exception $e){
-                echo 'Erreur: '.$e->getMessage();
-
+    isset($_POST["photo"] )&&
+	isset($_GET['idrecette'] )
+	)
+	{
+        $recette1 = new recette(
            
-            
-            }
-}
+            $_POST["titre"],
+            $_POST["prept"],
+            $_POST["cookingt"],
+			$_POST["difficulty"],
+			$_POST["nb_ppl"],
+			$_POST["category"],
+			$_POST["description"],
+			$_POST["photo"]
+        );
+        $recetteC->modifierrecette($recette1, $_GET['idrecette']);   
+             header('location: recipes.php ');
+	}
+
+    else
+        $error= "missing info";
 ?>
 
 
@@ -145,33 +133,32 @@ $recettec = new recetteC();
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
-					<h1>Add a new recipe</h1>
+			
 				</header>
-                <?php
-			if (isset($_GET['idrecette'])){
-				$recette1 = $recettec->recuperrecette($_GET['idrecette']);
-				
-		?>
-				<form method="POST" action="recipe.php">
-				<!--content-->
+               
 				<section class="content full-width">
 					
 					<div class="submit_recipe container">
-						
+					<?php
+			
+			$recette1 = $recetteC->recuperrecette($_GET['idrecette']);
+			
+	?>
+			<form name="myform" method="POST" >
 							<section>
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
-									<div class="full"><input type="text"   placeholder="Recipe title" id="titre" name="titre"  value = "<?php echo $recette1['titre'];?>" /></div>
+								<div class="full"><input type="text" placeholder="titre" id="titre" name="titre" value="<?php echo $recette1['titre']; ?>" /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time"  name="prept" id="prept"  value = "<?php echo $recette1['prept'];?>" /></div>
-									<div class="third"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt"  value = "<?php echo $recette1['cookingt'];?>" /></div>
-									<div class="third"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty"  value = "<?php echo $recette1['difficulty'];?>" /></div>
+									<div class="full"><input type="text" placeholder="Preparation time"  name="prept" id="prept"  value = "<?php echo $recette1['prept'];?>" /></div>
+									<div class="full"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt"  value = "<?php echo $recette1['cookingt'];?>" /></div>
+									<div class="full"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty"  value = "<?php echo $recette1['difficulty'];?>" /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl"  value = "<?php echo $recette1['nb_ppl'];?>" /></div>
-									<div class="third"><input type="text"  placeholder="category" id="category" name="category"  value = "<?php echo $recette1['category'];?>"  /></div>
+									<div class="full"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl"  value = "<?php echo $recette1['nb_ppl'];?>" /></div>
+									<div class="full"><input type="text"  placeholder="category" id="category" name="category"  value = "<?php echo $recette1['category'];?>"  /></div>
 								
 									
 								</div>
@@ -185,10 +172,14 @@ $recettec = new recetteC();
 							</section>	
 							
 							<section>
-								<h2>Photo</h2>
+								
+								<h2 for="image">Photo</h2>
 								<div class="f-row full">
-									<input type="file" name="photo" id="photo"  value = "<?php echo $recette1['photo'];?>"/>
+								<img src="images/<?php echo $recette1['photo'];?>" Style="height:250px; width:700px;" />
+									 <input type="file" id="photo" name="photo" value="<?php echo $recette1['photo']; ?>"/>
+
 								</div>
+								
 							</section>	
 							 
 							
@@ -202,7 +193,7 @@ $recettec = new recetteC();
 				</section>
 				<!--//content-->
 			</form>
-          <?php  } ?>
+        
 			</div>
 			<!--//row-->
 		</div>

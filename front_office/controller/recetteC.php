@@ -59,7 +59,7 @@
 
 
 
-		function modifierrecette($recette,$idrecette){
+		/*function modifierrecette($recette,$idrecette){
 			$sql="UPDATE recette SET  titre=:titre,prept=:prept,cookingt=:cookingt,difficulty=:difficulty,nb_ppl=:nb_ppl,category=:category,description=:description,photo=:photo WHERE idrecette=:idrecette";
 			
 			$db = config::getConnexion();
@@ -108,7 +108,7 @@
 	  print_r($datas);
 			}
 			
-		}
+		}*/
 	
 		function recuperrecette($idrecette){
 			$sql="SELECT * from recette where idrecette=$idrecette";
@@ -125,21 +125,21 @@
 			}
 		}
 
-
-		public function getUserbyname($titre) {
-            try {
-                $pdo = config::getConnexion();
-                $query = $pdo->prepare(
-                    'SELECT * FROM recette WHERE titre = :titre'
-                );
-                $query->execute([
-                    'titre' => $titre
-                ]);
-                return $query->fetch();
-            } catch (Exception $e) {
-                $e->getMessage();
-            }
-        }
+		 function getrecettebyname($idrecette) {            
+			$sql = "SELECT * from recette where idrecette=:idrecette"; 
+			$db = config::getConnexion();
+			try {
+				$query = $db->prepare($sql);
+				$query->execute([
+					'idrecette' => $recette->getidrecette(),
+				]); 
+				$result = $query->fetchAll(); 
+				return $result;
+			}
+			catch (Exception $e) {
+				$e->getMessage();
+			}
+		}
 
 
 		function checkname($titre)
@@ -156,6 +156,48 @@
                 return true;
             }
         }
-    }
+    
 
+	function modifierrecette($recette, $idrecette){
+			
+		echo 'test modif C' ;
+		  $db = config::getConnexion();
+		  $query = $db->prepare(
+			'UPDATE recette SET                     
+			
+			 titre=:titre,
+			 prept=:prept,
+		     cookingt=:cookingt,
+			difficulty=:difficulty,
+			nb_ppl=:nb_ppl,
+			category=:category,
+			description=:description,
+			photo=:photo 	
+			WHERE idrecette = :idrecette '
+		  );
+	
+		  
+	
+			$query->bindValue('titre',$recette->gettitre());
+			$query->bindValue('prept',$recette->getprept());
+			$query->bindValue('cookingt',$recette->getcookingt());
+			$query->bindValue('difficulty',$recette->getdifficulty());
+			$query->bindValue('nb_ppl',$recette->getnb_ppl());
+			$query->bindValue('category',$recette->getcategory());
+			$query->bindValue('description',$recette->getdescription());
+			$query->bindValue('photo',$recette->getphoto());
+			
+			$query->bindValue('idrecette',$idrecette);
+
+		  try {
+		  $query->execute();
+		  echo "test" ;
+		  echo $query->rowCount() . " records UPDATED successfully <br>";
+		} catch (PDOException $e) {
+		  echo $e->getMessage();
+		}
+	  }
+
+
+	}
 ?>
