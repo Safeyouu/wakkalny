@@ -1,5 +1,5 @@
 <?php
-include "../controller/recetteC.php";
+include "../../controller/recetteC.php";
 
 $recettec = new recetteC();
 $listerecette=$recettec->afficherrecette();

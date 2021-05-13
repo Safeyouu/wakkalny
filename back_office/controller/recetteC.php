@@ -1,7 +1,7 @@
 <?php
 
-    include "../config.php";
-	require_once '../model/recette.php';
+    include "../../config.php";
+	require_once '../../model/recette.php';
 
     class recetteC 
     {
