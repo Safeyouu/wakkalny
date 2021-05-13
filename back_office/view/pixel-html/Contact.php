@@ -76,9 +76,13 @@ $listecontact=$contactc->showcontact();
                     </ul>
                     <ul class="nav navbar-top-links navbar-right pull-right">
                         <li>
-                            <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">admin</b> </a>
+                        <a class="profile-pic" href="profile.php">  <i class="fa fa-user fa-fw" aria-hidden="true"></i><b class="hidden-xs"><?php echo $_SESSION['username']; ?></b> </a>
+                        </li>
+                        <li>
+                        <a class="profile-pic" href="../../../front_office/view/logout.php"> <b class="hidden-xs">logout</b> </a>
                         </li>
                     </ul>
+
                 </div>
                 <!-- /.navbar-header -->
                 <!-- /.navbar-top-links -->
@@ -143,12 +147,12 @@ $listecontact=$contactc->showcontact();
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Basic Table</h4>
+                        <h4 class="page-title">Contact Table</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
-                            <li class="active">Basic Table</li>
+                            <li class="active">Contact Table</li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -157,7 +161,7 @@ $listecontact=$contactc->showcontact();
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+                            <h3 class="box-title">Contact Table</h3>
                             <p class="text-muted">Add class <code>.table</code></p>
                             <div class="table-responsive">
                                 <table class="table">

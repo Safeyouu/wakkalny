@@ -61,6 +61,16 @@ $listeblogs=$blogc->afficherblog();
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="login.php" id="login"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Login</button></span></a> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="register.php" id="register"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Sign up</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -71,11 +81,7 @@ $listeblogs=$blogc->afficherblog();
 						
 					</li>
 					<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog.php" title="Blog post">Blog post</a></li>
-							<li><a href="error404.html" title="Add Blog">add blog</a></li>
-
-						</ul>
+						
 					</li>
 					
 					
@@ -94,7 +100,6 @@ $listeblogs=$blogc->afficherblog();
 			<nav class="user-nav" role="navigation">
 				<ul>
 					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
@@ -103,7 +108,98 @@ $listeblogs=$blogc->afficherblog();
 
 	</header>
 	<!--//header-->
-	<?php
+		<!--main-->
+	<main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.php" title="Home">Home</a></li>
+					<li>Blog</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<div class="row">
+				<header class="s-title">
+					<h1>Blog</h1>
+				</header>
+
+				</section>
+
+				<!--content-->
+				<section class="content three-fourth">
+					  
+				<!--blog entry-->
+				
+				<?php
+           			foreach($listeblogs as $blog){
+        		?>
+				<article class="post">
+						<div class="entry-meta">
+							
+							<div class="avatar">
+								<img src="images/abatar0.jpg"> <span> <?php echo $blog ["nom"] ?> </span> 
+							</div>
+						</div>
+						<div class="container">
+							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" /></a></div>
+							<div class="entry-content">
+								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
+								<p><?php echo $blog['sujet'];?> </p>
+							</div>
+						
+						
+							<div class="actions">
+								<div>
+									
+									<div class="more"> <?php echo "<a href=blog_single.php?idblog=" .$blog['idblog'].">"; ?> Leave a comment</a></div>
+									<div class="more"> <?php echo "<a  href=blog_single.php?idblog=" .$blog['idblog'].">";   ?> Read more</a></div>
+									
+								</div>
+								
+							</div>
+						</div>
+			
+					</article>
+					<?php
+            }    
+            ?>
+					<!--//blog entry-->
+				</section>
+
+			
+				<!--//content-->
+				
+				<!--right sidebar-->
+				<!--<aside class="sidebar one-fourth">
+					<div class="widget">
+						<ul class="categories right">
+							<li><a href="#">All recipes</a></li>
+							<li class="active"><a href="#">Tips and Tricks</a></li>
+							<li><a href="#">Events</a></li>
+							<li><a href="#">Inspiration</a></li>
+							<li><a href="#">Category name</a></li>
+							<li><a href="#">Lorem ipsum</a></li>
+							<li><a href="#">Dolor</a></li>
+							<li><a href="#">Sit amet</a></li>
+						</ul>
+					</div>
+					<div class="widget">
+						<h3>Advertisment</h3>
+						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
+					</div>
+				</aside>-->
+				<!--//right sidebar-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+				<?php
 					}
 					
 					else
@@ -137,7 +233,6 @@ $listeblogs=$blogc->afficherblog();
 										</li>
 										<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
 											<ul>
-												<li><a href="blog.php" title="Blog post">Blog post</a></li>
 												<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
 					
 											</ul>
@@ -146,11 +241,6 @@ $listeblogs=$blogc->afficherblog();
 										
 										<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 										<li><a href="shop.php" title="Shop"><span>Shop</span></a>
-										<ul>
-										<li><a href="Add_blog.php" title="Add add shop">add shop</a></li>
-					
-										</ul>
-										
 										
 										</li>
 									</ul>
@@ -167,10 +257,7 @@ $listeblogs=$blogc->afficherblog();
 							<!--//wrap-->
 						</header>
 						<!--//header-->
-					<?php 
-					}
-						
-					?>	<!--main-->
+							<!--main-->
 	<main class="main" role="main">
 		<!--wrap-->
 		<div class="wrap clearfix">
@@ -189,23 +276,7 @@ $listeblogs=$blogc->afficherblog();
 					<h1>Blog</h1>
 				</header>
 
-
-
-
-
-
-</section>
-				
-
-
-
-
-
-
-
-
-
-
+				</section>
 
 				<!--content-->
 				<section class="content three-fourth">
@@ -213,8 +284,8 @@ $listeblogs=$blogc->afficherblog();
 				<!--blog entry-->
 				
 				<?php
-            foreach($listeblogs as $blog){
-        ?>
+           			foreach($listeblogs as $blog){
+        		?>
 				<article class="post">
 						<div class="entry-meta">
 							
@@ -255,7 +326,7 @@ $listeblogs=$blogc->afficherblog();
 				<!--//content-->
 				
 				<!--right sidebar-->
-				<aside class="sidebar one-fourth">
+				<!--<aside class="sidebar one-fourth">
 					<div class="widget">
 						<ul class="categories right">
 							<li><a href="#">All recipes</a></li>
@@ -272,7 +343,7 @@ $listeblogs=$blogc->afficherblog();
 						<h3>Advertisment</h3>
 						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
 					</div>
-				</aside>
+				</aside>-->
 				<!--//right sidebar-->
 			</div>
 			<!--//row-->
@@ -280,7 +351,10 @@ $listeblogs=$blogc->afficherblog();
 		<!--//wrap-->
 	</main>
 	<!--//main-->
-	
+					<?php 
+					}
+						
+					?>
 	
 	<!--footer-->
 	<footer class="foot" role="contentinfo">

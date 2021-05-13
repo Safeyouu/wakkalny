@@ -52,11 +52,7 @@ session_start();
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-						<li><a href="blog.php" title="Blog post">Blog post</a></li>
-							<li><a href="error404.php" title="Add Blog">add blog</a></li>
-
-						</ul>
+						
 					</li>
 						
 					</li>
@@ -98,7 +94,7 @@ session_start();
 				<div class="row">
 					<article class="three-fourth text">
 						<h1>Welcome to Wakkalny!</h1>
-						<p>Wakkalny is the ultimate <strong>cooking social community</strong>, where recipes come to life. Wanna know what you will gain by joining us? Lorem ipsum dolor sit amet, this is some teaser text.</p>
+						<p>Wakkalny is the ultimate <strong>cooking social community</strong>, where recipes come to life. Wanna know what you will gain by joining us?</p>
 						<p>You will win awesome prizes, make new friends and share delicious recipes. </p>
 						<a href="register.php" class="button white more medium">Join our community <i class="fa fa-chevron-right"></i></a>
 						<p>Already a member? Click <a href="login.php">here</a> to login.</p>
@@ -150,10 +146,7 @@ session_start();
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-						<li><a href="blog.php" title="Blog post">Blog post</a></li>
-							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>						</ul>
-					</li>
+						
 						
 					</li>
 					
@@ -553,7 +546,7 @@ session_start();
 						</ul>
 					</div>
 												
-					<div class="widget members">
+					<!--<div class="widget members">
 						<h3>Our members</h3>
 						<div id="members-list-options" class="item-options">
 						</div>
@@ -568,10 +561,10 @@ session_start();
 							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar5.jpg" alt="" /><span>Michelle S.</span></a></div></li>
 							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar6.jpg" alt="" /><span>Bryan A.</span></a></div></li>
 						</ul>
-					</div>
+					</div>-->
 						
 					<div class="widget">
-						<h3>Advertisment</h3>
+						<a href="contact.php"><h3>Advertisment</h3></a>
 						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
 					</div>
 				</aside>

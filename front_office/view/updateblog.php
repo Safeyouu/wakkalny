@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include '../controller/blogC.php';
 include_once '../model/blog.php';
 
@@ -67,27 +67,33 @@ if(
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li"><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+
 					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog.php" title="Blog post">Blog post</a></li>
                             <li><a href="Add_blog.php" title="Add blog">Add blog</a></li>
 
 						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -110,6 +116,7 @@ if(
 	<!--main-->
 	<main class="main" role="main">
 		<!--wrap-->
+		
 		<div class="wrap clearfix">
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
@@ -124,7 +131,7 @@ if(
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
-					<h1>modifier blog </h1>
+					<h1>Update blog </h1>
 				</header>
 					
 				<!--content-->
@@ -143,7 +150,7 @@ if(
                             <section>
 							<h2 >nom</h2>
 								<div class="f-row">
-								<div class="full"><input type="text" placeholder=" nom" id="nom" name="nom" value="<?php echo $blog1['nom']; ?>" /></div>
+								<div class="full"><input type="text" placeholder=" nom" id="nom" name="nom" value="<?php echo $blog1['nom']; ?>" disabled/></div>
 								</div>
 								<h2>titre</h2>
 								<div class="f-row ">

@@ -63,7 +63,8 @@ if(isset($_GET["idCategorie"]))
 	</div>
 	<!--//preloader-->
 	<?php  
-
+if(isset($_SESSION['username']))  
+{
 
 	$user=$shopc->getUserbyname($_SESSION['username']);
 	if($user['role'] == 1)
@@ -94,14 +95,11 @@ if(isset($_GET["idCategorie"]))
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
+							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
+					
 						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 
@@ -305,25 +303,14 @@ if(isset($_GET["idCategorie"]))
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
+						
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 
 					<li  class="current-menu-item"><a href="shop.php" title="Shop" ><span>Shop</span></a> 
-					<ul>
-						<li><a href="addshop.php" title="Add shop">add shop</a></li>
-						<li><a href="addcategoriep.php" title="add category">add category</a></li>
-
-
-					</ul>
+					
 					</li>
 
 
@@ -482,7 +469,202 @@ if(isset($_GET["idCategorie"]))
 
 	<?php
 					}
+
+				}
+				else
+					{ 		
 		?>
+
+		<!--header-->
+	<header class="head" role="banner">
+		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="login.php" id="login"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Login</button></span></a> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="register.php" id="register"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Sign up</button></span></a> 
+				</li>
+			</li>
+		</nav>
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
+						
+					</li>
+					
+					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+
+					<li  class="current-menu-item"><a href="shop.php" title="Shop" ><span>Shop</span></a> 
+					
+					</li>
+
+
+
+
+				</ul>
+			</nav>
+			
+			<nav class="user-nav" role="navigation">
+				<ul>
+					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
+    <!--main-->
+	<main class="main" role="main">
+
+	<section class="content full-width">
+					<div class="icons dynamic-numbers">
+						<header class="s-title">
+							<h2 class="ribbon large">Number Of Product per Category</h2>
+						</header>
+						
+						<!--row-->
+						<div class="row">
+						<?php foreach($stats as $s){ ?>
+
+							<!--item-->
+							<div class="one-sixth">
+								<div class="container">
+									
+									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
+									<span class="subtitle"><?php echo $s['nom'] ?></span>
+								</div>
+							</div>
+							<!--//item-->
+							
+							<?php } ?>					
+
+						
+							
+						</div>
+						<!--//row-->
+					</div>
+				</section>
+
+
+		<!--wrap-->
+		
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.php" title="Home">Home</a></li>
+					<li>Shop</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<div class="row">
+				<header class="s-title">
+					<h1>Shop</h1>
+				</header>
+				
+				<!--content-->
+				<section class="content three-fourth">
+					<!--entries-->
+					<div class="entries row">
+					<?php 
+                    foreach($listeproducts as $shop){
+        			?>
+						<!--item-->
+						<div class="entry one-third">
+							<figure>
+								<img name="image" src="images/<?php echo $shop['image'];?>" alt="" />
+								<!--<figcaption><a href="recipe.php"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>-->
+							</figure>
+							<div class="container">
+								<h2><a ><?php echo $shop['description'];?></a></h2> 
+								<div class="actions">
+									<div>
+										<div class="difficulty"><a > <?php echo $shop['nom'];?></a></div>
+										<div class="likes"><a > <?php echo $shop['prix'];?></a></div>
+										<div class="comments"> <a><?php echo $shop['nb_stock'];?></a></div> 
+										
+								 <div>
+									 
+								 
+
+									<!--<a  href="modifiershop.php?id=<?PHP echo $shop['id']; ?>"> Mdifeir get </a> -->
+					
+
+					</div>
+                          
+
+
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--item-->
+						<?php
+                       
+					}
+
+
+						?>
+						
+						
+						
+					</div>
+					<!--//entries-->
+				</section>
+				<!--//content-->
+
+				
+				
+				<!--right sidebar-->
+				<aside class="sidebar one-fourth">
+
+
+					<div class="widget">
+						<ul class="categories right">
+							<li ><a href="shop.php">All Categories</a></li>
+							
+							<?php
+           						 foreach($listecat as $categorie){
+       			 			?>
+							<li class="
+							<?php if( isset($_GET['idCategorie'] ))
+							 { if( $categorie['id'] == $_GET['idCategorie'] )
+							  { echo 'active' ;} 
+							}  ?>
+							" > <a href="shop.php?idCategorie=<?php echo $categorie['id'];?>"><?php echo $categorie['nom'];?></a></li>	
+							<?php } ?>												
+						</ul>
+					</div>
+					 
+					
+				</aside>
+				<!--//right sidebar-->
+			</div>
+			<!--//row-->
+			
+		</>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+		
+
+				<?php
+					}
+					?>
 	<!--footer-->
 	<footer class="foot" role="contentinfo">
 		<div class="wrap clearfix">

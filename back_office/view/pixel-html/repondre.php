@@ -30,7 +30,83 @@ if(isset($_POST['enyoyer']))
 				$mail->Password = '55028849';
 				$mail->setFrom("no-reply@gmail.com");
 				$mail->Subject = "Reclamation";
-				$mail->Body = '<h2 style="color: blue">Hello,<h2><br><h3 style="color: blue">'.$_POST['message'].'</h3><br><br><br><h3 style="color: blue">Cordially,</h3><br><h3 style="color: blue">Wakkalny.</h3>';
+				$mail->Body = '
+<body style="background-color:#f8f8f8;">
+  <div style="background-color:#f8f8f8;">
+    
+    
+    
+    <div style="background:#ffffff;background-color:#ffffff;Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;padding-bottom:0px;padding-left:0px;padding-right:0px;padding-top:0px;text-align:center;vertical-align:top;">
+             
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td style="font-size:0px;padding:10px 25px;padding-top:0px;padding-right:0px;padding-bottom:40px;padding-left:0px;word-break:break-word;">
+                      <p style="border-top:solid 7px #f45424;font-size:1;margin:0px auto;width:100%;">
+                      </p>
+                     
+                    </td>
+                  </tr>
+                  
+                </table>
+              </div>
+             
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    
+   
+    <div style="background:#ffffff;background-color:#ffffff;Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0px 20px 0px;padding-bottom:70px;padding-top:30px;text-align:center;vertical-align:top;">
+             
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td align="left" style="font-size:0px;padding:0px 25px 0px 25px;padding-top:0px;padding-right:50px;padding-bottom:0px;padding-left:50px;word-break:break-word;">
+                      <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;color:#797e82;">
+                        <h1 style="text-align:center; color: #000000; line-height:32px">Hi , Thanks for using Wakkalny.</h1>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="font-size:0px;padding:0px 25px 0px 25px;padding-top:0px;padding-right:50px;padding-bottom:0px;padding-left:50px;word-break:break-word;">
+                      <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;color:#797e82;">
+                        <p style="margin: 10px 0; text-align: center;">We really appreciate you trusting us.&nbsp;</p>
+                        <p style="margin: 10px 0; text-align: center;">'.$_POST['message'].'</p>
+                      </div>
+                    </td>
+                  </tr>
+                 
+                  <tr>
+                    <td align="left" style="font-size:0px;padding:0px 25px 0px 25px;padding-top:0px;padding-right:50px;padding-bottom:0px;padding-left:50px;word-break:break-word;">
+                      <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;color:#797e82;">
+                        <p style="margin: 10px 0; text-align: center;"><b style="font-weight:700">Thanks,<br />The Wakkalny&nbsp;Team.</b></p>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   
+    
+    
+  </div>
+</body>';
 				$mail->AddAddress($_POST['mail']);
 				$mail->send();
                 header('Location: contact.php');
