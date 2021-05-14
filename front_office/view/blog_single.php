@@ -206,7 +206,7 @@ $id = $_GET['idblog'];
                                     <i style="position: relative; left:650px"><input type="submit" name="supprimer" value="supprimer"></i>
 	                                <input type="hidden" value="<?PHP echo $commentaire['idcom']; ?>" name="idcom">
 									</div>
-
+</form>
 								</div> 
 							</li> 
 							<!--//comment-->	

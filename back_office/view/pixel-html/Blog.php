@@ -191,6 +191,14 @@ function imprimer(divName) {
                                             <td><?php echo $blog ["titre"] ?></td>
                                             <td><?php echo $blog ["sujet"] ?></td>
                                             <td><a href=""><img src="images/<?php echo $blog['image'];?>"Style="height:70px; width:100px;" /></a>  </td>
+                                       
+
+                                            <td>
+                                            <form method="POST" action="deleteblog.php">
+                                    <input type="submit" name="supprimer" value="supprimer">
+	                                <input type="hidden" value="<?PHP echo $blog['idblog']; ?>" name="idblog">
+									</form>
+                                    </td>
                                         </tr>
                                         
                                     </tbody>
