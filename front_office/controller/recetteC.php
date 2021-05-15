@@ -59,56 +59,6 @@
 
 
 
-		/*function modifierrecette($recette,$idrecette){
-			$sql="UPDATE recette SET  titre=:titre,prept=:prept,cookingt=:cookingt,difficulty=:difficulty,nb_ppl=:nb_ppl,category=:category,description=:description,photo=:photo WHERE idrecette=:idrecette";
-			
-			$db = config::getConnexion();
-			
-	try{		
-			$query=$db->prepare($sql);
-			$titre=$recette->gettitre();
-			$prept=$recette->getprept();
-			$cookingt=$recette->getcookingt();
-			$difficulty=$recette->getdifficulty();
-			$nb_ppl=$recette->getnb_ppl();
-			$category=$recette->getcategory();
-			$description=$recette->getdescription();
-			$photo=$recette->getphoto();
-			
-			$datas = array( 
-				':idrecette'=>$idrecette,
-				 ':titre'=>$titre,
-				 ':prept'=>$prept,
-				 ':cookingt'=>$cookingt,
-				 ':difficulty'=>$difficulty,
-				 ':nb_ppl'=>$nb_ppl,
-				 ':category'=>$category,
-				 ':description'=>$description,
-				 ':photo'=>$photo
-				);
-
-			$query->bindValue(':idrecette',$idrecette);
-			$query->bindValue(':titre',$titre);
-			$query->bindValue(':prept',$prept);
-			$query->bindValue(':cookingt',$cookingt);
-			$query->bindValue(':difficulty',$difficulty);
-			$query->bindValue(':nb_ppl',$nb_ppl);
-			$query->bindValue(':category',$category);
-			$query->bindValue(':description',$description);
-			$query->bindValue(':photo',$photo);
-
-
-        	$s=$query->execute();
-				
-			  
-			}
-			catch (Exception $e){
-				echo " Erreur ! ".$e->getMessage();
-	   echo " Les datas : " ;
-	  print_r($datas);
-			}
-			
-		}*/
 	
 		function recuperrecette($idrecette){
 			$sql="SELECT * from recette where idrecette=$idrecette";

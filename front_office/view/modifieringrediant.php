@@ -5,29 +5,27 @@ include '../controller/ingrediantC.php';
 
 $error = "";
 
-$ingrediant1 = null;
+$ingrediantC = new ingrediantC();
 
-$ingrediantc = new ingrediantC();
 
-if(
+
+    if ( 
     isset($_POST["nom"])&&
-    isset($_POST["quantite"])
-    )
-    {
-        if(!empty($_POST["nom"])&&
-            !empty($_POST["quantite"])
-            ){
+    isset($_POST["quantite"])&&
+	isset($_GET['id'] )
+	)
+	{
         $ingrediant1 = new ingrediants(
+           
             $_POST["nom"],
-            $_POST["quantite"]
+			$_POST["quantite"]
         );
-        $ingrediantc->ajouteringrediants($ingrediant1);
-        header('Location:recipe.php');
-    }}
-    else{
+        $ingrediantC->modifieringrediant($ingrediant1, $_GET['id']);   
+             header('location: recipe.php ');
+	}
+
+    else
         $error= "missing info";
-      
-    }
 
 ?>
  <html>   
@@ -110,11 +108,7 @@ if(
 	<!--main-->
 	<main class="main" role="main">
 		<!--wrap-->
-        <?php
-			if (isset($_GET['id'])){
-				$ingrediant1 = $ingrediantc->recupereringrediant($_GET['id']);
-				
-		?>
+        
 		<div class="wrap clearfix">
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
@@ -125,12 +119,15 @@ if(
 				</ul>
 			</nav>
 			<!--//breadcrumbs-->
-          <?php  } ?>
+        
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
 					<h1>update an ingrediant</h1>
 				</header>
+				<?php 
+				$ingrediant1 = $ingrediantC->recupereringrediant($_GET['id']);
+?>
 				<form method="POST" action="">
 				<!--content-->
 				<section class="content full-width">

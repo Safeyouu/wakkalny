@@ -4,6 +4,38 @@ include "../controller/recetteC.php";
 $recettec = new recetteC();
 $listerecette=$recettec->afficherrecette();
 $erreur="";
+
+
+
+
+if(!empty($_POST)){
+    extract($_POST);
+	$valid = true;
+
+	if(isset($_POST['search'])){
+
+		$contenu = (string) trim($recette);
+		if(empty($recette)){
+			$valid = false;
+			$message_er = "mettre une recherche";
+
+		}
+	
+		if($valid){
+			$req_search = $DB->query("
+				SELECT titre
+				FROM recette WHERE titre LIKE ?
+      		ORDER BY titre ",
+			array($recette . "%"));
+				$req_search =$req_search->fetchAll();
+		}
+	}
+} 
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -97,30 +129,39 @@ $erreur="";
 					<h1>Recipes</h1>
 				<?php	echo $erreur; ?>
 				</header>
-				<form  method="post" >
-			  <h3 for="query">search a recipe : </h3>
-			  <br> 
-			  <input type="search" name="search" maxlength="80" size="80" id="query" />
-			  <br>  <br>
-			  <input type="submit" namme="recette" value="Rechercher" >
-			
+	        <h1 style="text-align: center"> recherche d'une recette </h1>
+			<form  method="get" >
+			<div class="form-group">
+				<input type="text" name="recette" value=""  placeholder="rechercher une recette"/>
+				<br>
+				<input type="submit" value="rechercher" name="search"/>
+			</div>
 			</form>
-			<?php
-			if (isset($_POST['search']) && isset($_POST['recette']) )
-			{
-				$recette=$recettec->getrecettebyname($_POST['idrecette']);
-				if ($recette !== false )
-				{
-					header('Location:recipe.php?idrecette='.$recette['idrecette']);
-                 
-								}
-				else 
-				{
-					$erreur="<h2>recipe not found </h2>";
-				}
-			}
 
-			?>
+			<?php
+
+			if(isset($message_er))
+			{
+				echo $message_er;
+			}
+			if(isset($_POST['search']) && $valid){
+
+				if(count($req_search) == 0){
+					echo "aucun resultat";
+				}
+				foreach($req_search as $rs)
+				{
+					echo "<div >" . $rs['titre'] . "</div><br>";
+								}
+
+			}
+				 
+
+
+
+
+			?> 
+			
 			<br>
 				<!--content-->
 				<section class="content three-fourth">

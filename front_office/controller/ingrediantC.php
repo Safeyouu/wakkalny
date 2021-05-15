@@ -52,37 +52,6 @@
 			}
 		}
 
-		function modifieringrediant($ingrediant,$id){
-			$sql="UPDATE ingrediants SET  nom=:nom,quantite=:quantite WHERE id=:id";
-			
-			$db = config::getConnexion();
-			
-	try{		
-			$query=$db->prepare($sql);
-			$nom=$ingrediant->getnom();
-			$quantite=$ingrediant->getquantite();
-		
-			$datas = array( 
-				':id'=>$id,
-				 ':nom'=>$nom,
-				 ':quantite'=>$quantite);
-			$query->bindValue(':id',$id);
-			$query->bindValue(':nom',$nom);
-			$query->bindValue(':quantite',$quantite);
-		
-			
-			
-				$s=$query->execute();
-				
-			   // header('Location: index.php');
-			}
-			catch (Exception $e){
-				echo " Erreur ! ".$e->getMessage();
-	   echo " Les datas : " ;
-	  print_r($datas);
-			}
-			
-		}
 	
 		function recupereringrediant($id){
 			$sql="SELECT * from ingrediants where id=$id";
@@ -114,6 +83,36 @@
             }
         }
 
+
+		function modifieringrediant($ingrediant, $id){
+			
+			echo 'test modif C' ;
+			  $db = config::getConnexion();
+			  $query = $db->prepare(
+				'UPDATE ingrediants SET                     
+				
+				 nom=:nom,
+				 
+				quantite=:quantite 	
+				WHERE id = :id '
+			  );
+		
+			  
+		
+				$query->bindValue('nom',$ingrediant->getnom());
+				
+				$query->bindValue('quantite',$ingrediant->getquantite());
+				
+				$query->bindValue('id',$id);
+	
+			  try {
+			  $query->execute();
+			  echo "test" ;
+			  echo $query->rowCount() . " records UPDATED successfully <br>";
+			} catch (PDOException $e) {
+			  echo $e->getMessage();
+			}
+		  }
 
     }
 
