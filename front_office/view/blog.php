@@ -145,7 +145,7 @@ $listeblogs=$blogc->afficherblog();
 							</div>
 						</div>
 						<div class="container">
-							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" /></a></div>
+							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" Style="height:250px; width:300px;"  /></a></div>
 							<div class="entry-content">
 								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
 								<p><?php echo $blog['sujet'];?> </p>
@@ -294,7 +294,7 @@ $listeblogs=$blogc->afficherblog();
 							</div>
 						</div>
 						<div class="container">
-							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" /></a></div>
+							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" Style="height:250px; width:300px;"  /></a></div>
 							<div class="entry-content">
 								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
 								<p><?php echo $blog['sujet'];?> </p>
@@ -310,6 +310,7 @@ $listeblogs=$blogc->afficherblog();
 									<form method="POST" action="deleteblog.php">
                                     <input type="submit" name="supprimer" value="supprimer">
 	                                <input type="hidden" value="<?PHP echo $blog['idblog']; ?>" name="idblog">
+									</form>
 								</div>
 								
 							</div>

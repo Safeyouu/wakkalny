@@ -148,9 +148,9 @@ if(
 						<form name="myForm"  method="POST" >
 
                             <section>
-							<h2 >nom</h2>
+						
 								<div class="f-row">
-								<div class="full"><input type="text" placeholder=" nom" id="nom" name="nom" value="<?php echo $blog1['nom']; ?>" disabled/></div>
+								<div class="full"><input type="hidden" placeholder=" nom" id="nom" name="nom" value="<?php echo $blog1['nom']; ?>"/></div>
 								</div>
 								<h2>titre</h2>
 								<div class="f-row ">
@@ -169,7 +169,11 @@ if(
 							<section>
 								<h2 for="image">Photo</h2>
 								<div class="f-row full">
-								<img src="images/<?php echo $blog1['image'];?>" Style="height:250px; width:700px;" />
+								<img src="images/<?php echo $blog1['image'];?>" Style=  " display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;" />
+  <br>
 									 <input type="file" id="image" name="image" value="<?php echo $blog1['image']; ?>"/>
 
 								</div>
