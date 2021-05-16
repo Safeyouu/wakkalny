@@ -146,6 +146,15 @@
                 $e->getMessage();
             }
         }
+		function rechercher ($mot){
+		
+			$q = array('motclef' => $mot. '%' );
+			$sqlQuery = "SELECT * FROM shop WHERE nom like :motclef ";
+			$db=config::getConnexion();
+			$liste=$db->prepare($sqlQuery);
+			$liste->execute($q);
+			return $liste;	
+		}
 
 		
 	}

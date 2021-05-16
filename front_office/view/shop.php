@@ -22,8 +22,13 @@ if(isset($_GET["idCategorie"]))
     	}
     }
 	else
+	 if(isset($_POST['recherche'])){
+		$mot = $_POST['recherche'];
+		$listeproducts = $shopc->rechercher($mot);
+	}
+	else
     $listeproducts=$shopc->affichershop();
-
+ 
 
 
 
@@ -155,7 +160,9 @@ if(isset($_SESSION['username']))
 							<?php } ?>					
 
 						
-							
+							<form method="POST">
+                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
+                              </form>	
 						</div>
 						<!--//row-->
 					</div>
@@ -354,7 +361,9 @@ if(isset($_SESSION['username']))
 							<!--//item-->
 							
 							<?php } ?>					
-
+							<form method="POST">
+                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
+                              </form>
 						
 							
 						</div>
@@ -548,7 +557,9 @@ if(isset($_SESSION['username']))
 							<!--//item-->
 							
 							<?php } ?>					
-
+							<form method="POST">
+                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
+                              </form>
 						
 							
 						</div>
