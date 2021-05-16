@@ -136,37 +136,11 @@ if(isset($_SESSION['username']))
 	<!--//header-->
     <!--main-->
 	<main class="main" role="main">
+			<!--wrap-->
 
-	<section class="content full-width">
-					<div class="icons dynamic-numbers">
-						<header class="s-title">
-							<h2 class="ribbon large">Number Of Product per Category</h2>
-						</header>
-						
-						<!--row-->
-						<div class="row">
-						<?php foreach($stats as $s){ ?>
+	<div class="wrap clearfix">
 
-							<!--item-->
-							<div class="one-sixth">
-								<div class="container">
-									
-									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
-									<span class="subtitle"><?php echo $s['nom'] ?></span>
-								</div>
-							</div>
-							<!--//item-->
-							
-							<?php } ?>					
-
-						
-							<form method="POST">
-                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
-                              </form>	
-						</div>
-						<!--//row-->
-					</div>
-				</section>
+	
 
 
 		<!--wrap-->
@@ -184,8 +158,11 @@ if(isset($_SESSION['username']))
 			<div class="row">
 				<header class="s-title">
 					<h1>Shop</h1>
+					
 				</header>
-				
+				<form method="POST">
+                              <input type="text" name="recherche" id="recherche" placeholder="Search for product.."  class="form-control round-form" onblur="submit();" > 
+                              </form>	<br>
 				<!--content-->
 				<section class="content three-fourth">
 					<!--entries-->
@@ -269,13 +246,41 @@ if(isset($_SESSION['username']))
 						</ul>
 					</div>
 					 
-					
+					<section class="content full-width">
+					<div class="icons dynamic-numbers">
+						<header class="s-title">
+							<h6 style="color: #7e1610 ; ">Number Of Product per Category</h6>
+						</header>
+						
+						<!--row-->
+						
+						<?php foreach($stats as $s){ ?>
+
+							<!--item-->
+							<div class="widget">
+								<div class="container">
+									
+									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
+									<span class="subtitle"><?php echo $s['nom'] ?></span>
+								</div>
+							</div>
+							<!--//item-->
+							
+							<?php } ?>					
+
+						
+							
+						
+						<!--//row-->
+					</div>
+				</section>
 				</aside>
 				<!--//right sidebar-->
+				
 			</div>
 			<!--//row-->
 			
-		</>
+		</div>
 		<!--//wrap-->
 	</main>
 	<!--//main-->
@@ -361,9 +366,7 @@ if(isset($_SESSION['username']))
 							<!--//item-->
 							
 							<?php } ?>					
-							<form method="POST">
-                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
-                              </form>
+							
 						
 							
 						</div>
@@ -387,6 +390,9 @@ if(isset($_SESSION['username']))
 			<div class="row">
 				<header class="s-title">
 					<h1>Shop</h1>
+					<form method="POST">
+                              <input type="text" name="recherche" id="recherche" placeholder="Search for product.."  class="form-control round-form" onblur="submit();" > 
+                              </form>	<br>
 				</header>
 				
 				<!--content-->
@@ -557,9 +563,7 @@ if(isset($_SESSION['username']))
 							<!--//item-->
 							
 							<?php } ?>					
-							<form method="POST">
-                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
-                              </form>
+							
 						
 							
 						</div>
@@ -583,6 +587,10 @@ if(isset($_SESSION['username']))
 			<div class="row">
 				<header class="s-title">
 					<h1>Shop</h1>
+
+					<form method="POST">
+                              <input type="text" name="recherche" id="recherche" placeholder="Search for id.."  class="form-control round-form" onblur="submit();" > 
+                              </form>
 				</header>
 				
 				<!--content-->
