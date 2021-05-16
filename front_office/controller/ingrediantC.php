@@ -7,16 +7,17 @@
     {
 
         function ajouteringrediants($ingrediant){
-			$sql="INSERT INTO ingrediants (nom, quantite ) 
-			VALUES (:nom , :quantite )";
+			$sql="INSERT INTO ingrediants (nom, quantite,user ) 
+			VALUES (:nom , :quantite ,:user )";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
 			 
 				$query->execute([
 					'nom' => $ingrediant->getnom(),
-					'quantite' => $ingrediant->getquantite()
-                   
+					'quantite' => $ingrediant->getquantite(),
+					'user' => $ingrediant->getuser()
+
 
 						]);			
 			}

@@ -4,11 +4,14 @@ class ingrediants
     private  $id=null ;
 	private  $nom=null ;
     private  $quantite=null ;
-  
+	private  $user=null ;
 
-    public function __construct(string $nom ,string $quantite )
+
+    public function __construct(string $nom ,string $quantite,string $user )
     {   $this->nom=$nom;
         $this->quantite=$quantite;
+		$this->user=$user;
+
        
     }
     function getid():int{
@@ -20,7 +23,9 @@ class ingrediants
 	function getquantite():string{
 		return $this->quantite;
 	}
-	
+	function getuser():string{
+		return $this->user;
+	}
 
 	function setnom($nom):void{
 		$this->nom=$nom;
@@ -29,5 +34,9 @@ class ingrediants
 		$this->quantite=$quantite;
 	
 	}
+	function setuser($user):void{
+		$this->user=$user;
+	}
+	
 }
 ?>

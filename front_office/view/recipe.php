@@ -90,9 +90,15 @@ if(isset($_SESSION['username']))
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-				<li class="light "><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
-					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+				<?php
+				foreach ($result as $recette) {
+						if($recette['user'] == $user['id']){
+									?>
+				<li class="light "><a href="submit_ingrediant.php?idrecette=<?php echo $recette['idrecette'];?>" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
+					<?php
+						}}
+						?>
+				<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -109,6 +115,7 @@ if(isset($_SESSION['username']))
 				<ul>
 					<li><a href="index.php" title="Home">Home</a></li>
 					<li><a href="#" title="Recipes">Recipes</a></li>
+					<li><a href="recipes.php" title="Cocktails">Deserts</a></li>
 					<li>Recipe</li>
 				</ul>
 			</nav>
@@ -117,13 +124,7 @@ if(isset($_SESSION['username']))
 			<!--row-->
 			<?php
 
-				foreach ($result as $recette) {
-
-					
-				
-
-					
-			?>
+foreach ($result as $recette) { ?>
 			<div class="row">
 				<header class="s-title">
 					<h1> <?php echo $recette ['titre']; ?></h1>
@@ -138,9 +139,11 @@ if(isset($_SESSION['username']))
 								<!--two-third-->
 								<article class="two-third">
 
-									<div class="photo"><a href="#"><img src=" images/<?php echo $recette ['photo']; ?> "Style="height:500px; width:800px;"/></a></div>
+									<div class="photo"><a href="#"><img src=" images/<?php echo $recette ['photo']; ?> "  /></a></div>
 									<div class="intro"><p><strong><?php echo $recette ['description']; ?></p></div>
 									
+							
+							
 								</article>
 								<!--//two-third-->
 								
@@ -165,51 +168,25 @@ if(isset($_SESSION['username']))
 
         <?php 
 		foreach ($listingrediant as $ingrediants)
-		 {
-			if($user['id'] != $recette['user'])
-			{
-
-			 ?>
+		 { 
+			 if($id == $ingrediants['user']){
+			?>
 									<dl class="ingredients">
 										<dt><?php echo $ingrediants ['nom']; ?></dt>
 										<dd><?php echo $ingrediants ['quantite']; ?></dd>
-										
-										<?php
-						}
-						else
-						{
-							?>
-										<dl class="ingredients">
-										<dt><?php echo $ingrediants ['nom']; ?></dt>
-										<dd><?php echo $ingrediants ['quantite']; ?></dd>
-										<form method="POST" action="deleteingrediant.php">
-										<input type="submit" name="supprimer" value="supprimer">
-										<input type="hidden" value="<?PHP echo $ingrediants ['id']; ?>" name="id">
-										<a href="modifieringrediant.php?id=<?php echo $ingrediants['id'];?>">Modifier</a>
-										</form>
-							<?php
-						}
-						?>
-									</dl>
-									<?php } ?>
-							<div class="actions">
-								<div>
-								<?php
-						if($user['id'] != $recette['user'])
-						{
+					<form method="POST" action="deleteingrediant.php">
+                    <input type="submit" name="supprimer" value="supprimer">
+	                <input type="hidden" value="<?PHP echo $ingrediants ['id']; ?>" name="id">
+					<a href="modifieringrediant.php?id=<?php echo $ingrediants['id'];?>">Modifier</a>
 
-						?>
-								<div class="third bwrap">
+	
+									</dl>
+									<?php 
+									}} 
+									?>
+						</div>
 								
-									</div>
-									<?php
-						}
-						
-							?>
-						
-								</div>
-							</div>
-						</div>		
+									
 								</article>
 								<!--//one-third-->
 							</div>

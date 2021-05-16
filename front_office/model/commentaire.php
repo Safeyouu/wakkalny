@@ -7,8 +7,9 @@ class commentaire
     private  $email =null;
     private  $date =null;
     private  $commentaire=null;
+    private  $user=null;
 
-    public function __construct(string $nom,string $prenom,string $email ,string $date,string $commentaire)
+    public function __construct(string $nom,string $prenom,string $email ,string $date,string $commentaire,string $user)
     {
         
         $this->nom=$nom;
@@ -16,6 +17,8 @@ class commentaire
         $this->email=$email;
 		$this->date=$date;
         $this->commentaire=$commentaire;
+		$this->user=$user;
+
     }
     function getidcom():int{
 		return $this->idcom;
@@ -36,8 +39,14 @@ class commentaire
 		return $this->commentaire;
 	}
 
-
+	function getuser():string{
+		return $this->user;
+	}
 /* ************************* */
+function setuser($user):void{
+	$this->user=$user;
+}
+
 
 
 

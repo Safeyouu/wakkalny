@@ -99,10 +99,7 @@ if(isset($_SESSION['username']))
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
-					
-						</ul>
+						
 					</li>
 					
 					
@@ -125,7 +122,6 @@ if(isset($_SESSION['username']))
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
@@ -345,38 +341,12 @@ if(isset($_SESSION['username']))
     <!--main-->
 	<main class="main" role="main">
 
-	<section class="content full-width">
-					<div class="icons dynamic-numbers">
-						<header class="s-title">
-							<h2 class="ribbon large">Number Of Product per Category</h2>
-						</header>
-						
-						<!--row-->
-						<div class="row">
-						<?php foreach($stats as $s){ ?>
-
-							<!--item-->
-							<div class="one-sixth">
-								<div class="container">
-									
-									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
-									<span class="subtitle"><?php echo $s['nom'] ?></span>
-								</div>
-							</div>
-							<!--//item-->
-							
-							<?php } ?>					
-							
-						
-							
-						</div>
-						<!--//row-->
-					</div>
-				</section>
+	
 
 
 		<!--wrap-->
-		
+		<div class="wrap clearfix">
+
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
@@ -471,13 +441,41 @@ if(isset($_SESSION['username']))
 						</ul>
 					</div>
 					 
-					
+					<section class="content full-width">
+					<div class="icons dynamic-numbers">
+						<header class="s-title">
+							<h6 style="color: #7e1610 ; ">Number Of Product per Category</h6>
+						</header>
+						
+						<!--row-->
+						
+						<?php foreach($stats as $s){ ?>
+
+							<!--item-->
+							<div class="widget">
+								<div class="container">
+									
+									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
+									<span class="subtitle"><?php echo $s['nom'] ?></span>
+								</div>
+							</div>
+							<!--//item-->
+							
+							<?php } ?>					
+
+						
+							
+						
+						<!--//row-->
+					</div>
+				</section>
 				</aside>
 				<!--//right sidebar-->
+				
 			</div>
 			<!--//row-->
 			
-		</>
+						</div>
 		<!--//wrap-->
 	</main>
 	<!--//main-->
@@ -542,38 +540,12 @@ if(isset($_SESSION['username']))
     <!--main-->
 	<main class="main" role="main">
 
-	<section class="content full-width">
-					<div class="icons dynamic-numbers">
-						<header class="s-title">
-							<h2 class="ribbon large">Number Of Product per Category</h2>
-						</header>
-						
-						<!--row-->
-						<div class="row">
-						<?php foreach($stats as $s){ ?>
-
-							<!--item-->
-							<div class="one-sixth">
-								<div class="container">
-									
-									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
-									<span class="subtitle"><?php echo $s['nom'] ?></span>
-								</div>
-							</div>
-							<!--//item-->
-							
-							<?php } ?>					
-							
-						
-							
-						</div>
-						<!--//row-->
-					</div>
-				</section>
+	
 
 
 		<!--wrap-->
-		
+		<div class="wrap clearfix">
+
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
 				<ul>
@@ -594,7 +566,7 @@ if(isset($_SESSION['username']))
 				</header>
 				
 				<!--content-->
-				<section class="content three-fourth">
+				<br><section class="content three-fourth">
 					<!--entries-->
 					<div class="entries row">
 					<?php 
@@ -669,13 +641,41 @@ if(isset($_SESSION['username']))
 						</ul>
 					</div>
 					 
-					
+					<section class="content full-width">
+					<div class="icons dynamic-numbers">
+						<header class="s-title">
+							<h6 style="color: #7e1610 ; ">Number Of Product per Category</h6>
+						</header>
+						
+						<!--row-->
+						
+						<?php foreach($stats as $s){ ?>
+
+							<!--item-->
+							<div class="widget">
+								<div class="container">
+									
+									<span class="title dynamic-number" data-dnumber="<?php echo $s['qqt'] ?>"><?php echo $s['qqt'] ?></span>
+									<span class="subtitle"><?php echo $s['nom'] ?></span>
+								</div>
+							</div>
+							<!--//item-->
+							
+							<?php } ?>					
+
+						
+							
+						
+						<!--//row-->
+					</div>
+				</section>
 				</aside>
 				<!--//right sidebar-->
+				
 			</div>
 			<!--//row-->
 			
-		
+			</div>
 		<!--//wrap-->
 	</main>
 	<!--//main-->

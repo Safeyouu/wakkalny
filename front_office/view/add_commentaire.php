@@ -5,6 +5,7 @@ include '../controller/commentaireC.php';
 $error = "";
 
 $commentaire1 = null;
+$id = isset($_GET['idblog']) ? $_GET['idblog'] : '';
 
 $commentairec = new commentaireC();
 $user=$commentairec->getUserbyname($_SESSION['username']);
@@ -177,7 +178,9 @@ isset($email)&&
 										<input type="date" placeholder="date" id="date" name="date" required />
 										<span class="req">*</span>
 									</div>
-									
+									<div class="f-row">
+									<div class="third"><input type="hidden"  id="user" name="user" value="<?php echo $id;?>" /></div>
+								</div>
 								</div>
 
 

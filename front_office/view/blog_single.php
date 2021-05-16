@@ -152,7 +152,7 @@ $id = $_GET['idblog'];
 					   </div>
 					  
 						
-					<div class="third bwrap"><a href="add_commentaire.php" class="button white more medium">add comment<i class="fa fa-chevron-right"></i></a></div>
+					<div class="third bwrap"><a href="add_commentaire.php?idblog=<?php echo $blog['idblog'];?>" class="button white more medium">add comment<i class="fa fa-chevron-right"></i></a></div>
 					
 						
 					</article>
@@ -166,7 +166,8 @@ $id = $_GET['idblog'];
 				<?php
 				
            foreach($listecommentaire as $commentaire){
-			   
+			   if($id == $commentaire['user'])
+			   {
         ?>
 				<div class="comments" id="comments">
 						<ol class="comment-list">
@@ -198,7 +199,7 @@ $id = $_GET['idblog'];
 								
 						
 						</ol>
-       <?php } ?>
+       <?php }} ?>
 						
 					</div>
 					<!--//comments-->

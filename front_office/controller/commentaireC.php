@@ -10,8 +10,8 @@
 		
                  function ajoutercommentaire($commentaire)
                  {
-                    $sql="INSERT INTO commentaire ( nom ,prenom ,email,date, commentaire ) 
-                    VALUES (:nom , :prenom ,:email ,:date, :commentaire)";
+                    $sql="INSERT INTO commentaire ( nom ,prenom ,email,date, commentaire,user ) 
+                    VALUES (:nom , :prenom ,:email ,:date, :commentaire,:user)";
                     $pdo = config::getConnexion();
                     try
                     {
@@ -22,6 +22,7 @@
                       'prenom' => $commentaire->getprenom(),
                       'email' => $commentaire->getemail(),
                       'date' => $commentaire->getdate(),
+                      'user' => $commentaire->getuser(),
 
                      'commentaire' => $commentaire->getcommentaire()]);
                   }

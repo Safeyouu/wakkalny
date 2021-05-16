@@ -8,6 +8,7 @@ $error = "";
 $ingrediant1 = null;
 
 $ingrediantc = new ingrediantC();
+$id = isset($_GET['idrecette']) ? $_GET['idrecette'] : '';
 
 if(
     isset($_POST["nom"])&&
@@ -19,10 +20,12 @@ if(
             ){
         $ingrediant1 = new ingrediants(
             $_POST["nom"],
-            $_POST["quantite"]
+            $_POST["quantite"],
+			$_POST["user"]
+
         );
         $ingrediantc->ajouteringrediants($ingrediant1);
-        header('Location:recipe.php');
+        header('Location:recipes.php');
     }}
     else{
         $error= "missing info";
@@ -135,7 +138,9 @@ if(
 									<div class="third"><input type="text" placeholder="nom"  name="nom" id="nom" /></div>
 									<div class="third"><input type="text" placeholder="quantite"  name="quantite" id="quantite" /></div>
 								</div>
-							
+								<div class="f-row">
+									<div class="third"><input type="hidden"  id="user" name="user" value="<?php echo $id;?>" /></div>
+								</div>
 							
 						
 							
