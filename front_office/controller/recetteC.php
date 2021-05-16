@@ -148,6 +148,16 @@
 		}
 	  }
 
+	  function rechercher ($mot){
+		
+		$q = array('motclef' => $mot. '%' );
+		$sqlQuery = "SELECT * FROM recette WHERE titre like :motclef";
+		$db=config::getConnexion();
+		$liste=$db->prepare($sqlQuery);
+		$liste->execute($q);
+		return $liste;	
+	}
+
 
 	}
 ?>

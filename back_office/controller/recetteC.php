@@ -156,6 +156,32 @@
                 return true;
             }
         }
+
+		 function trie_titre(){
+			$sql="SELECT * FROM recette order by titre ASC ";
+			$db = config::getConnexion();
+			try{
+			$liste=$db->query($sql);
+			return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}	
+		}
+
+
+		function trie_category(){
+			$sql="SELECT * FROM recette order by category ASC ";
+			$db = config::getConnexion();
+			try{
+			$liste=$db->query($sql);
+			return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: '.$e->getMessage());
+			}	
+		}
+		
     }
 
 ?>

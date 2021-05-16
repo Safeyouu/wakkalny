@@ -6,31 +6,11 @@ $listerecette=$recettec->afficherrecette();
 $erreur="";
 
 
+if(isset($_POST['recherche'])){
+	$mot = $_POST['recherche'];
+	$listerecette = $recettec->rechercher($mot);
+}
 
-
-if(!empty($_POST)){
-    extract($_POST);
-	$valid = true;
-
-	if(isset($_POST['search'])){
-
-		$contenu = (string) trim($recette);
-		if(empty($recette)){
-			$valid = false;
-			$message_er = "mettre une recherche";
-
-		}
-	
-		if($valid){
-			$req_search = $DB->query("
-				SELECT titre
-				FROM recette WHERE titre LIKE ?
-      		ORDER BY titre ",
-			array($recette . "%"));
-				$req_search =$req_search->fetchAll();
-		}
-	}
-} 
 
 
 
@@ -129,38 +109,12 @@ if(!empty($_POST)){
 					<h1>Recipes</h1>
 				<?php	echo $erreur; ?>
 				</header>
-	        <h1 style="text-align: center"> recherche d'une recette </h1>
-			<form  method="get" >
-			<div class="form-group">
-				<input type="text" name="recette" value=""  placeholder="rechercher une recette"/>
-				<br>
-				<input type="submit" value="rechercher" name="search"/>
-			</div>
-			</form>
+	        <h1 style="text-align: center"> Search for a Recipe </h1>
+			<form method="POST">
+                <input type="text" name="recherche" id="recherche" placeholder="Search for recipe.."  class="form-control round-form" onblur="submit();" > 
+            </form>
 
-			<?php
-
-			if(isset($message_er))
-			{
-				echo $message_er;
-			}
-			if(isset($_POST['search']) && $valid){
-
-				if(count($req_search) == 0){
-					echo "aucun resultat";
-				}
-				foreach($req_search as $rs)
-				{
-					echo "<div >" . $rs['titre'] . "</div><br>";
-								}
-
-			}
-				 
-
-
-
-
-			?> 
+			
 			
 			<br>
 				<!--content-->

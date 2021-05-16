@@ -4,6 +4,22 @@ include "../../controller/recetteC.php";
 $recettec = new recetteC();
 $listerecette=$recettec->afficherrecette();
 
+/*if(isset($_POST["tri"])){
+    $listerecette=$recettec->trie_titre();
+    
+
+}*/
+if(isset($_POST['tri'])){
+
+    $tri=$_POST['tri'];
+        if($tri=='titre'){
+            $listerecette=$recettec->trie_titre();
+          }elseif ($tri=='category') {
+            $listerecette=$recettec->trie_category();
+          }
+  }
+
+
 ?>
 
 
@@ -162,21 +178,21 @@ $listerecette=$recettec->afficherrecette();
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>titre</th>
-                                            <th>prept </th>
-                                            <th>cookingt</th>
-                                            <th>difficulty</th>
-                                            <th>nb_ppl</th>
-                                            <th>category</th>
-                                            <th>description</th>
+                                            <th>Title</th>
+                                            <th>Preperation time </th>
+                                            <th>Cooking time</th>
+                                            <th>Difficulty</th>
+                                            <th>Serving number</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
                                             
                                         </tr>
                                     </thead>
+                                   
+                                    <tbody>
                                     <?php
 						foreach ($listerecette as $recette ){
 						?>
-                                    <tbody>
-                                        
                                         <tr>
                                             <td><?php echo $recette['idrecette']; ?></td>
                                             <td><?php echo $recette['titre']; ?></td>
@@ -189,14 +205,27 @@ $listerecette=$recettec->afficherrecette();
 
 
                                         </tr>
+                                        <?php } ?>
+                                        <tr>
                                       
+
+                        <form method="POST">
+                <select class="btn btn-theme03" name="tri" onchange="this.form.submit();">
+                  <option>Sort by</option>
+                  <option value="titre"> Title</option>
+                  <option value="category">Category</option>
+                </select>
+                </form>
+                                        </tr>
                                     </tbody>
-                                    <?php } ?>
+                                   
+
+
                                 </table>
                             </div>
                         </div>
                     </div>
-                </div>
+                        </div>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
