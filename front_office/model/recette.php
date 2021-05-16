@@ -12,9 +12,10 @@ class recette
     private  $category=null ;
     private  $descrption=null ;
     private  $photo=null ;
+    private  $user=null ;
 
 
-    public function __construct(string $titre,int $prept,int $cookingt,string $difficulty,int $nb_ppl,string $category,string $description,string $photo)
+    public function __construct(string $titre,int $prept,int $cookingt,string $difficulty,int $nb_ppl,string $category,string $description,string $photo,string $user)
     {
         $this->titre=$titre;
         $this->prept=$prept;
@@ -24,6 +25,8 @@ class recette
         $this->category=$category;
         $this->description=$description;
         $this->photo=$photo;
+		$this->user=$user;
+
     }
     function getidrecette():int{
 		return $this->idrecette;
@@ -52,6 +55,9 @@ class recette
     function getphoto():string{
 		return $this->photo;
 	}
+	function getuser():string{
+		return $this->user;
+	}
 
     
 	function settitre($titre):void{
@@ -77,6 +83,9 @@ class recette
 	}
     function setphoto($photo):void{
 		$this->photo=$photo;
+	}
+	function setuser($user):void{
+		$this->user=$user;
 	}
 }
 ?>

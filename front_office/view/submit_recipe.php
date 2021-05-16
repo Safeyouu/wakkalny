@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../model/recette.php';
 include '../controller/recetteC.php';
 
@@ -8,6 +9,7 @@ $error = "";
 $recette1 = null;
 
 $recettec = new recetteC();
+$user=$recettec->getUserbyname($_SESSION['username']);
 
 if(
     isset($_POST["titre"])&&
@@ -39,7 +41,9 @@ if(
             $_POST["nb_ppl"],
             $_POST["category"],
             $_POST["description"],
-            $_POST["photo"]
+            $_POST["photo"],
+			$_POST["user"]
+
         );
 		if(!$recettec->checkname($_POST['titre']))
 			{
@@ -94,25 +98,27 @@ else {
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li"><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
-					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
-					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a></li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -121,7 +127,6 @@ else {
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark current-menu-item"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
@@ -135,6 +140,7 @@ else {
 	<!--main-->
 	<main class="main" role="main">
 		<!--wrap-->
+		
 		<div class="wrap clearfix">
 			<!--breadcrumbs-->
 			<nav class="breadcrumbs">
@@ -162,23 +168,30 @@ else {
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
+									<label for="">Title :</label>
 									<div class="full"><input type="text"   placeholder="Recipe title" id="titre" name="titre" required /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time"  name="prept" id="prept" required /></div>
-									<div class="third"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt" required  /></div>
-									<div class="third"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty" required /></div>
+								
+									<div class="third"><label for="">Preparation Time :</label><input type="text" placeholder="Preparation time"  name="prept" id="prept" required /></div>
+									
+									<div class="third"><label for="">Cooking Time :</label><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt" required  /></div>
+									
+									<div class="third"><label for="">Difficulty :</label><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty" required /></div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl" required  /></div>
-									<div class="third"><input type="text"  placeholder="category" id="category" name="category" required  /></div>
+									<div class="third"><label for="">Number of Serving :</label><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl" required  /></div>
+									<div class="third"><label for="">Category :</label><input type="text"  placeholder="category" id="category" name="category" required  /></div>
 								
 									
+								</div>
+								<div class="f-row">
+									<div class="third"><input type="hidden" placeholder="user" id="user" name="user" value="<?php echo $user['id'];?>" /></div>
 								</div>
 							</section>
 							
 							<section>
-								<h2>Description</h2>
+								<h3>Description :</h3>
 								<div class="f-row">
 									<div class="full"><textarea  placeholder="Recipe title"  id="description" name="description" required  ></textarea></div>
 								</div>
@@ -186,7 +199,7 @@ else {
 							
 						
 							<section>
-								<h2>Photo</h2>
+								<h3>Photo :</h3>
 								<div class="f-row full">
 									<input type="file" name="photo" id="photo" required  />
 								</div>

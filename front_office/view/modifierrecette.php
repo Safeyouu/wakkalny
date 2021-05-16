@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../model/recette.php';
 include_once '../controller/recetteC.php';
 
@@ -7,6 +8,7 @@ $error = "";
 
 
 $recetteC = new recetteC();
+$user=$recetteC->getUserbyname($_SESSION['username']);
 
 
 
@@ -31,7 +33,9 @@ $recetteC = new recetteC();
 			$_POST["nb_ppl"],
 			$_POST["category"],
 			$_POST["description"],
-			$_POST["photo"]
+			$_POST["photo"],
+			$_POST["user"]
+
         );
         $recetteC->modifierrecette($recette1, $_GET['idrecette']);   
              header('location: recipes.php ');
@@ -77,25 +81,31 @@ $recetteC = new recetteC();
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:white; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li"><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
+						
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -104,9 +114,8 @@ $recetteC = new recetteC();
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-					<li class="dark current-menu-item"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+					<li class="dark "><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -123,7 +132,6 @@ $recetteC = new recetteC();
 			<nav class="breadcrumbs">
 				<ul>
 					<li><a href="index.php" title="Home">Home</a></li>
-					<li><a href="submit_ingrediant.php" >submit an ingrediant</a></li>
 					<li>Submit a recipe</li>
 					
 				</ul>
@@ -149,25 +157,30 @@ $recetteC = new recetteC();
 								<h2>Basics</h2>
 								<p>All fields are required.</p>
 								<div class="f-row">
-								<div class="full"><input type="text" placeholder="titre" id="titre" name="titre" value="<?php echo $recette1['titre']; ?>" /></div>
+								<div class="full"><input type="text" placeholder="titre" id="titre" name="titre" value="<?php echo $recette1['titre']; ?>" required /></div>
 								</div>
 								<div class="f-row">
-									<div class="full"><input type="text" placeholder="Preparation time"  name="prept" id="prept"  value = "<?php echo $recette1['prept'];?>" /></div>
-									<div class="full"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt"  value = "<?php echo $recette1['cookingt'];?>" /></div>
-									<div class="full"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty"  value = "<?php echo $recette1['difficulty'];?>" /></div>
+									<div class="full"><input type="text" placeholder="Preparation time"  name="prept" id="prept"  value = "<?php echo $recette1['prept'];?>"required /></div>
+									<div class="full"><input type="text"  placeholder="Cooking time" id="cookingt" name="cookingt"  value = "<?php echo $recette1['cookingt'];?>" required/></div>
+									<div class="full"><input type="text"  placeholder="Difficulty" id="difficulty"  name="difficulty"  value = "<?php echo $recette1['difficulty'];?>" required/></div>
 								</div>
+
 								<div class="f-row">
-									<div class="full"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl"  value = "<?php echo $recette1['nb_ppl'];?>" /></div>
-									<div class="full"><input type="text"  placeholder="category" id="category" name="category"  value = "<?php echo $recette1['category'];?>"  /></div>
-								
+									<div class="full"><input type="text"  placeholder="Serves how many people?" id="nb_ppl" name="nb_ppl"  value = "<?php echo $recette1['nb_ppl'];?>" required/></div>
+									<div class="full"><input type="text"  placeholder="category" id="category" name="category"  value = "<?php echo $recette1['category'];?>"required  /></div>
+									<div class="f-row">
+									<div class="third"><input type="hidden" placeholder="user" id="user" name="user" value="<?php echo $user['id'];?>" /></div>
+								</div>
+							
 									
 								</div>
+								
 							</section>
 							
 							<section>
 								<h2>Description</h2>
 								<div class="f-row">
-									<div class="full"><textarea  placeholder="Recipe title"  id="description" name="description"  value = "<?php echo $recette1['description'];?>"  ></textarea></div>
+									<div class="full"><textarea  placeholder="Recipe title"  id="description" name="description"  value = "<?php echo $recette1['description'];?>" required ></textarea></div>
 								</div>
 							</section>	
 							
@@ -175,8 +188,8 @@ $recetteC = new recetteC();
 								
 								<h2 for="image">Photo</h2>
 								<div class="f-row full">
-								<img src="images/<?php echo $recette1['photo'];?>" Style="height:250px; width:700px;" />
-									 <input type="file" id="photo" name="photo" value="<?php echo $recette1['photo']; ?>"/>
+								<img src="images/<?php echo $recette1['photo'];?>" Style=  " display: block; margin-left: auto; margin-right: auto; width: 30%;" /> <br>	
+									 <input type="file" id="photo" name="photo" value="<?php echo $recette1['photo']; ?>"required/>
 
 								</div>
 								
@@ -186,14 +199,19 @@ $recetteC = new recetteC();
 							
 							<div class="f-row full">
 								<input type="submit" class="button" id="submitRecipe" value="Publish this recipe" />
+								</form>
+							<form action="recipes.php">
+								<input type="submit" class="button" id="submitRecipe" style="left:35px;" value="Cancel" />
+								</form>
 							</div>
-						
+							
 					</div>
 				
 				</section>
 				<!--//content-->
-			</form>
-        
+			
+			
+			
 			</div>
 			<!--//row-->
 		</div>

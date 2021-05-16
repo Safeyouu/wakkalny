@@ -7,8 +7,8 @@
     {
 
         function ajouterrecette($recette){
-			$sql="INSERT INTO recette (titre , prept , cookingt , difficulty , nb_ppl , category , description , photo) 
-			VALUES (:titre , :prept, :cookingt , :difficulty , :nb_ppl , :category , :description , :photo)";
+			$sql="INSERT INTO recette (titre , prept , cookingt , difficulty , nb_ppl , category , description , photo , user) 
+			VALUES (:titre , :prept, :cookingt , :difficulty , :nb_ppl , :category , :description , :photo , :user)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
@@ -22,6 +22,7 @@
                     'category' => $recette->getcategory(),
                     'description' => $recette->getdescription(),
                     'photo' => $recette->getphoto(),
+                    'user' => $recette->getuser()
 
 						]);			
 			}
@@ -157,7 +158,21 @@
 		$liste->execute($q);
 		return $liste;	
 	}
-
+	function getUserbyname($username) {
+		try {
+			$pdo = config::getConnexion();
+			$query = $pdo->prepare(
+				'SELECT * FROM user WHERE username = :username'
+			);
+			$query->execute([
+				'username' => $username
+			]);
+			return $query->fetch();
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+	
 
 	}
 ?>

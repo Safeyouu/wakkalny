@@ -8,10 +8,8 @@ include "../controller/blogC.php";
 
 
 $blogc = new blogC();
+
 $listeblogs=$blogc->afficherblog();
-
-
-
 
 
 
@@ -52,9 +50,190 @@ $listeblogs=$blogc->afficherblog();
 	<!--//preloader-->
 	
 	<?php  
-			if(!isset($_SESSION['username']))  
+			if(isset($_SESSION['username']))  
 			{  
-		?>
+
+				$user=$blogc->getUserbyname($_SESSION['username']);
+	
+
+	?>
+		
+
+
+
+	<!--header-->
+	<header class="head" role="banner">
+							<!--wrap-->
+							<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:white; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				
+				</li>
+				
+			</li>
+		</nav>
+							<div class="wrap clearfix">
+								<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+								
+								<nav class="main-nav" role="navigation" id="menu">
+									<ul>
+										<li><a href="index.php" title="Home"><span>Home</span></a></li>
+										<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
+											
+										</li>
+										<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
+											<ul>
+												<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
+					
+											</ul>
+										</li>
+										
+										
+										<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+										<li><a href="shop.php" title="Shop"><span>Shop</span></a>
+										
+										</li>
+									</ul>
+								</nav>
+								
+								<nav class="user-nav" role="navigation">
+									<ul>
+										<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
+										<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+									</ul>
+								</nav>
+							</div>
+							<!--//wrap-->
+						</header>
+						<!--//header-->
+							<!--main-->
+	<main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.php" title="Home">Home</a></li>
+					<li>Blog</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<div class="row">
+				<header class="s-title">
+					<h1>Blog</h1>
+				</header>
+
+				</section>
+
+				<!--content-->
+				<section class="content three-fourth">
+					  
+				<!--blog entry-->
+				
+				<?php
+           			foreach($listeblogs as $blog){
+        		?>
+				<article class="post">
+						<div class="entry-meta">
+							
+							<div class="avatar">
+								<a href="my_profile.php"> <img src="images/abatar0.jpg"> <span> <?php echo $blog ["nom"] ?> </span>  </a>
+							</div>
+						</div>
+						<div class="container">
+							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" Style="height:250px; width:300px;"  /></a></div>
+							<div class="entry-content">
+								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
+								<p><?php echo $blog['sujet'];?> </p>
+							</div>
+						
+						
+							<?php
+						if($user['id'] != $blog['user'])
+						{
+
+						?>
+						<div class="actions">
+								<div>
+									
+									<div class="more"> <?php echo "<a href=blog_single.php?idblog=" .$blog['idblog'].">"; ?> Leave a comment</a></div>
+									<div class="more"> <?php echo "<a  href=blog_single.php?idblog=" .$blog['idblog'].">";   ?> Read more</a></div>
+									
+								</div>
+							
+							</div>
+
+					<?php
+						}
+						else
+						{
+							?>
+
+							<div class="actions">
+								<div>
+									
+									<div class="more"> <?php echo "<a href=blog_single.php?idblog=" .$blog['idblog'].">"; ?> Leave a comment</a></div>
+									<div class="more"> <?php echo "<a  href=blog_single.php?idblog=" .$blog['idblog'].">";   ?> Read more</a></div>
+									<div class="more"> <?php echo "<a  href=updateblog.php?idblog=" .$blog['idblog'].">";   ?>  modifier</a></div>
+									
+								</div>
+								<form method="POST" action="deleteblog.php">
+                                    <input type="submit" name="supprimer" value="supprimer">
+	                                <input type="hidden" value="<?PHP echo $blog['idblog']; ?>" name="idblog">
+									</form>
+							</div>
+							<?php
+						}
+						?>
+						</div>
+			
+					</article>
+					<?php
+            }    
+            ?>
+					<!--//blog entry-->
+				</section>
+
+			
+				<!--//content-->
+				
+				<!--right sidebar-->
+				<!--<aside class="sidebar one-fourth">
+					<div class="widget">
+						<ul class="categories right">
+							<li><a href="#">All recipes</a></li>
+							<li class="active"><a href="#">Tips and Tricks</a></li>
+							<li><a href="#">Events</a></li>
+							<li><a href="#">Inspiration</a></li>
+							<li><a href="#">Category name</a></li>
+							<li><a href="#">Lorem ipsum</a></li>
+							<li><a href="#">Dolor</a></li>
+							<li><a href="#">Sit amet</a></li>
+						</ul>
+					</div>
+					<div class="widget">
+						<h3>Advertisment</h3>
+						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
+					</div>
+				</aside>-->
+				<!--//right sidebar-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+	<?php
+			}
+					else
+					{
+				?>
 
 
 
@@ -83,7 +262,7 @@ $listeblogs=$blogc->afficherblog();
 					<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
 						
 					</li>
-					
+
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a>
@@ -97,12 +276,7 @@ $listeblogs=$blogc->afficherblog();
 				</ul>
 			</nav>
 			
-			<nav class="user-nav" role="navigation">
-				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
-				</ul>
-			</nav>
+			
 		</div>
 		<!--//wrap-->
 
@@ -158,159 +332,6 @@ $listeblogs=$blogc->afficherblog();
 									<div class="more"> <?php echo "<a href=blog_single.php?idblog=" .$blog['idblog'].">"; ?> Leave a comment</a></div>
 									<div class="more"> <?php echo "<a  href=blog_single.php?idblog=" .$blog['idblog'].">";   ?> Read more</a></div>
 									
-								</div>
-								
-							</div>
-						</div>
-			
-					</article>
-					<?php
-            }    
-            ?>
-					<!--//blog entry-->
-				</section>
-
-			
-				<!--//content-->
-				
-				<!--right sidebar-->
-				<!--<aside class="sidebar one-fourth">
-					<div class="widget">
-						<ul class="categories right">
-							<li><a href="#">All recipes</a></li>
-							<li class="active"><a href="#">Tips and Tricks</a></li>
-							<li><a href="#">Events</a></li>
-							<li><a href="#">Inspiration</a></li>
-							<li><a href="#">Category name</a></li>
-							<li><a href="#">Lorem ipsum</a></li>
-							<li><a href="#">Dolor</a></li>
-							<li><a href="#">Sit amet</a></li>
-						</ul>
-					</div>
-					<div class="widget">
-						<h3>Advertisment</h3>
-						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
-					</div>
-				</aside>-->
-				<!--//right sidebar-->
-			</div>
-			<!--//row-->
-		</div>
-		<!--//wrap-->
-	</main>
-	<!--//main-->
-				<?php
-					}
-					
-					else
-						
-					{ 
-						
-						?>
-						<!--header-->
-						<header class="head" role="banner">
-							<!--wrap-->
-							<nav class="main-nav" role="navigation" id="menu">
-			<li>
-				<li style="color:white; font-size:15px;text-transform: lowercase" >
-					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
-				</li>
-				<li  
-					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
-				
-				</li>
-				
-			</li>
-		</nav>
-							<div class="wrap clearfix">
-								<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
-								
-								<nav class="main-nav" role="navigation" id="menu">
-									<ul>
-										<li><a href="index.php" title="Home"><span>Home</span></a></li>
-										<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
-											
-										</li>
-										<li class="current-menu-item"><a href="blog.php" title="Blog"><span>Blog</span></a>
-											<ul>
-												<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
-					
-											</ul>
-										</li>
-										
-										
-										<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
-										<li><a href="shop.php" title="Shop"><span>Shop</span></a>
-										
-										</li>
-									</ul>
-								</nav>
-								
-								<nav class="user-nav" role="navigation">
-									<ul>
-										<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
-										<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-										<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
-									</ul>
-								</nav>
-							</div>
-							<!--//wrap-->
-						</header>
-						<!--//header-->
-							<!--main-->
-	<main class="main" role="main">
-		<!--wrap-->
-		<div class="wrap clearfix">
-			<!--breadcrumbs-->
-			<nav class="breadcrumbs">
-				<ul>
-					<li><a href="index.php" title="Home">Home</a></li>
-					<li>Blog</li>
-				</ul>
-			</nav>
-			<!--//breadcrumbs-->
-			
-			<!--row-->
-			<div class="row">
-				<header class="s-title">
-					<h1>Blog</h1>
-				</header>
-
-				</section>
-
-				<!--content-->
-				<section class="content three-fourth">
-					  
-				<!--blog entry-->
-				
-				<?php
-           			foreach($listeblogs as $blog){
-        		?>
-				<article class="post">
-						<div class="entry-meta">
-							
-							<div class="avatar">
-								<a href="my_profile.php"> <img src="images/abatar0.jpg"> <span> <?php echo $blog ["nom"] ?> </span>  </a>
-							</div>
-						</div>
-						<div class="container">
-							<div class="entry-featured"><a href="blog_single.php"><img src="images/<?php echo $blog['image'];?>" Style="height:250px; width:300px;"  /></a></div>
-							<div class="entry-content">
-								<h2><a href="blog_single.php"><?php echo $blog['titre'];?></a></h2>
-								<p><?php echo $blog['sujet'];?> </p>
-							</div>
-						
-						
-							<div class="actions">
-								<div>
-									
-									<div class="more"> <?php echo "<a href=blog_single.php?idblog=" .$blog['idblog'].">"; ?> Leave a comment</a></div>
-									<div class="more"> <?php echo "<a  href=blog_single.php?idblog=" .$blog['idblog'].">";   ?> Read more</a></div>
-									<div class="more"> <?php echo "<a  href=updateblog.php?idblog=" .$blog['idblog'].">";   ?>  modifier</a></div>
-									<form method="POST" action="deleteblog.php">
-                                    <input type="submit" name="supprimer" value="supprimer">
-	                                <input type="hidden" value="<?PHP echo $blog['idblog']; ?>" name="idblog">
-									</form>
 								</div>
 								
 							</div>

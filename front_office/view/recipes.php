@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include "../controller/recetteC.php";
 
 $recettec = new recetteC();
@@ -49,10 +51,27 @@ if(isset($_POST['recherche'])){
 		<div class="spinner"></div>
 	</div>
 	<!--//preloader-->
+	<?php
+	if(isset($_SESSION['username']))  
+{
+
+	$user=$recettec->getUserbyname($_SESSION['username']);
 	
+	?>
+
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -63,15 +82,9 @@ if(isset($_POST['recherche'])){
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
+						
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -80,11 +93,171 @@ if(isset($_POST['recherche'])){
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
+	
+	<!--main-->
+	<main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.php" title="Home">Home</a></li>
+					<li>Recipes</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<div class="row">
+				<header class="s-title">
+					<h1>Recipes</h1>
+				<?php	echo $erreur; ?>
+				</header>
+	        <h1 style="text-align: center"> Search for a Recipe </h1>
+			<form method="POST">
+                <input type="text" name="recherche" id="recherche" placeholder="Search for recipe.."  class="form-control round-form" onblur="submit();" > 
+            </form>
+
+			
+			
+			<br>
+				<!--content-->
+				<section class="content three-fourth">
+					<!--entries-->
+					<div class="entries row">
+						<?php
+						foreach ($listerecette as $recette ){
+
+							if($user['id'] != $recette['user'])
+						{
+
+						
+						?>
+						<!--item-->
+						<div class="entry one-third">
+							<figure>
+								<img src="images/<?php echo $recette['photo']; ?> "  />
+								<figcaption><?php echo "<a href=recipe.php?idrecette=".$recette['idrecette'].">" ; ?>  <i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
+							</figure>
+							<div class="container">
+								<h2><?php echo "<a href=recipe.php?idrecette=".$recette['idrecette'].">" ; ?> <?php echo $recette['titre']; ?></a></h2> 
+								<div class="actions">
+									<div>
+										<div class="difficulty">
+											<i class="ico i-hard"></i><a href="#"><?php echo $recette['difficulty']; ?></a>
+										</div>
+
+										
+
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--item-->
+						<?php
+						}
+						else
+						{
+							?>
+						<!--item-->
+						<div class="entry one-third">
+							<figure>
+								<img src="images/<?php echo $recette['photo']; ?> "  />
+								<figcaption><?php echo "<a href=recipe.php?idrecette=".$recette['idrecette'].">" ; ?>  <i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
+							</figure>
+							<div class="container">
+								<h2><a href="recipe.php"><?php echo $recette['titre']; ?></a></h2> 
+								<div class="actions">
+									<div>
+										<div class="difficulty">
+											<i class="ico i-hard"></i><a href="#"><?php echo $recette['difficulty']; ?></a>
+										</div>
+
+										<form method="POST" action="deleterecette.php">
+											<input type="submit" name="supprimer" value="supprimer">
+											<input type="hidden" value="<?PHP echo $recette['idrecette']; ?>"  name="idrecette">
+											<a href="modifierrecette.php?idrecette=<?php echo $recette['idrecette'];?>">Modifier</a>
+										</form>
+
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--item-->
+
+						<?php
+						}
+					}
+						?>
+						
+						
+						
+					</div>
+					<!--//entries-->
+				</section>
+				<!--//content-->
+				
+			
+					
+				</aside>
+				<!--//right sidebar-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+	<?php
+	}
+		else
+			{
+	?>
+
+	
+
+		<!--header-->
+	<header class="head" role="banner">
+		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="login.php" id="login"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Login</button></span></a> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="register.php" id="register"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Sign up</button></span></a> 
+				</li>
+			</li>
+		</nav>
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li class="current-menu-item"><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
+						
+					</li>
+					
+					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
+				</ul>
+			</nav>
+			
+			
 		</div>
 		<!--//wrap-->
 	</header>
@@ -135,13 +308,7 @@ if(isset($_POST['recherche'])){
 								<div class="actions">
 									<div>
 										<div class="difficulty"><i class="ico i-hard"></i><a href="#"><?php echo $recette['difficulty']; ?></a></div>
-										<form method="POST" action="deleterecette.php">
-                    <input type="submit" name="supprimer" value="supprimer">
-	                <input type="hidden" value="<?PHP echo $recette['idrecette']; ?>"  name="idrecette">
-					<a href="modifierrecette.php?idrecette=<?php echo $recette['idrecette'];?>">Modifier</a>
-	
-                     
-                    </form>
+										
 									</div>
 								</div>
 							</div>
@@ -151,21 +318,14 @@ if(isset($_POST['recherche'])){
 						}
 						?>
 						
-						
-						<div class="quicklinks">
-							<a href="#" class="button">More recipes</a>
-							<a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
-						</div>
+					
 					</div>
 					<!--//entries-->
 				</section>
 				<!--//content-->
 				
 			
-					<div class="widget">
-						<h3>Advertisment</h3>
-						<a href="#"><img src="images/advertisment.jpg" alt="" /></a>
-					</div>
+					
 				</aside>
 				<!--//right sidebar-->
 			</div>
@@ -174,7 +334,9 @@ if(isset($_POST['recherche'])){
 		<!--//wrap-->
 	</main>
 	<!--//main-->
-
+	<?php
+					}
+					?>
 	<!--footer-->
 	<footer class="foot" role="contentinfo">
 		<div class="wrap clearfix">

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include "../controller/recetteC.php";
 include "../controller/ingrediantC.php";
 
@@ -50,10 +50,26 @@ $ingrediantc=new ingrediantC();
 		<div class="spinner"></div>
 	</div>
 	<!--//preloader-->
+	<?php  
+if(isset($_SESSION['username']))  
+{
+
+	$user=$recettec->getUserbyname($_SESSION['username']);
 	
+	?>
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:black; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				</li>
+			</li>
+		</nav>
 		<div class="wrap clearfix">
 			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
 			
@@ -64,15 +80,8 @@ $ingrediantc=new ingrediantC();
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -81,11 +90,182 @@ $ingrediantc=new ingrediantC();
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+				<li class="light "><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
 			</nav>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
+		
+	<!--main-->
+	<main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.php" title="Home">Home</a></li>
+					<li><a href="#" title="Recipes">Recipes</a></li>
+					<li>Recipe</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<?php
+
+				foreach ($result as $recette) {
+
+					
+				
+
+					
+			?>
+			<div class="row">
+				<header class="s-title">
+					<h1> <?php echo $recette ['titre']; ?></h1>
+				</header>
+				<!--content-->
+				<section class="content three-fourth">
+
+					<!--recipe-->
+				
+					<div class="recipe">
+							<div class="row">
+								<!--two-third-->
+								<article class="two-third">
+
+									<div class="photo"><a href="#"><img src=" images/<?php echo $recette ['photo']; ?> "Style="height:500px; width:800px;"/></a></div>
+									<div class="intro"><p><strong><?php echo $recette ['description']; ?></p></div>
+									
+								</article>
+								<!--//two-third-->
+								
+								<!--one-third-->
+								<article class="one-third">
+									<dl class="basic">
+										<dt>Preparation time</dt>
+										<dd> <?php echo $recette ['prept']; ?></dd>
+										<dt>Cooking time</dt>
+										<dd> <?php echo $recette ['cookingt']; ?></dd>
+										<dt>Difficulty</dt>
+										<dd> <?php echo $recette ['difficulty']; ?></dd>
+										<dt>Serves</dt>
+										<dd> <?php echo $recette ['nb_ppl']; ?></dd>
+									</dl>
+									
+									<dl class="user">
+										<dt>Category</dt>
+										<dd> <?php echo $recette ['category']; ?></dd>
+										
+									</dl>
+
+        <?php 
+		foreach ($listingrediant as $ingrediants)
+		 {
+			if($user['id'] != $recette['user'])
+			{
+
+			 ?>
+									<dl class="ingredients">
+										<dt><?php echo $ingrediants ['nom']; ?></dt>
+										<dd><?php echo $ingrediants ['quantite']; ?></dd>
+										
+										<?php
+						}
+						else
+						{
+							?>
+										<dl class="ingredients">
+										<dt><?php echo $ingrediants ['nom']; ?></dt>
+										<dd><?php echo $ingrediants ['quantite']; ?></dd>
+										<form method="POST" action="deleteingrediant.php">
+										<input type="submit" name="supprimer" value="supprimer">
+										<input type="hidden" value="<?PHP echo $ingrediants ['id']; ?>" name="id">
+										<a href="modifieringrediant.php?id=<?php echo $ingrediants['id'];?>">Modifier</a>
+										</form>
+							<?php
+						}
+						?>
+									</dl>
+									<?php } ?>
+							<div class="actions">
+								<div>
+								<?php
+						if($user['id'] != $recette['user'])
+						{
+
+						?>
+								<div class="third bwrap">
+								
+									</div>
+									<?php
+						}
+						
+							?>
+						
+								</div>
+							</div>
+						</div>		
+								</article>
+								<!--//one-third-->
+							</div>
+						</div>
+						<?php } ?>
+						<!--//recipe-->
+							
+						
+				</aside>
+				<!--//right sidebar-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+	<?php
+	}
+					else
+					{
+				?>
+
+
+
+<!--header-->
+<header class="head" role="banner">
+		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="login.php" id="login"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Login</button></span></a> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="register.php" id="register"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Sign up</button></span></a> 
+				</li>
+			</li>
+		</nav>
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li class="current-menu-item"><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
+					</li>
+					
+					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
+				</ul>
+			</nav>
+			
+			
 		</div>
 		<!--//wrap-->
 	</header>
@@ -153,19 +333,13 @@ foreach ($result as $recette) { ?>
 									<dl class="ingredients">
 										<dt><?php echo $ingrediants ['nom']; ?></dt>
 										<dd><?php echo $ingrediants ['quantite']; ?></dd>
-					<form method="POST" action="deleteingrediant.php">
-                    <input type="submit" name="supprimer" value="supprimer">
-	                <input type="hidden" value="<?PHP echo $ingrediants ['id']; ?>" name="id">
-					<a href="modifieringrediant.php?id=<?php echo $ingrediants['id'];?>">Modifier</a>
-
+					
 	
 									</dl>
 									<?php } ?>
 							<div class="actions">
 								<div>
-								<div class="third bwrap">
-								<a href="submit_ingrediant.php" class="button white more medium">add ingrediant<i class="fa fa-chevron-right"></i></a>
-									</div>
+								
 									
 								</div>
 							</div>
@@ -180,156 +354,7 @@ foreach ($result as $recette) { ?>
 						<?php } ?>
 						<!--//recipe-->
 							
-						<!--comments-->
-						<div class="comments" id="comments">
-							<h2>5 comments </h2>
-							<ol class="comment-list">
-								<!--comment-->
-								<li class="comment depth-1">
-									<div class="avatar"><a href="my_profile.php"><img src="images/avatar1.jpg" alt="" /></a></div>
-									<div class="comment-box">
-										<div class="comment-author meta"> 
-											<strong>Kimberly C.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
-										</div>
-										<div class="comment-text">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-										</div>
-									</div> 
-								</li>
-								<!--//comment-->
-								
-								<!--comment-->
-								<li class="comment depth-1">
-									<div class="avatar"><a href="my_profile.php"><img src="images/avatar2.jpg" alt="" /></a></div>
-									<div class="comment-box">
-										<div class="comment-author meta"> 
-											<strong>Alex J.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
-										</div>
-										<div class="comment-text">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-										</div>
-									</div> 
-								</li>
-								<!--//comment-->
-								
-								<!--comment-->
-								<li class="comment depth-2">
-									<div class="avatar"><a href="my_profile.php"><img src="images/avatar1.jpg" alt="" /></a></div>
-									<div class="comment-box">
-										<div class="comment-author meta"> 
-											<strong>Kimberly C.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
-										</div>
-										<div class="comment-text">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-										</div>
-									</div> 
-								</li>
-								<!--//comment-->
-								
-								<!--comment-->
-								<li class="comment depth-3">
-									<div class="avatar"><a href="my_profile.php"><img src="images/avatar2.jpg" alt="" /></a></div>
-									<div class="comment-box">
-										<div class="comment-author meta"> 
-											<strong>Alex J.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
-										</div>
-										<div class="comment-text">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-										</div>
-									</div> 
-								</li>
-								<!--//comment-->
-								
-								<!--comment-->
-								<li class="comment depth-1">
-									<div class="avatar"><a href="my_profile.php"><img src="images/avatar3.jpg" alt="" /></a></div>
-									<div class="comment-box">
-										<div class="comment-author meta"> 
-											<strong>Denise M.</strong> said 1 month ago <a href="#" class="comment-reply-link"> Reply</a>
-										</div>
-										<div class="comment-text">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.</p>
-										</div>
-									</div> 
-								</li>
-								<!--//comment-->
-							</ol>
-						</div>
-						<!--//comments-->
 						
-						<!--respond-->
-						<div class="comment-respond" id="respond">
-							<h2>Leave a reply</h2>
-							<div class="container">
-								<p><strong>Note:</strong> Comments on the web site reflect the views of their authors, and not necessarily the views of the socialchef internet portal. Requested to refrain from insults, swearing and vulgar expression. We reserve the right to delete any comment without notice explanations.</p>
-								<p>Your email address will not be published. Required fields are signed with <span class="req">*</span></p>
-								<form>
-									<div class="f-row">
-										<div class="third">
-											<input type="text" placeholder="Your name" />
-											<span class="req">*</span>
-										</div>
-										
-										<div class="third">
-											<input type="email" placeholder="Your email" />
-											<span class="req">*</span>
-										</div>
-										
-										<div class="third">
-											<input type="text" placeholder="Your website" />
-										</div>
-									
-									</div>
-									<div class="f-row">
-										<textarea></textarea>
-									</div>
-									
-									<div class="f-row">
-										<div class="third bwrap">
-											<input type="submit" value="Submit comment" />
-										</div>
-									</div>
-									
-									<div class="bottom">
-										<div class="f-row checkbox">
-											<input type="checkbox" id="ch1" />
-											<label for="ch1">Notify me of replies to my comment via e-mail</label>
-										</div>
-										<div class="f-row checkbox">
-											<input type="checkbox" id="ch2" />
-											<label for="ch2">Notify me of new articles by email.</label>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-						<!--//respond-->
-				</section>
-				<!--//content-->
-				
-					
-					<div class="widget share">
-						<ul class="boxed">
-							<li class="light"><a href="#" title="Facebook"><i class="fa fa-facebook"></i> <span>Share on Facebook</span></a></li>
-							<li class="medium"><a href="#" title="Twitter"><i class="fa fa-twitter"></i> <span>Share on Twitter</span></a></li>
-							<li class="dark"><a href="#" title="Favourites"><i class="fa fa-heart"></i> <span>Add to Favourites</span></a></li>
-						</ul>
-					</div>
-					
-					<div class="widget members">
-						<h3>Members who liked this recipe</h3>
-						<ul class="boxed">
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar1.jpg" alt="" /><span>Kimberly C.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar2.jpg" alt="" /><span>Alex J.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar3.jpg" alt="" /><span>Denise M.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar9.jpg" alt="" /><span>Jason H.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar8.jpg" alt="" /><span>Jennifer W.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar4.jpg" alt="" /><span>Anabelle Q.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar7.jpg" alt="" /><span>Thomas M.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar5.jpg" alt="" /><span>Michelle S.</span></a></div></li>
-							<li><div class="avatar"><a href="my_profile.php"><img src="images/avatar6.jpg" alt="" /><span>Bryan A.</span></a></div></li>
-						</ul>
-					</div>
 				</aside>
 				<!--//right sidebar-->
 			</div>
@@ -338,7 +363,9 @@ foreach ($result as $recette) { ?>
 		<!--//wrap-->
 	</main>
 	<!--//main-->
-	
+	<?php
+					}
+					?>
 	<!--footer-->
 	<footer class="foot" role="contentinfo">
 		<div class="wrap clearfix">

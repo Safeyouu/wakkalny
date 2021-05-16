@@ -675,7 +675,7 @@ if(isset($_SESSION['username']))
 			</div>
 			<!--//row-->
 			
-		</>
+		
 		<!--//wrap-->
 	</main>
 	<!--//main-->

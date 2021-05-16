@@ -5,6 +5,7 @@ include_once '../model/blog.php';
 
 $error = "";
 $blogC = new blogC();
+$user=$blogC->getUserbyname($_SESSION['username']);
 
 if(
 	isset($_POST["nom"])&&
@@ -19,7 +20,9 @@ if(
             $_POST["nom"],
             $_POST["titre"],
             $_POST["sujet"],
-            $_POST["image"]
+            $_POST["image"],
+			$_POST["user"]
+
         );
         $blogC->modifierblog($blog1, $_GET['idblog']);   
              header('location: blog.php ');
@@ -102,7 +105,6 @@ if(
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
@@ -165,14 +167,13 @@ if(
 								<textarea type="text" name="sujet" id="sujet"  ><?php echo $blog1['sujet']; ?></textarea>
 								</div>
 							</section>	
-							
+							<div class="f-row">
+									<div class="third"><input type="hidden" placeholder="user" id="user" name="user" value="<?php echo $user['id'];?>" /></div>
+								</div>
 							<section>
 								<h2 for="image">Photo</h2>
 								<div class="f-row full">
-								<img src="images/<?php echo $blog1['image'];?>" Style=  " display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 30%;" />
+								<img src="images/<?php echo $blog1['image'];?>" Style=" display: block; margin-left: auto; margin-right: auto; width: 30%;" />
   <br>
 									 <input type="file" id="image" name="image" value="<?php echo $blog1['image']; ?>"/>
 

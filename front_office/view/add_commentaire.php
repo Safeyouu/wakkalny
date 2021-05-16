@@ -32,7 +32,8 @@ isset($email)&&
             $prenom,
             $email,
 			$_POST["date"],
-            $_POST["commentaire"]
+            $_POST["commentaire"],
+            $_POST["user"]
         );
         $commentairec->ajoutercommentaire($commentaire1);
         header('Location:blog.php');
@@ -101,16 +102,11 @@ isset($email)&&
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
                             <li class="current-menu-item"><a href="Add_blog.php" title="Add blog">Add blog</a></li>
 
 						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -119,7 +115,6 @@ isset($email)&&
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
@@ -179,7 +174,7 @@ isset($email)&&
 									<div class="third">
 <br>
 
-										<input type="date" placeholder="date" id="date" name="date" />
+										<input type="date" placeholder="date" id="date" name="date" required />
 										<span class="req">*</span>
 									</div>
 									
@@ -188,7 +183,7 @@ isset($email)&&
 
 								<div class="f-row">
 									<div class="f-row">
-									<div class="full"><textarea placeholder="commentaire" id="commentaire" name="commentaire"></textarea></div>
+									<div class="full"><textarea placeholder="commentaire" id="commentaire" name="commentaire" required></textarea></div>
 								</div>
 								</div>
 								

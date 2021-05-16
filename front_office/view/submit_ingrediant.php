@@ -73,20 +73,14 @@ if(
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li"><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
+						
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -95,9 +89,10 @@ if(
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
+				<li class="light current-menu-item "><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
+
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-					<li class="dark current-menu-item"><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
+					<li class="dark "><a href="submit_recipe.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a Recipe</span></a></li>
 					
                 </ul>
 			</nav>

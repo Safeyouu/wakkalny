@@ -6,14 +6,17 @@ class blog
     private  $titre =null;
     private  $sujet=null;
     private  $image=null;
+    private  $user=null;
 
-    public function __construct(string $nom,string $titre,string $sujet,string $image)
+    public function __construct(string $nom,string $titre,string $sujet,string $image,string $user)
     {
         
         $this->nom=$nom;
         $this->titre=$titre;
         $this->prix=$sujet;
         $this->image=$image;
+		$this->user=$user;
+
     }
     function getidblog():int{
 		return $this->idblog;
@@ -30,8 +33,11 @@ class blog
 	function getimage():string{
 		return $this->image;
 	}
+	function getuser():string{
+		return $this->user;
+	}
 
-/* ************************* */
+
 
 
 
@@ -48,6 +54,10 @@ class blog
 	function setimage($image):void{
 		$this->image=$image;
 	}
+	function setuser($user):void{
+		$this->user=$user;
+	}
 	
+
 }
 ?>

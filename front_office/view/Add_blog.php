@@ -13,6 +13,7 @@ $blogc = new blogC();
 
 $user=$blogc->getUserbyname($_SESSION['username']);
 
+
 $nom = $user['nom'];
 
 if(isset($nom)&&
@@ -30,7 +31,8 @@ if(isset($nom)&&
             $nom,
             $_POST["titre"],
             $_POST["sujet"],
-            $_POST["image"]
+            $_POST["image"],
+			$_POST["user"]
         );
         $blogc->ajouterblog($blog1);
         header('Location:blog.php');
@@ -73,7 +75,14 @@ if(isset($nom)&&
 		<div class="spinner"></div>
 	</div>
 	<!--//preloader-->
+	<?php  
+			if(isset($_SESSION['username']))  
+			{  
+
+				$user=$blogc->getUserbyname($_SESSION['username']);
 	
+
+	?>
 	<!--header-->
 	<header class="head" role="banner">
 		<!--wrap-->
@@ -94,22 +103,17 @@ if(isset($nom)&&
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li"><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
 					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
 						
 					</li>
 					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
 						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-                            <li class="current-menu-item"><a href="Add_blog.php" title="Add blog">Add blog</a></li>
+						<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
 
 						</ul>
 					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -118,7 +122,6 @@ if(isset($nom)&&
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
 					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
 				</ul>
@@ -163,6 +166,9 @@ if(isset($nom)&&
 								<div class="f-row">
 									<div class="third"><input type="text" placeholder="titre" id="titre" name="titre" /></div>
 								</div>
+								<div class="f-row">
+									<div class="third"><input type="hidden" placeholder="user" id="user" name="user" value="<?php echo $user['id'];?>" /></div>
+								</div>
 								
 							</section>
 							
@@ -195,12 +201,138 @@ if(isset($nom)&&
 	<!--//main-->
 	
 	
+	<?php
+	}
+					else
+					{
+				?>
 
 
+<!--header-->
+<header class="head" role="banner">
+		<!--wrap-->
+		<nav class="main-nav" role="navigation" id="menu">
+			<li>
+				<li style="color:white; font-size:15px;text-transform: lowercase" >
+					<img src="../../back_office/view/plugins/images/user.ico"  alt="" width="25" height="25" ><i></i><?php echo $_SESSION['username']; ?> 
+				</li>
+				<li  
+					style=" font-size:10px;text-transform: lowercase; text-color:white;"> <a href="logout.php" id="logout"><span class="" ><button  style="padding: 10px 10px; text-align: center; font-size:10px;">Logout</button></span></a> 
+				
+				</li>
+				
+			</li>
+		</nav>
+		<div class="wrap clearfix">
+			<a href="index.php" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo"  /></a>
+			
+			<nav class="main-nav" role="navigation" id="menu">
+				<ul>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
+						
+					</li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
+						<ul>
+						<li><a href="Add_blog.php" title="Add Blog">add blog</a></li>
 
 
+						</ul>
+					</li>
+					
+					
+					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
+					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
+				</ul>
+			</nav>
+			
+			<nav class="user-nav" role="navigation">
+				<ul>
+					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
+					<li class="dark"><a href="submit_recipe.php" title="Submit a recipe"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		</div>
+		<!--//wrap-->
+	</header>
+	<!--//header-->
+		
+	<!--main-->
+	<main class="main" role="main">
+		<!--wrap-->
+		<div class="wrap clearfix">
+			<!--breadcrumbs-->
+			<nav class="breadcrumbs">
+				<ul>
+					<li><a href="index.php" title="Home">Home</a></li>
+                    <li><a href="blog.php" title="Blog">blog</a></li>
+                    <li>Submit a blog</li>
+				</ul>
+			</nav>
+			<!--//breadcrumbs-->
+			
+			<!--row-->
+			<div class="row">
+				<header class="s-title">
+					<h1>Add a new blog</h1>
+				</header>
+					
+				<!--content-->
+				<section class="content full-width">
+					<div class="submit_blog container">
+						<form  name="myForm" method="POST" action="" >
+ 
+							<section>
+								<h2>Basics</h2>
+								<p>All fields are required.</p>
+								<div class="f-row">
+									<div class="full"><input type="text"  id="nom" name="nom" value="<?php echo $user['nom'];?>" disabled/></div>
+								</div>
+								<div class="f-row">
+									<div class="third"><input type="text" placeholder="titre" id="titre" name="titre" /></div>
+								</div>
+								<div class="f-row">
+									<div class="third"><input type="hidden" placeholder="user" id="user" name="user" value="<?php echo $user['id'];?>" /></div>
+								</div>
+								
+							</section>
+							
+							<section>
+								<h2>Description</h2>
+								<div class="f-row">
+									<div class="full"><textarea placeholder="sujet" id="sujet" name="sujet"></textarea></div>
+								</div>
+							</section>	
+							
+							<section>
+								<h2>Photo</h2>
+								<div class="f-row full">
+									<input type="file" id="image" name="image" />
+								</div>
+							</section>	
+							
+							<div class="f-row full">
+								<input type="submit" class="button" id="submitblog" value="Publish this blog" />
+							</div>
+						</form>
+					</div>
+				</section>
+				<!--//content-->
+			</div>
+			<!--//row-->
+		</div>
+		<!--//wrap-->
+	</main>
+	<!--//main-->
+	
 
-
+<?php
+				
+					}
+						
+						?>
+						
 
 
 

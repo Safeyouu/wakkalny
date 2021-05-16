@@ -10,10 +10,8 @@ $ingrediantC = new ingrediantC();
 
 
     if ( 
-    isset($_POST["nom"])&&
-    isset($_POST["quantite"])&&
-	isset($_GET['id'] )
-	)
+    isset($_POST["submit"]))
+	
 	{
         $ingrediant1 = new ingrediants(
            
@@ -21,7 +19,7 @@ $ingrediantC = new ingrediantC();
 			$_POST["quantite"]
         );
         $ingrediantC->modifieringrediant($ingrediant1, $_GET['id']);   
-             header('location: recipe.php ');
+             header('location:recipe.php?idrecette='.$recette['idrecette']);
 	}
 
     else
@@ -71,20 +69,10 @@ $ingrediantC = new ingrediantC();
 			
 			<nav class="main-nav" role="navigation" id="menu">
 				<ul>
-					<li"><a href="index.php" title="Home"><span>Home</span></a></li>
-					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a>
-						
-					</li>
-					<li><a href="blog.php" title="Blog"><span>Blog</span></a>
-						<ul>
-							<li><a href="blog_single.php" title="Blog post">Blog post</a></li>
-						</ul>
-					</li>
-					<li><a href="#" title="Pages"><span>Pages</span></a>
-						<ul>
-							<li><a href="login.php" title="Login page">Login page</a></li><li><a href="register.php" title="Register page">Register page</a></li>
-						</ul>
-					</li>
+					<li><a href="index.php" title="Home"><span>Home</span></a></li>
+					<li><a href="recipes.php" title="Recipes"><span>Recipes</span></a></li>
+					<li><a href="blog.php" title="Blog"><span>Blog</span></a></li>
+					
 					
 					<li><a href="contact.php" title="Contact"><span>Contact</span></a></li>
 					<li><a href="shop.php" title="Shop"><span>Shop</span></a></li>
@@ -93,9 +81,8 @@ $ingrediantC = new ingrediantC();
 			
 			<nav class="user-nav" role="navigation">
 				<ul>
-					<li class="light"><a href="find_recipe.php" title="Search for recipes"><i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span></a></li>
 					<li class="medium"><a href="my_profile.php" title="My account"><i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span></a></li>
-					<li class="dark current-menu-item"><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
+					<li class="dark "><a href="submit_ingrediant.php" title="Submit an ingrediant"><i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit an ingrediant</span></a></li>
 					
                 </ul>
 			</nav>
@@ -114,7 +101,6 @@ $ingrediantC = new ingrediantC();
 			<nav class="breadcrumbs">
 				<ul>
 					<li><a href="index.php" title="Home">Home</a></li>
-					<li><a href="submit_recipe.php">Submit a recipe</a></li>
 					<li>Submit an ingrediant</li>
 				</ul>
 			</nav>
@@ -123,12 +109,12 @@ $ingrediantC = new ingrediantC();
 			<!--row-->
 			<div class="row">
 				<header class="s-title">
-					<h1>update an ingrediant</h1>
+					<h1>Update an ingrediant</h1>
 				</header>
 				<?php 
 				$ingrediant1 = $ingrediantC->recupereringrediant($_GET['id']);
-?>
-				<form method="POST" action="">
+				?>
+				<form method="POST" action="modifieringrediant.php">
 				<!--content-->
 				<section class="content full-width">
 					
@@ -150,7 +136,7 @@ $ingrediantC = new ingrediantC();
 							
 							
 							<div class="f-row full">
-								<input href="recipe.php?idrecette=" type="submit" class="button" id="submit_igrediant" value="Publish this recipe" />
+								<input href="recipe.php?idrecette=" type="submit" class="button" name="submit" id="submit_igrediant" value="Submit" />
 							</div>
 						
 					</div>

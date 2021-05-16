@@ -10,8 +10,8 @@
 		
                  function ajouterblog($blog)
                  {
-                    $sql="INSERT INTO blog ( nom ,titre , sujet , image) 
-                    VALUES (:nom , :titre , :sujet , :image)";
+                    $sql="INSERT INTO blog ( nom ,titre , sujet , image,user) 
+                    VALUES (:nom , :titre , :sujet , :image , :user)";
                     $db = config::getConnexion();
                     try
                     {
@@ -21,7 +21,10 @@
                       'nom' => $blog->getnom(),
                       'titre' => $blog->gettitre(),
                        'sujet' => $blog->getsujet(),
-                       'image' => $blog->getimage()]);			
+                       'image' => $blog->getimage(),
+                       'user' => $blog->getuser()]);		
+		
+
                     }
                     catch (Exception $e)
                     {
@@ -51,6 +54,26 @@
                               }
                            } 
                       
+
+
+                           public function afficherblogid($user)
+                           {
+       
+                            
+                             try
+                               { $pdo=config::getConnexion();
+                                 $query= $pdo ->prepare(
+                                   'SELECT idblog FROM blog WHERE user = :user'
+                               );
+                               $query->execute(['user'=> $user]);
+ 
+                                 return $query;
+                               }
+                               catch (PDOException $e)
+                               {
+                                 die('Erreur: '.$e->getMessage());
+                               }
+                            } 
 
 
 
