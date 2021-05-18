@@ -97,10 +97,7 @@ $listeproducts=$shopc->affichershop();
                             <a href="Profile.php" class="waves-effect"><i class="fa fa-user fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
-                        <li>
-                            <a href="fontawesome.php" class="waves-effect"><i class="fa fa-font fa-fw"
-                                    aria-hidden="true"></i><span class="hide-menu">Icons</span></a>
-                        </li>
+                        
                         <li>
                             <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw"
                                     aria-hidden="true"></i><span class="hide-menu">Users</span></a>

@@ -14,7 +14,14 @@ session_start();
 	<meta name="keywords" content="SocialChef - Social Recipe HTML Template" />
 	<meta name="description" content="SocialChef - Social Recipe HTML Template">
 	<meta name="author" content="themeenergy.com">
-	
+	<script>
+		var mtcaptchaConfig = {
+		  "sitekey": "MTPublic-QrW38gK02"   // replace sitekey with valid sitekey; can be obtained from your site account at https://admin.mtcaptcha.com
+	  };
+	  (function(){var mt_service = document.createElement('script');mt_service.async = true;mt_service.src = 'https://service.mtcaptcha.com/mtcv1/client/mtcaptcha.min.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(mt_service);
+	  var mt_service2 = document.createElement('script');mt_service2.async = true;mt_service2.src = 'https://service2.mtcaptcha.	com/mtcv1/client/mtcaptcha2.min.js';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(mt_service2);}) ();
+	</script>
+  
 	<title>Wakkalny</title>
 	
 	<link rel="stylesheet" href="css/style.css" />
@@ -41,6 +48,7 @@ session_start();
 			{  
 				include '../../controller/contactC.php';
 				include_once "../../model/contact.php";
+				require_once 'lib/class.mtcaptchalib.php';
 
 
 				$contactc = new contactC();
@@ -55,6 +63,10 @@ session_start();
 						$contact1 = new contact($_POST["sujet"],$_POST["message"],$mail);
 						
 						$contactc->addContact($contact1);
+						$MTCaptchaSDK = new MTCaptchaLib("MTPrivat-QrW38gK02-KaBEpUEVVRbEnHy1naV9iLjk9pFrVLgecuGlBAJ4J9gVXJfOLr");
+								$result = $MTCaptchaSDK->validate_token("");
+
+								print_r($result);
 						header('Location:index.php');
 					}
 					else
@@ -151,6 +163,8 @@ session_start();
                                 <p><strong>Basic information on Data Protection:</strong>Wakkalny Company collects your data to be able to answer to questions, suggested, or complaints filed. </p>
 							</div>
 							</div>
+							<div class="mtcaptcha"></div>
+
 							<div class="f-row bwrap">
 								<button type="submit" class="btn" name="send">Send Message</button>
 							</div>
@@ -171,18 +185,31 @@ session_start();
 					{ 	
 						include '../../controller/contactC.php';
 						include_once "../../model/contact.php";
+					
+						require_once 'lib/class.mtcaptchalib.php';
 
-
+						
+					
+						
 						$contactc = new contactC();
 
 						if(isset($_POST['send']))
 						{
 							if(!empty($_POST["sujet"])&&!empty($_POST["message"]))
 							{
+						
+					
+
 								$contact1 = new contact($_POST["sujet"],$_POST["message"],$_POST['mail']);
 								
 								$contactc->addContact($contact1);
+								$MTCaptchaSDK = new MTCaptchaLib("MTPrivat-QrW38gK02-KaBEpUEVVRbEnHy1naV9iLjk9pFrVLgecuGlBAJ4J9gVXJfOLr");
+								$result = $MTCaptchaSDK->validate_token("");
+
+								print_r($result);
 								header('Location:index.php');
+
+							
 							}
 							else
 							{
@@ -242,7 +269,7 @@ session_start();
 				<!--content-->
 				<section class="content center full-width">
 					<div class="modal container">
-						<form method="post" action="contact.php" >
+						<form method="post" id="sign-in-form" action="contact.php" >
 							<h3>Contact us</h3>
 							<div id="message" class="alert alert-danger"></div>
 							
@@ -271,6 +298,10 @@ session_start();
                                 <p><strong>Basic information on Data Protection:</strong>Wakkalny Company collects your data to be able to answer to questions, suggested, or complaints filed. </p>
 							</div>
 							</div>
+							<div class="form-label-group">
+                <!-- Div to place the MTCaptcha -->
+                <div class="mtcaptcha"></div>
+              </div>	
 							<div class="f-row bwrap">
 								<button type="submit" class="btn" name="send">Send Message</button>
 							</div>
@@ -338,6 +369,24 @@ session_start();
 	<script src="js/jquery.uniform.min.js"></script>
 	<script src="js/jquery.slicknav.min.js"></script>
 	<script src="js/scripts.js"></script>
+	<script>
+    /*"#sign-in-form").submit(function (e) {
+        e.preventDefault();
+
+        var form = $("#sign-in-form");
+        var url = form.attr('action');
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), 
+            success: function (data) {
+                // do the folloup action, redirect
+            }
+        });
+
+    });*/
+    </script>
 </body>
 
 </html>
